@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\MSI\Downloads\JobRecommendationSystem\env"
+VIRTUAL_ENV="C:\Users\Admin\Desktop\Systeme-de-recommandation-pour-le-recrutement\env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

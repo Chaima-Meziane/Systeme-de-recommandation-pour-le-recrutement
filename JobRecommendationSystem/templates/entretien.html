@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if entretien %}
+    <table width="80%">
+      <caption>
+        Liste des entretiens
+      </caption>
+      <tr>
+        <th>Heure</th>
+        <th>Date</th>
+        <th>Resultat</th>
+      </tr>
+      {% for e in entretiens %}
+      <tr>
+        <td>{{ e.heure }}</td>
+        <td>{{e.date}}</td>
+        <td>{{ e.resultat}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    <h1>0 entretien</h1>
+    {% endif %}
+</body>
+</html>
