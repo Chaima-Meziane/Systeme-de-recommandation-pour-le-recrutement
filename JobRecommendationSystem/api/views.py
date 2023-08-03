@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view, parser_classes
 from entretien.models import Entretien
+from account.models import User
 from api.serializer import EntretienSerializer
 from api.serializer import UserSerializer
 from rest_framework.views import APIView
@@ -39,6 +40,16 @@ def updateEntretien(request, id=None):
     entretien = Entretien.objects.get(id=id)
 
     serializer = EntretienSerializer(instance=entretien, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PUT'])
+def updateUser(request, id=None):
+    user = User.objects.get(id=id)
+
+    serializer = UserSerializer(instance=user, data=request.data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)

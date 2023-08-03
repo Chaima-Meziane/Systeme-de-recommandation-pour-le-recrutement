@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\Admin\Desktop\Systeme-de-recommandation-pour-le-recrutement\env
+set VIRTUAL_ENV=C:\Users\MSI\Downloads\Systeme-de-recommandation-pour-le-recrutement\env
 
 if not defined PROMPT set PROMPT=$P$G
 

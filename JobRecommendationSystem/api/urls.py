@@ -8,6 +8,7 @@ urlpatterns = [
     path('delete/<int:id>', deleteEntretien),
     path('register/', register_api),
     path('login/', LoginAPIView.as_view(), name='post'),
+    path('user/<int:id>/update/', updateUser),
 
    
 

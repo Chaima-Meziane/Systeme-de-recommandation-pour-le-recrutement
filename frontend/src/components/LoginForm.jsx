@@ -28,6 +28,7 @@ const LoginForm = () => {
       .then((response) => {
         // Handle successful login
         console.log("Login successful!");
+        
         // You can store the authentication token or user information in local storage or session storage
         // Redirect the user to the home page or any other authenticated page
       })
@@ -39,6 +40,7 @@ const LoginForm = () => {
   };
 
   return (
+    <div className="main">
     <section className="sign-in">
       <div className="container">
         <div className="signin-content">
@@ -123,6 +125,7 @@ const LoginForm = () => {
         </div>
       </div>
     </section>
+    </div>
   );
 };
 

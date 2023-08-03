@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import './loginstyle.css';
+import React, { useState, useContext } from "react";
 import axios from 'axios';
-
+import { UserContext } from './UserContext';
+import { useNavigate } from "react-router-dom";
 const RegisterForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { setUser } = useContext(UserContext);
   const userType = "candidat"; // Set the default value to "candidat" directly
-
+  let navigate = useNavigate();
   const handleNameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -22,6 +23,7 @@ const RegisterForm = () => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
+
   
     // Create an object to hold the user data
     const formData = {
@@ -36,7 +38,11 @@ const RegisterForm = () => {
       .then((response) => {
         // Handle successful registration
         console.log("Registration successful!");
-        // You can also redirect the user to a success page or display a success message.
+        // Set the user information in the context
+        setUser(response.data); // Assuming the response contains user data
+        console.log(response.data)
+        // Redirect to the complete your profile page
+        navigate('/completeprofile');
       })
       .catch((error) => {
         // Handle registration error
