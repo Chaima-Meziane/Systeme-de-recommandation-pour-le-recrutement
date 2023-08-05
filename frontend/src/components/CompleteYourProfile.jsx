@@ -64,28 +64,28 @@ const { user } = useContext(UserContext);
   };
 
   return (
-    <div className="main">
+    <div className="main1">
       <section className="signup">
-        <div className="container">
+        <div className="container1">
           <div className="signup-content">
             <div className="signup-form">
-              <h2 className="form-title">Complete Your Profile</h2>
+              <h2 className="form-title1">Complete Your Profile</h2>
               <form onSubmit={handleFormSubmit} className="register-form" id="register-form" encType="multipart/form-data">
-                <div className="form-group">
+                <div className="form-group1">
                   <label htmlFor="phone_number"><i className="material-icons" style={iconStyle}>phone</i></label>
                   <input type="text" name="phone_number" id="phone_number" onChange={handlePhoneNumberChange} placeholder="Your Phone Number"/>
                 </div>
-                <div className="form-group">
+                <div className="form-group1">
                   <label htmlFor="address"><i className="material-icons" style={iconStyle}>gps_fixed</i></label>
                   <input type="text" name="address" id="address" value={address} onChange={handleAddressChange} placeholder="Your Address"/>
                 </div>
-                <div className="form-group">
+                <div className="form-group1">
                     <label htmlFor="resume"> Add Your Resume</label>
                     <br/><br/><br/>
                     <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" onChange={handleFileChange}/>
                 </div>
                 
-                <div className="form-group form-button">
+                <div className="form-group1 form-button1">
                   <button type="submit" name="signup" id="signup" className="form-submit" value="Register">Register</button>
                 </div>
               </form>
