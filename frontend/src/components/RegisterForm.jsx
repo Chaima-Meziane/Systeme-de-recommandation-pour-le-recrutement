@@ -52,27 +52,27 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="main">
-      <section className="signup">
-        <div className="container">
+    <div className="main1">
+      <section className="signup1">
+        <div className="container1">
           <div className="signup-content">
             <div className="signup-form">
-              <h2 className="form-title">Sign up</h2>
-              <form onSubmit={handleFormSubmit} className="register-form" id="register-form">
-                <div className="form-group">
+              <h2 className="form-title1">Sign up</h2>
+              <form onSubmit={handleFormSubmit} className="register-form1" id="register-form">
+                <div className="form-group1">
                   <label htmlFor="name"><i className="zmdi zmdi-account material-icons-name"></i></label>
                   <input type="text" name="name" id="name" onChange={handleNameChange} placeholder="Your Name"/>
                 </div>
-                <div className="form-group">
+                <div className="form-group1">
                   <label htmlFor="email"><i className="zmdi zmdi-email"></i></label>
                   <input type="email" name="email" id="email" value={email} onChange={handleEmailChange} placeholder="Your Email"/>
                 </div>
-                <div className="form-group">
+                <div className="form-group1">
                   <label htmlFor="pass"><i className="zmdi zmdi-lock"></i></label>
                   <input type="password" name="pass" id="pass" value={password} onChange={handlePasswordChange} placeholder="Password"/>
                 </div>
 
-                <div className="form-group form-button">
+                <div className="form-group1 form-button1">
                   <button type="submit" name="signup" id="signup" className="form-submit" value="Register">Register</button>
                 </div>
               </form>

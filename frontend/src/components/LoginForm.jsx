@@ -60,8 +60,9 @@ const LoginForm = () => {
  
 
   return (
+    <div className="main1">
     <section className="sign-in">
-      <div className="container">
+      <div className="container1">
         <div className="signin-content">
           <div className="signin-image">
            
@@ -71,9 +72,9 @@ const LoginForm = () => {
           </div>
 
           <div className="signin-form">
-            <h2 className="form-title">Sign up</h2>
+            <h2 className="form-title1">Sign up</h2>
             <form onSubmit={handleFormSubmit} className="register-form" id="login-form">
-              <div className="form-group">
+              <div className="form-group1">
                 <label htmlFor="your_name">
                   <i className="zmdi zmdi-account material-icons-name"></i>
                 </label>
@@ -86,7 +87,7 @@ const LoginForm = () => {
                   onChange={handleUsernameChange}
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group1">
                 <label htmlFor="your_pass">
                   <i className="zmdi zmdi-lock"></i>
                 </label>
@@ -99,7 +100,7 @@ const LoginForm = () => {
                   onChange={handlePasswordChange}
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group1">
                 <input
                   type="checkbox"
                   name="remember-me"
@@ -110,7 +111,7 @@ const LoginForm = () => {
                   <span><span></span></span>Remember me
                 </label>
               </div>
-              <div className="form-group form-button">
+              <div className="form-group1 form-button1">
                 <input
                   type="submit"
                   name="signin"
@@ -128,6 +129,7 @@ const LoginForm = () => {
         </div>
       </div>
     </section>
+    </div>
   );
 };
 

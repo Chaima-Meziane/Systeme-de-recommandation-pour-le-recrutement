@@ -6,7 +6,7 @@ const Hero = () => {
   return (
     <>
       <section className='hero'>
-        <div className='container'>
+        <div  className='container'>
           <div className='row'>
             <Heading subtitle='WELCOME TO ACADEMIA' title='Best Online Education Expertise' />
             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>

@@ -185,9 +185,9 @@ h2 {
   font-family: Poppins;
   font-size: 36px; }
 
-.main {
+.main1 {
   background: #f8f8f8;
-  padding: 90px 0; }
+  padding: 150px 0; }
 
 .clear {
   clear: both; }
@@ -200,7 +200,7 @@ body {
   font-weight: 400;
   font-family: Poppins; }
 
-.container {
+.container1 {
   width: 900px;
   background: #fff;
   margin: 0 auto;
@@ -262,7 +262,7 @@ body {
 .signup-image {
   margin: 0 55px; }
 
-.form-title {
+.form-title1 {
   margin-bottom: 33px; }
 
 .signup-image {
@@ -274,7 +274,7 @@ figure {
 
 .form-submit {
   display: inline-block;
-  background: #1eb2a6;
+  background: #6dabe4;
   color: #fff;
   border-bottom: none;
   width: auto;
@@ -287,7 +287,7 @@ figure {
   margin-top: 25px;
   cursor: pointer; }
   .form-submit:hover {
-    background: #1eb2a6; }
+    background: #4292dc; }
 
 #signin {
   margin-top: 16px; }
@@ -310,7 +310,7 @@ figure {
 .register-form {
   width: 100%; }
 
-.form-group {
+.form-group1 {
   position: relative;
   margin-bottom: 25px;
   overflow: hidden; }
@@ -562,7 +562,7 @@ label.valid {
     -o-justify-content: center;
     -ms-justify-content: center; }
 
-  .form-button {
+  .form-button1 {
     text-align: center; }
 
   .signin-form {
@@ -575,7 +575,7 @@ label.valid {
     margin-left: 0px;
     padding: 0 30px; }
 
-  .form-title {
+  .form-title1 {
     text-align: center; } }
 @media screen and (max-width: 400px) {
   .social-login {

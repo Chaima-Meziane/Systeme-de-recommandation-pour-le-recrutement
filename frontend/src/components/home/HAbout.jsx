@@ -35,7 +35,7 @@ const HAbout = () => {
                       <div className='details'>
                         {val.courTeacher.map((details) => (
                           <>
-                            <div className='box'>
+                            <div className='container'>
                               <div className='dimg'>
                                 <img src={details.dcover} alt='' />
                               </div>
