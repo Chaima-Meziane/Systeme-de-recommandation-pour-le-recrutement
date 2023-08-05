@@ -11,7 +11,8 @@ from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password
-
+from django.http import JsonResponse
+from django.views import View
 
 @api_view(['GET'])
 def getEntretiens(request):
@@ -89,3 +90,20 @@ class LoginAPIView(APIView):
             login(request, user)
             return Response({"message": "Login successful"}, status=status.HTTP_200_OK)
         return Response({"message": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
+    
+
+
+# Vue pour la connexion de l'utilisateur avec linkedIn
+class LinkedInAuthView(View):
+    def get(self, request):
+        # Construire l'URL d'autorisation LinkedIn
+        auth_url = 'https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=7829tbzcy4b4hq&redirect_uri=http://localhost:5173&state=SOME_RANDOM_STATE&scope=r_liteprofile%20r_emailaddress'
+
+        # Construire la réponse JSON avec l'URL d'autorisation LinkedIn
+        response_data = {
+            'auth_url': auth_url,
+        }
+
+        # Renvoyer la réponse JSON
+        return JsonResponse(response_data)
+

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     "corsheaders",
     'offre',
+    'social_django', 
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -71,6 +72,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'JobRecommendationSystem.urls'
@@ -86,6 +88,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -133,6 +136,26 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+
+#social app custom settings
+AUTHENTICATION_BACKENDS = [
+ 
+ 
+    'social_core.backends.linkedin.LinkedinOAuth2',
+ 
+ 
+    'django.contrib.auth.backends.ModelBackend',
+ 
+ 
+]
+
+LOGIN_REDIRECT_URL = 'http://localhost:5173'
+
+LOGOUT_REDIRECT_URL = ''
+SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '7829tbzcy4b4hq'    
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = 'q46jHTIjlSCvpp4j'
 
 
 # Internationalization

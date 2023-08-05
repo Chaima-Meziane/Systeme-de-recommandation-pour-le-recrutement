@@ -5,6 +5,7 @@ const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -28,7 +29,6 @@ const LoginForm = () => {
       .then((response) => {
         // Handle successful login
         console.log("Login successful!");
-        
         // You can store the authentication token or user information in local storage or session storage
         // Redirect the user to the home page or any other authenticated page
       })
@@ -37,10 +37,29 @@ const LoginForm = () => {
         console.error("Login failed:", error);
         // You can display an error message to the user
       });
+
+
+      
+  };
+  const handleLinkedInLogin = () => {
+    // Make an API call to your Django backend to get the LinkedIn authorization URL
+    axios
+      .get("http://localhost:8000/api/linkedin-auth/")
+      .then((response) => {
+        // Redirect the user to the LinkedIn authorization URL
+        window.location.replace(response.data.auth_url);
+      })
+      .catch((error) => {
+        // Handle errors if any
+        console.error("Error getting LinkedIn auth URL:", error);
+        // You can display an error message to the user if necessary
+      });
   };
 
+  
+ 
+
   return (
-    <div className="main">
     <section className="sign-in">
       <div className="container">
         <div className="signin-content">
@@ -102,30 +121,13 @@ const LoginForm = () => {
               </div>
             </form>
             <div className="social-login">
-              <span className="social-label">Or login with</span>
-              <ul className="socials">
-                <li>
-                  <a href="#">
-                    <i className="display-flex-center zmdi zmdi-facebook"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="display-flex-center zmdi zmdi-twitter"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="display-flex-center zmdi zmdi-google"></i>
-                  </a>
-                </li>
-              </ul>
+              
+              <button onClick={handleLinkedInLogin}>Login with LinkedIn</button>
             </div>
           </div>
         </div>
       </div>
     </section>
-    </div>
   );
 };
 
