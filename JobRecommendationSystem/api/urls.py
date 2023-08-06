@@ -11,6 +11,7 @@ urlpatterns = [
     path('login/', LoginAPIView.as_view(), name='post'),
     path('user/<int:id>/update/', updateUser),
     path('linkedin-auth/', LinkedInAuthView.as_view(), name='get'),
+    path('logout/', logout_view, name='logout'),
 
    
 

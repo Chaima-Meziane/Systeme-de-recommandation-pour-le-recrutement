@@ -7,7 +7,7 @@ class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(required=False)
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password', 'is_coordinateur', 'is_candidat', 'phone_number', 'address', 'resume')
+        fields = ('id', 'username', 'email', 'password', 'is_coordinateur', 'is_candidat', 'phone_number', 'address', 'resume', 'first_name', 'last_name')
         extra_kwargs = {'password': {'write_only': True}}
     def to_representation(self, instance):
         # Exclude 'password' from the response data

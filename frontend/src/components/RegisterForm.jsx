@@ -6,15 +6,24 @@ const RegisterForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const { setUser } = useContext(UserContext);
   const userType = "candidat"; // Set the default value to "candidat" directly
   let navigate = useNavigate();
   const handleNameChange = (e) => {
     setUsername(e.target.value);
   };
+  
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+  };
+  const handleFirstNameChange = (e) => {
+    setFirstName(e.target.value);
+  };
+  const handleLastNameChange = (e) => {
+    setLastName(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
@@ -27,6 +36,8 @@ const RegisterForm = () => {
   
     // Create an object to hold the user data
     const formData = {
+      first_name: firstName,
+      last_name: lastName,
       username: username,
       email: email,
       password: password,
@@ -50,6 +61,10 @@ const RegisterForm = () => {
         // You can also display an error message to the user.
       });
   };
+  const formGroup1Style = {
+    display: "flex",
+    
+  };
 
   return (
     <div className="main1">
@@ -59,6 +74,14 @@ const RegisterForm = () => {
             <div className="signup-form">
               <h2 className="form-title1">Sign up</h2>
               <form onSubmit={handleFormSubmit} className="register-form1" id="register-form">
+              <div className="form-group1" style={formGroup1Style}>
+                <label htmlFor="firstName"><i className="zmdi zmdi-account material-icons-name"></i></label>
+                <input type="text" name="firstName" id="firstName" onChange={handleFirstNameChange} placeholder="First Name"/>
+                <input type="text" name="lastName" id="lastName" onChange={handleLastNameChange} placeholder="Last Name"/>
+              </div>
+              
+                
+                
                 <div className="form-group1">
                   <label htmlFor="name"><i className="zmdi zmdi-account material-icons-name"></i></label>
                   <input type="text" name="name" id="name" onChange={handleNameChange} placeholder="Your Name"/>
@@ -80,7 +103,8 @@ const RegisterForm = () => {
 
             <div className="signup-image">
                 <figure><img src='./images/about.webp' alt='sign up image' /> </figure>
-                <a href="#" className="signup-image-link">I am already a member</a>
+                <a href="/login" className="signup-image-link">I am already a member</a>
+
             </div>
 
           </div>

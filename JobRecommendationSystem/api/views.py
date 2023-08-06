@@ -1,18 +1,22 @@
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.decorators import api_view, parser_classes
+from rest_framework.decorators import api_view
 from entretien.models import Entretien
 from account.models import User
 from api.serializer import EntretienSerializer
 from api.serializer import UserSerializer
 from rest_framework.views import APIView
-from django.contrib.auth import authenticate, login
-from rest_framework.decorators import permission_classes
-from rest_framework.permissions import AllowAny
-from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
 from django.views import View
+
+
+@api_view(['POST'])
+def logout_view(request):
+    logout(request)
+    return JsonResponse({'message': 'Logout successful'}, status=200)
+    
 
 @api_view(['GET'])
 def getEntretiens(request):
@@ -20,8 +24,7 @@ def getEntretiens(request):
     serializer = EntretienSerializer(entretiens, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
-from rest_framework.response import Response
-from rest_framework import status
+
 
 @api_view(['POST'])
 def addEntretien(request):

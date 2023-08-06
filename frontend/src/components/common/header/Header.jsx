@@ -1,10 +1,25 @@
 import React, { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Head from "./Head"
 import "./header.css"
-
+import axios from 'axios';
 const Header = () => {
-  const [click, setClick] = useState(false)
+  const [click, setClick] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    
+    axios.post('http://127.0.0.1:8000/api/logout/')  
+      .then(response => {
+        
+        // Redirect the user to the login page after successful logout
+        navigate('/login');
+      })
+      .catch(error => {
+        
+        console.error('Logout error:', error);
+      });
+  };
 
   return (
     <>
@@ -35,7 +50,9 @@ const Header = () => {
             </li>
           </ul>
           <div className='start'>
-            <div className='button'>GET CERTIFICATE</div>
+          <div className='button'>
+            <a href="#" style={{ color: 'white' }} onClick={handleLogout}>Logout</a>
+          </div>
           </div>
           <button className='toggle' onClick={() => setClick(!click)}>
             {click ? <i className='fa fa-times'> </i> : <i className='fa fa-bars'></i>}

@@ -53,7 +53,7 @@ const Offers = () => {
                         <label htmlFor=''>(5.0)</label>
                       </div>
                       <div className='localisation'> 
-                      <i class="fas fa-map-marker-alt"></i>
+                      <i className="fas fa-map-marker-alt"></i>
                     <h4>{offre.localisation}</h4>
                   </div>
                       

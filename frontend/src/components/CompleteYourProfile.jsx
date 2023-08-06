@@ -23,6 +23,8 @@ const { user } = useContext(UserContext);
 
     // Create an object to hold the user data
     const formData = {
+      first_name: user.first_name,
+      last_name: user.last_name,
         username: user.username,
         email:user.email,
         is_candidat:user.is_candidat,
