@@ -3,12 +3,13 @@ import { UserContext } from './UserContext';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
+
 const CompleteYourProfile = () => {
 const { user } = useContext(UserContext); 
   const [phonenumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [resume, setResume] = useState(null);
-
+  let navigate = useNavigate();
   const handlePhoneNumberChange = (e) => {
     setPhoneNumber(e.target.value);
   };
@@ -43,6 +44,7 @@ const { user } = useContext(UserContext);
         // Handle successful profile update
         console.log("Profile update successful!");
         console.log(response.data)
+        navigate('/')
       })
       .catch((error) => {
         // Handle registration error

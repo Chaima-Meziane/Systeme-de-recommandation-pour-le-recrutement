@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  let navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -31,6 +32,7 @@ const LoginForm = () => {
         console.log("Login successful!");
         // You can store the authentication token or user information in local storage or session storage
         // Redirect the user to the home page or any other authenticated page
+        navigate('/')
       })
       .catch((error) => {
         // Handle login error
@@ -72,7 +74,7 @@ const LoginForm = () => {
           </div>
 
           <div className="signin-form">
-            <h2 className="form-title1">Sign up</h2>
+            <h2 className="form-title1">Login</h2>
             <form onSubmit={handleFormSubmit} className="register-form" id="login-form">
               <div className="form-group1">
                 <label htmlFor="your_name">
