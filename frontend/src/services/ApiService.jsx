@@ -7,6 +7,12 @@ export function getoffre(){
         return res.data
     })
 }
+export function getoffrebyid(id){
+    return(axios.get('http://127.0.0.1:8000/offre/offre/'+id+'/'))
+    .then (res => {
+        return res.data
+    })
+}
 
 export function addoffre(offre){
     return axios.post('http://127.0.0.1:8000/offre/offre/',

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import OnlineCourses from "../allcourses/OnlineCourses"
 import Heading from "../common/heading/Heading"
 import "../allcourses/courses.css"
+import { Link } from 'react-router-dom';
 
 import { getoffre } from "../../services/ApiService";
 
@@ -34,8 +35,8 @@ const Offers = () => {
             {/* copy code form  coursesCard */}
             <div className='grid2'>
               {offres.map((offre) => (
-                <div className='items'>
-                  <div className='content flex'key={offre.id}>
+                <div className='items'key={offre.id}>
+                  <div className='content flex'>
                     <div className='left'>
                       <div className='img'>
                         <img src='images/job_offer.png' alt='' />
@@ -71,7 +72,8 @@ const Offers = () => {
                                 <h4>{offre.entreprise}</h4>
                               </div></div>
                             </div></div>
-                            <span>{offre.description}</span>
+                            
+                            {/*<span>{offre.description}</span>*/}
                           </>
                         
                       </div>
@@ -83,8 +85,9 @@ const Offers = () => {
                     </h3>
                   </div>
                   
-
+                  <Link to={`/details/${parseInt(offre.url.split('/').filter(Boolean).pop())}`}>
                   <button className='outline-btn'>VIEW JOB DETAILS</button>
+                  </Link>
                 </div>
               ))}
             </div>

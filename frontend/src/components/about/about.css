@@ -1,6 +1,16 @@
 .aboutHome {
   height: auto;
 }
+.aboutHome .localisation p{
+  font-weight: 200;
+  font-size: 15px;
+  color: #121414;
+  text-align: left;
+  margin-left: 26px;
+  margin-top: -23px;
+  
+  
+}
 .aboutHome #heading {
   text-align: left;
   padding: 0;
