@@ -121,6 +121,12 @@ const AboutCard = () => {
                       )}
                     </div>
                   </div>
+                  <div className='item flexSB'>
+                  <div className='text'>
+                    <p> Êtes-vous intéressé(e) par cette offre ? </p></div></div>
+                  <button className='outline-btn'>Postuler</button>
+                  
+                  
 
                 
             </div>
