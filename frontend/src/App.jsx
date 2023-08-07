@@ -15,6 +15,7 @@ import Blog from './components/blog/Blog';
 import Contact from './components/contact/Contact';
 import CompleteYourProfile from './components/CompleteYourProfile';
 import { UserProvider } from './components/UserContext';
+import AddOffre from './components/AddOffre';
 
 const shouldShowHeaderandFooter = (location) => {
   const { pathname } = location;
@@ -40,6 +41,7 @@ function App() {
         <Route path="/entretiens" element={<GestionEntretien />} />
         <Route path="/register" element={<RegisterPage/>} />
         <Route path="/login" element={<LoginPage/>} />
+        <Route path="/addoffre" element={<AddOffre/>} />
         <Route path="/offre" element={<OffreList/>} />
         <Route path="/completeprofile" element={<CompleteYourProfile/>} />
       </Routes>

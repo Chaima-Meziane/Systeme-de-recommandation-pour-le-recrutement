@@ -6,10 +6,7 @@
 .contacts .right {
   padding: 50px;
 }
-.contacts h1 {
-  font-size: 30px;
-  font-weight: 400;
-}
+
 .contacts p {
   color: grey;
 }
@@ -52,4 +49,104 @@ form .flexSB input:nth-child(1) {
   .contacts .row {
     width: 100%;
   }
+}
+
+
+/* AddOffre.jsx */
+
+
+
+.contacts .box p {
+  font-size: 17px;
+  margin-top: 10px;
+}
+
+/* Apply the same styling to select elements */
+.contacts select {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  outline: none;
+  border: 1px solid grey;
+}
+
+form .flexSB input:nth-child(1) {
+  margin-right: 10px;
+}
+
+.contacts h3 {
+  margin-top: 20px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.contacts span {
+  color: #1eb2a6;
+  font-weight: 600;
+  font-size: 15px;
+  word-spacing: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  .contacts .container {
+    flex-direction: column;
+  }
+  .contacts iframe {
+    height: 50vh;
+  }
+  .contacts .row {
+    width: 100%;
+  }
+}
+
+.contacts .container {
+  display: flex;
+justify-content: center;
+align-items: flex-start; /* Align the form to the top of the container */
+height: 130vh;
+width: 100%; /* Set the container width to take up the full viewport width */
+background-color: white; /* Set the background color of the container */
+border-radius: 10px; /* Add border radius to the container for a rounded appearance */
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for a subtle effect */
+}
+
+
+
+.contacts h1 {
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 50px;
+  margin-top: 25px;
+  text-align: center;
+
+}
+
+.contacts .form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.contacts .form-field label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.contacts .form-field input,
+.contacts .form-field select {
+  width: 100%;
+  padding: 15px;
+  outline: none;
+  border: 1px solid grey;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.form-field label {
+  font-weight: bold;
+  margin-bottom: 5px;
 }

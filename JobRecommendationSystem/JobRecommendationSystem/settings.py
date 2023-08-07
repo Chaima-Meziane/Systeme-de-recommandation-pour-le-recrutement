@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "corsheaders",
     'offre',
     'social_django', 
+    
 ]
 
 CORS_ALLOWED_ORIGINS = [

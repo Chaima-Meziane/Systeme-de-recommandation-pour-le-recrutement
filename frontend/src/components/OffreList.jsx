@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { addoffre, getoffre, editoffre, deleteoffre } from '../services/ApiService';
+import { Link} from 'react-router-dom';
+
 import AddOffre from './AddOffre';
 import EditOffre from './EditOffre';
 export default function OffreList() {
@@ -25,13 +27,6 @@ useEffect(() => {
     }
   }, [])
 
-  const handleAddSubmit=(e)=>{
-    addoffre(e.target)
-    .then(res=>{
-        setOffres(res)
-        window.location.reload()
-    })
-}
 const handleEditBtn=(offre)=>{
     setSelectedEditData(offre)
     console.log("offre selected is", offre)
@@ -88,10 +83,11 @@ const handleDeleteBtn=(url)=>{
             
         </tbody>
       </table>
-      <button onClick={() => setShowAddOffreForm(true)}>
-        Ajouter une nouvelle offre
-      </button>
-      {showAddOffreForm && <AddOffre handleAddSubmit={handleAddSubmit} />}
+      <Link to="/addoffre">
+        <button>Ajouter une nouvelle offre</button>
+      </Link>
+      
+      
       {showEditOffreForm && <EditOffre handleEditSubmit={handleEditSubmit} selectedEditData={selectedEditData}/>}
     </>
   );
