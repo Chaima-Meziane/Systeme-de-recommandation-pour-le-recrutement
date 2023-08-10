@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from './UserContext';
+import jwtDecode from "jwt-decode";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   let navigate = useNavigate();
-
+  const { setUser } = useContext(UserContext);
+  
+  
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -30,6 +34,12 @@ const LoginForm = () => {
       .then((response) => {
         // Handle successful login
         console.log("Login successful!");
+        setUser(response.data.user);
+        console.log(response.data.user)
+        
+        
+        
+        
         // You can store the authentication token or user information in local storage or session storage
         // Redirect the user to the home page or any other authenticated page
         navigate('/')
@@ -39,6 +49,7 @@ const LoginForm = () => {
         console.error("Login failed:", error);
         // You can display an error message to the user
       });
+      
 
 
       

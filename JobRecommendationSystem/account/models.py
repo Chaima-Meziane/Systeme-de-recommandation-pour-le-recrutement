@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+
 # Create your models here.
 class User(AbstractUser):
     first_name= models.CharField(max_length=20,  default='')
@@ -10,3 +11,4 @@ class User(AbstractUser):
     resume = models.FileField(upload_to='pdfs/', null=True)
     is_candidat = models.BooleanField('Is candidat', default=False)
     is_coordinateur = models.BooleanField('Is coordinateur', default=False)
+    

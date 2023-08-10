@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from entretien.models import Entretien
 from account.models import User
+from candidature.models import Candidature
 
 class UserSerializer(serializers.ModelSerializer):
     resume = serializers.FileField(required=False)
@@ -19,5 +20,11 @@ class EntretienSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Entretien
+        fields = '__all__'
+
+class CandidatureSerializer(serializers.ModelSerializer):
+    lettre_de_motivation = serializers.FileField(required=False)
+    class Meta:
+        model = Candidature
         fields = '__all__'
     

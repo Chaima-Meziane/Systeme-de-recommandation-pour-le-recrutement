@@ -1,16 +1,19 @@
-import React, {useState, useEffect} from "react"
+import React, {useContext, useState, useEffect} from "react"
 import Heading from "../common/heading/Heading"
 import "./about.css"
 import Awrapper from "./Awrapper"
-import { useParams } from "react-router-dom";
+import { UserContext } from '../UserContext'
+
+import { useParams, Link } from "react-router-dom";
 import { getoffrebyid } from "../../services/ApiService";
 import on_recrute_image from '../../../public/images/on_recrute.png';
 const AboutCard = () => {
   const { id } = useParams();
+  const { setUser } = useContext(UserContext);
   const [jobOffer, setJobOffer] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  
   useEffect(() => {
     let isMounted = true; // Add a flag to check if the component is still mounted
 
@@ -124,7 +127,12 @@ const AboutCard = () => {
                   <div className='item flexSB'>
                   <div className='text'>
                     <p> Êtes-vous intéressé(e) par cette offre ? </p></div></div>
-                  <button className='outline-btn'>Postuler</button>
+
+                    <Link to={`/${id}/addCandidature`}>
+                    <button className='outline-btn'>Postuler</button>
+                  
+                    </Link>
+                 
                   
                   
 

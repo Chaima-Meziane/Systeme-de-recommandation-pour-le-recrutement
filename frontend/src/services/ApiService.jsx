@@ -54,3 +54,18 @@ export function deleteoffre(id){
         return res.data
     })
 }
+
+export function addcandidature(candidature){
+    return axios.post('http://127.0.0.1:8000/candidature/add/',
+    {
+        id:null,
+        lettre_de_motivation: candidature.lettre_de_motivation.value,
+        etat: candidature.etat.value,
+        candidat: candidature.candidat.value,
+        offre: candidature.offre.value,
+        
+    })
+    .then (res => {
+        return res.data
+    })
+}

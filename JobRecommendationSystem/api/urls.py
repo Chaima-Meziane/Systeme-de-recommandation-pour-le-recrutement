@@ -12,6 +12,7 @@ urlpatterns = [
     path('user/<int:id>/update/', updateUser),
     path('linkedin-auth/', LinkedInAuthView.as_view(), name='get'),
     path('logout/', logout_view, name='logout'),
+     path('candidature/add/', addCandidature),
 
    
 

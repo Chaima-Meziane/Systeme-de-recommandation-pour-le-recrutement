@@ -45,8 +45,11 @@ INSTALLED_APPS = [
     "corsheaders",
     'offre',
     'social_django', 
+    'candidature',
     
 ]
+# Generate a random key and store it securely
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY') or 'thisissecret'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",

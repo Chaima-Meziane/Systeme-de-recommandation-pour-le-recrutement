@@ -3,8 +3,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from entretien.models import Entretien
 from account.models import User
-from api.serializer import EntretienSerializer
-from api.serializer import UserSerializer
+from api.serializer import EntretienSerializer, CandidatureSerializer, UserSerializer
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
@@ -30,6 +29,18 @@ def getEntretiens(request):
 def addEntretien(request):
     try:
         serializer = EntretienSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['POST'])
+def addCandidature(request):
+    try:
+        serializer = CandidatureSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -83,7 +94,8 @@ def register_api(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     
-# Vue pour la connexion de l'utilisateur
+from django.contrib.auth import get_user_model
+
 class LoginAPIView(APIView):
     def post(self, request):
         username = request.data.get('username')
@@ -91,8 +103,16 @@ class LoginAPIView(APIView):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return Response({"message": "Login successful"}, status=status.HTTP_200_OK)
+            user_data = {
+                'id': user.id,
+                'username': user.username,
+                'email': user.email,
+                # Add other user fields you want to include
+            }
+            return Response({"message": "Login successful", "user": user_data}, status=status.HTTP_200_OK)
+        
         return Response({"message": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
+
     
 
 
