@@ -2,6 +2,8 @@ from rest_framework import serializers
 from entretien.models import Entretien
 from account.models import User
 from candidature.models import Candidature
+from offre.models import Offre
+
 
 class UserSerializer(serializers.ModelSerializer):
     resume = serializers.FileField(required=False)
@@ -27,4 +29,8 @@ class CandidatureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Candidature
         fields = '__all__'
-    
+
+class OffreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Offre
+        fields = '__all__'

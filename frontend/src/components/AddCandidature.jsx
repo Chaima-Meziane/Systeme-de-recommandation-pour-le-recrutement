@@ -21,7 +21,7 @@ export default function AddCandidature() {
 
     // Access the user context
     const { user } = useContext(UserContext);
-    const idUser=user.id;
+    const idUser = user ? user.id : null
     
     
 
@@ -116,7 +116,7 @@ export default function AddCandidature() {
       <section className='contacts padding'>
         <div className='container shadow'>
           <div className='left row'>
-            <h1>Ajouter une offre</h1>
+            <h1>Ajouter votre candidature</h1>
 
             <form onSubmit={handleAddSubmit}>
             

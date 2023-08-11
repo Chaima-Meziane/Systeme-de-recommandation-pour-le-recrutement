@@ -25,12 +25,15 @@ const Offers = () => {
       isMounted = false;
     }
   }, [])
+
+  
+
   return (
     <>
       <section className='homeAbout'>
         <div className='container'>
           <Heading subtitle='our job offers' title='explore available job offers' />
-
+          <Link to={`/addoffre`}><button className='outline-btn'>add offre</button></Link>
           <div className='coursesCard'>
             {/* copy code form  coursesCard */}
             <div className='grid2'>
@@ -84,10 +87,19 @@ const Offers = () => {
                       {offre.competences}
                     </h3>
                   </div>
-                  
+                  <Link to={`/details/${offre.id}`}><button className='outline-btn'>VIEW JOB DETAILS</button></Link>
+                  <Link to={`/details/${offre.id}`}><button className='outline-btn'>Postuler</button></Link>
+                 
+
+
+                  {/*
                   <Link to={`/details/${parseInt(offre.url.split('/').filter(Boolean).pop())}`}>
                   <button className='outline-btn'>VIEW JOB DETAILS</button>
                   </Link>
+                  <Link to={`/${parseInt(offre.url.split('/').filter(Boolean).pop())}/addcandidature`}>
+                  <button className='outline-btn'>POSTULER</button>
+                  </Link>
+              */}
                 </div>
               ))}
             </div>

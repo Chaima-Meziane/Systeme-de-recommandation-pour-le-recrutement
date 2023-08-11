@@ -8,7 +8,7 @@ const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   let navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext); // Assurez-vous d'obtenir la valeur actuelle de l'utilisateur depuis le contexte
   
   
   const handleUsernameChange = (e) => {
@@ -18,6 +18,9 @@ const LoginForm = () => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
+  useEffect(() => {
+    console.log("User context has been updated:", user);
+  }, [user]);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -36,13 +39,12 @@ const LoginForm = () => {
         console.log("Login successful!");
         setUser(response.data.user);
         console.log(response.data.user)
-        
-        
+        navigate("/")
         
         
         // You can store the authentication token or user information in local storage or session storage
         // Redirect the user to the home page or any other authenticated page
-        navigate('/')
+     
       })
       .catch((error) => {
         // Handle login error

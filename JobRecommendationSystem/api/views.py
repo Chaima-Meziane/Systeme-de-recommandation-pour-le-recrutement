@@ -3,13 +3,13 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from entretien.models import Entretien
 from account.models import User
-from api.serializer import EntretienSerializer, CandidatureSerializer, UserSerializer
+from api.serializer import EntretienSerializer, CandidatureSerializer, UserSerializer, OffreSerializer
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
 from django.views import View
-
+from offre.models import Offre
 
 @api_view(['POST'])
 def logout_view(request):
@@ -130,3 +130,38 @@ class LinkedInAuthView(View):
         # Renvoyer la réponse JSON
         return JsonResponse(response_data)
 
+
+
+
+@api_view(['POST'])
+def addOffre(request):
+    try:
+        serializer = OffreSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Offre.DoesNotExist:
+        return Response({'error': 'Offre not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+
+@api_view(['GET'])
+def getOffres(request):
+    offres = Offre.objects.all()
+    serializer = OffreSerializer(offres, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+class GetOffreByID(APIView):
+    def get(self, request, offre_id):
+        try:
+            offre = Offre.objects.get(pk=offre_id)
+            serializer = OffreSerializer(offre)  # Utilisez votre serializer pour sérialiser l'offre
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Offre.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)

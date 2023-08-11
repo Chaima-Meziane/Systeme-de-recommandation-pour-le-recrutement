@@ -2,13 +2,13 @@ import axios from "axios";
 
 
 export function getoffre(){
-    return(axios.get('http://127.0.0.1:8000/offre/offre/'))
+    return(axios.get('http://127.0.0.1:8000/api/getoffres/'))
     .then (res => {
         return res.data
     })
 }
 export function getoffrebyid(id){
-    return(axios.get('http://127.0.0.1:8000/offre/offre/'+id+'/'))
+    return(axios.get('http://127.0.0.1:8000/api/getOffreByID/'+id+'/'))
     .then (res => {
         return res.data
     })

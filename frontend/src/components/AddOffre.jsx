@@ -1,31 +1,69 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext,  useState } from 'react';
 import './contact/contact.css';
 import Back from './common/back/Back';
-import { addoffre, getoffre } from '../services/ApiService';
 import { Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { UserContext } from './UserContext';
+import axios from "axios";
 
 export default function AddOffre() {
+
   const [offres, setOffres] = useState([]);
 
   const [statut, setStatut] = useState('Ouvert');
   const [typeEmploi, setTypeEmploi] = useState('Permanent');
+  const { user } = useContext(UserContext);
+  console.log("Current user:", user); // Vérifier si l'utilisateur est correctement récupéré du contexte
 
-  const handleAddSubmit=(e)=>{
-    e.preventDefault();
-    addoffre(e.target)
-    .then(res=>{
-        setOffres(res)
-        window.location.reload()
-        console.log('Offer added successfully:', res); //ne s'affiche pas!!
-      
-    })
-    .catch((error) => {
-      console.error('Error adding offer:', error);
+  const handleAddSubmit = (event) => {
+    event.preventDefault();
 
-    })
-}
+    // Récupérer les valeurs des champs de saisie
+    const titreDuPoste = event.target.titreDuPoste.value;
+    const description = event.target.description.value;
+    const competences = event.target.competences.value;
+    const entreprise = event.target.entreprise.value;
+    const localisation = event.target.localisation.value;
+
+    // Créer un objet pour contenir les données de l'offre
+    const formData = {
+      titreDuPoste: titreDuPoste,
+      description: description,
+      competences: competences,
+      entreprise: entreprise,
+      localisation: localisation,
+      statut: statut,
+      typeEmploi: typeEmploi,
+      coordinateur: user ? user.id : undefined, // Utiliser l'ID de l'utilisateur s'il est connecté, sinon laisser la valeur par défaut (undefined)
+    };
+
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data', // Spécifier le bon type de contenu pour les données de formulaire
+      },
+    };
+
+    // Envoyer les données de l'offre via Axios
+    axios
+      .post(`http://127.0.0.1:8000/api/addOffre/`, formData, config)
+      .then((response) => {
+        setOffres(response.data);
+
+        // Gérer la réussite de l'ajout de l'offre
+        console.log('Offre ajoutée avec succès !');
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // Gérer les erreurs
+        console.error('Quelque chose s\'est mal passé !', error);
+        // Vous pouvez également afficher un message d'erreur à l'utilisateur.
+        if (error.response) {
+          console.log('Erreur de réponse:', error.response.data); // Journaliser les données de la réponse d'erreur
+        }
+      });
+  };
+
 
 
   return (
@@ -39,7 +77,7 @@ export default function AddOffre() {
             <form onSubmit={handleAddSubmit}>
             
               <div className='form-field'>
-                
+
                 <div className='input-container'>
                 <input type='text' placeholder='Titre Du Poste' name='titreDuPoste' id='titreDuPoste' />
                 </div>
