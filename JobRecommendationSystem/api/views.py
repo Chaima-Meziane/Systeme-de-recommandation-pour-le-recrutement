@@ -10,6 +10,8 @@ from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
 from django.views import View
 from offre.models import Offre
+from django.shortcuts import get_object_or_404
+
 
 @api_view(['POST'])
 def logout_view(request):
@@ -146,8 +148,16 @@ def addOffre(request):
         return Response({'error': 'Offre not found'}, status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
 
+@api_view(['PUT'])
+def updateOffre(request, id=None):
+    offre = get_object_or_404(Offre, id=id)
+
+    serializer = OffreSerializer(instance=offre, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)  # Use 200 for successful updates
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 def getOffres(request):

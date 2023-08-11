@@ -16,9 +16,11 @@ import Contact from './components/contact/Contact';
 import CompleteYourProfile from './components/CompleteYourProfile';
 import { UserProvider } from './components/UserContext';
 import AddOffre from './components/AddOffre';
+import UpdateOffre from './components/UpdateOffre';
+
 import AddCandidature from './components/AddCandidature';
 import OffersByCoordinator from './components/OffersByCoordinator';
-
+import CoordinatorsOfferDetails from './components/about/CoordinatorsOfferDetails';
 const shouldShowHeaderandFooter = (location) => {
   const { pathname } = location;
   return !['/login', '/register', '/offre', '/completeprofile'].includes(pathname);
@@ -33,6 +35,7 @@ function App() {
       {showHeaderandFooter && <Header />}
       <Routes>
         <Route path='/details/:id' element={<About/>} />
+        <Route path='/owner/details/:id' element={<CoordinatorsOfferDetails/>} />
         <Route path='/' element={<Home />} />
         <Route path='/:id/addCandidature' element={<AddCandidature/>} />
         <Route path='/courses' element={<CourseHome />} />
@@ -44,6 +47,7 @@ function App() {
         <Route path="/register" element={<RegisterPage/>} />
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/addoffre" element={<AddOffre/>} />
+        <Route path='/updateoffre/:id' element={<UpdateOffre/>} />
         <Route path="/offre" element={<OffreList/>} />
         <Route path="/completeprofile" element={<CompleteYourProfile/>} />
         <Route path='/OffersByCoordinator' element={<OffersByCoordinator/>} />
