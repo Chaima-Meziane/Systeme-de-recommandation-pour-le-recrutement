@@ -16,5 +16,6 @@ urlpatterns = [
     path('addOffre/', addOffre),
     path('getoffres/',getOffres),
     path('getOffreByID/<int:offre_id>/', GetOffreByID.as_view(), name='get-offre-by-id'),
+    path('offres/coordinator/<int:coordinator_id>/', getOffresByCoordinator),
 
 ]

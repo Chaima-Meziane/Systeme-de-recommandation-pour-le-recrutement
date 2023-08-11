@@ -17,6 +17,7 @@ import CompleteYourProfile from './components/CompleteYourProfile';
 import { UserProvider } from './components/UserContext';
 import AddOffre from './components/AddOffre';
 import AddCandidature from './components/AddCandidature';
+import OffersByCoordinator from './components/OffersByCoordinator';
 
 const shouldShowHeaderandFooter = (location) => {
   const { pathname } = location;
@@ -45,6 +46,8 @@ function App() {
         <Route path="/addoffre" element={<AddOffre/>} />
         <Route path="/offre" element={<OffreList/>} />
         <Route path="/completeprofile" element={<CompleteYourProfile/>} />
+        <Route path='/OffersByCoordinator' element={<OffersByCoordinator/>} />
+
       </Routes>
       {showHeaderandFooter && <Footer />}
     </>

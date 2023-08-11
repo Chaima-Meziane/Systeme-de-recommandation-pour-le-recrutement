@@ -33,7 +33,8 @@ const Offers = () => {
       <section className='homeAbout'>
         <div className='container'>
           <Heading subtitle='our job offers' title='explore available job offers' />
-          <Link to={`/addoffre`}><button className='outline-btn'>add offre</button></Link>
+          <Link to={`/OffersByCoordinator`}><button className='outline-btn'>coordinator offers</button></Link>
+
           <div className='coursesCard'>
             {/* copy code form  coursesCard */}
             <div className='grid2'>

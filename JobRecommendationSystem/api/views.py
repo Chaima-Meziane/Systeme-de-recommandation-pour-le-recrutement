@@ -165,3 +165,9 @@ class GetOffreByID(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Offre.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['GET'])
+def getOffresByCoordinator(request, coordinator_id):
+    offres = Offre.objects.filter(coordinateur_id=coordinator_id)
+    serializer = OffreSerializer(offres, many=True)
+    return Response(serializer.data)
