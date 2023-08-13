@@ -18,9 +18,7 @@ const LoginForm = () => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-  useEffect(() => {
-    console.log("User context has been updated:", user);
-  }, [user]);
+  
 
   const handleFormSubmit = (event) => {
     event.preventDefault();

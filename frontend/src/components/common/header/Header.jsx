@@ -1,25 +1,32 @@
-import React, { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import Head from "./Head"
-import "./header.css"
-import axios from 'axios';
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../UserContext"; // Import the UserContext
+import Head from "./Head";
+import "./header.css";
+import axios from "axios";
+
 const Header = () => {
   const [click, setClick] = useState(false);
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext); // Retrieve the setUser function from UserContext
 
   const handleLogout = () => {
-    
-    axios.post('http://127.0.0.1:8000/api/logout/')  
-      .then(response => {
+    axios
+      .post("http://127.0.0.1:8000/api/logout/")
+      .then((response) => {
         
+        // Set the user to null upon successful logout
+        setUser(null);
+
         // Redirect the user to the login page after successful logout
-        navigate('/login');
+        navigate("/login");
       })
-      .catch(error => {
-        
-        console.error('Logout error:', error);
+      .catch((error) => {
+        console.error("Logout error:", error);
       });
   };
+
+
 
   return (
     <>
