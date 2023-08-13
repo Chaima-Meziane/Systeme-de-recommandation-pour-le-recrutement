@@ -20,6 +20,7 @@ import CompleteYourProfile from './components/CompleteYourProfile';
 import AddOffre from './components/AddOffre';
 import UpdateOffre from './components/UpdateOffre';
 import OffersByCoordinator from './components/OffersByCoordinator';
+import CandidaturesByOffers from './components/CandidaturesByOffer';
 
 function shouldShowHeaderandFooter(location) {
   const { pathname } = location;
@@ -62,6 +63,8 @@ function App() {
             <Route path='/offre' element={<OffreList />} />
             <Route path='/completeprofile' element={<CompleteYourProfile />} />
             <Route path='/OffersByCoordinator' element={<OffersByCoordinator />} />
+            <Route path="/candidaturesbyoffer/:id" element={<CandidaturesByOffers/>}/>
+
           </>
         ) : (
           // Redirect unauthorized routes to the login page

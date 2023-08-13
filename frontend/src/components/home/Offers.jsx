@@ -89,7 +89,6 @@ const Offers = () => {
                     </h3>
                   </div>
                   <Link to={`/details/${offre.id}`}><button className='outline-btn'>VIEW JOB DETAILS</button></Link>
-                  <Link to={`/details/${offre.id}`}><button className='outline-btn'>Postuler</button></Link>
                  
 
 

@@ -32,3 +32,24 @@
 .blog p {
   color: grey;
 }
+
+
+
+/* Candidature.css */
+.candidature {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.candidature p {
+  margin: 5px 0;
+}
+
+.candidature a {
+  color: blue;
+  text-decoration: underline;
+  margin-top: 10px;
+}

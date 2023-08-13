@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from entretien.models import Entretien
 from account.models import User
-from api.serializer import EntretienSerializer, CandidatureSerializer, UserSerializer, OffreSerializer
+from api.serializer import EntretienSerializer, CandidatureSerializer, UserSerializer, OffreSerializer, CandidatureDisplaySerializer
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
@@ -11,6 +11,7 @@ from django.http import JsonResponse
 from django.views import View
 from offre.models import Offre
 from django.shortcuts import get_object_or_404
+from candidature.models import Candidature
 
 
 @api_view(['POST'])
@@ -181,3 +182,15 @@ def getOffresByCoordinator(request, coordinator_id):
     offres = Offre.objects.filter(coordinateur_id=coordinator_id)
     serializer = OffreSerializer(offres, many=True)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def get_candidatures_by_offre(request, offre_id):
+    try:
+        candidatures = Candidature.objects.filter(offre_id=offre_id).select_related('candidat')
+        serializer = CandidatureDisplaySerializer(candidatures, many=True)
+        return Response(serializer.data)
+    except Candidature.DoesNotExist:
+        return Response({'error': 'Candidatures not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

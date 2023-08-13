@@ -8,7 +8,7 @@ export function getoffre(){
     })
 }
 export function getoffrebyid(id){
-    return(axios.get('http://127.0.0.1:8000/api/getOffreByID/'+id+'/'))
+    return(axios.get('http://127.0.0.1:8000/api/getOffreByID/'+id))
     .then (res => {
         return res.data
     })

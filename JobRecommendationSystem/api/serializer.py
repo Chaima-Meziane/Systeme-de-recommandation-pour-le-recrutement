@@ -18,6 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
         ret.pop('password', None)
         return ret
 
+
 class EntretienSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -29,6 +30,16 @@ class CandidatureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Candidature
         fields = '__all__'
+
+
+class CandidatureDisplaySerializer(serializers.ModelSerializer):
+    lettre_de_motivation = serializers.FileField(required=False)
+    candidat = UserSerializer(read_only=True)  # Champ de lecture seule pour l'affichage
+    class Meta:
+        model = Candidature
+        fields = '__all__'
+
+
 
 class OffreSerializer(serializers.ModelSerializer):
     class Meta:
