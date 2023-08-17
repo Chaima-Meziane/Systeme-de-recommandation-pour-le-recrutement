@@ -194,3 +194,219 @@ def get_candidatures_by_offre(request, offre_id):
         return Response({'error': 'Candidatures not found'}, status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+
+
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from bs4 import BeautifulSoup
+import urllib.parse
+import time
+from time import sleep
+import urllib.parse
+from offre.models import Offre
+from profil.models import Profil
+
+
+@csrf_exempt
+def login_to_linkedin(request):
+    if request.method == 'POST':
+        try:
+            profile_to_search = request.POST.get('profile_to_search')
+            driver = webdriver.Chrome()
+            url = 'https://www.linkedin.com/login'
+            driver.get(url)
+            sleep(2)
+            
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            email_field = driver.find_element(By.ID, 'username')
+            email_field.send_keys(username)
+            sleep(2)
+                        
+            password_field = driver.find_element(By.ID, 'password')
+            password_field.send_keys(password)
+            
+            login_field = driver.find_element(By.XPATH, '//*[@id="organic-div"]/form/div[3]/button')
+            login_field.click()
+            sleep(3)
+            
+            search_field = driver.find_element(By.XPATH,'//*[@id="global-nav-typeahead"]/input')
+            search_field.send_keys(profile_to_search)
+            search_field.send_keys(Keys.RETURN)
+            print('- Finish Task 2: Search for profiles')
+            sleep(2)
+
+            language = driver.find_element(By.XPATH, '//html').get_attribute('lang')
+            sleep(2)
+            if language == 'fr':
+                people_button = driver.find_element(By.XPATH, '//*[@id="search-reusables__filters-bar"]/ul/li/button[text()="Personnes"]')
+            else:
+                people_button = driver.find_element(By.XPATH, '//*[@id="search-reusables__filters-bar"]/ul/li/button[text()="People"]')
+            sleep(2)
+            people_button.click()
+            sleep(2)
+            URLs_all_page = []
+            for page in range(1):
+                URLs_one_page = GetURL(driver)
+                sleep(2)
+                driver.execute_script('window.scrollTo(0, document.body.scrollHeight);') #scroll to the end of the page
+                sleep(3)
+                next_button = driver.find_element(By.CLASS_NAME, "artdeco-pagination__button--next")
+                driver.execute_script("arguments[0].click();", next_button)
+                URLs_all_page = URLs_all_page + URLs_one_page
+                sleep(2)
+
+            print('- Finish Task 3: Scrape the URLs')
+
+            # Garder uniquement les urls des profils filtrés
+            urls_filtered = [url for url in URLs_all_page if url.startswith("https://www.linkedin.com/in/")]
+
+
+            profiles_data = []
+            for linkedin_URL in urls_filtered:
+                driver.get(linkedin_URL)
+                print('- Accessing profile: ', linkedin_URL)
+
+                page_source = BeautifulSoup(driver.page_source, "html.parser")
+
+                info_div = page_source.find('div',{'class':'mt2 relative'})
+                location = info_div.find('span',{'class':'text-body-small inline t-black--light break-words'}).get_text().strip()
+                sleep(1)
+                print('--- Profile location is: ', location)
+                name = info_div.find('h1').get_text().strip()
+                sleep(1)
+                print('--- Profile name is: ', name) 
+                title = info_div.find('div',{'class':"text-body-medium break-words"}).get_text().strip()
+                sleep(1)
+                print('--- Profile title is: ', title)
+
+                sleep(2)
+                skills = extractSkills(driver)
+                
+                profile_data = {
+                    'Name': name,
+                    'Location': location,
+                    'Job Title': title,
+                    'URL': linkedin_URL,
+                    'Skills': skills
+                }
+                profiles_data.append(profile_data)
+
+                print('--- Profile skills: \n',skills)
+                print('\n')
+
+            driver.quit()
+
+            # Récupérer l'ID de l'offre depuis la requête POST
+            offre_id = int(request.POST.get('offre'))
+
+            for profile_data in profiles_data:
+                offre = Offre.objects.get(id=offre_id)
+                profil = Profil.objects.create(
+                    name=profile_data['Name'],
+                    location=profile_data['Location'],
+                    job_title=profile_data['Job Title'],
+                    url=profile_data['URL'],
+                    skills=', '.join(profile_data['Skills']),
+                    offre=offre
+                )
+
+            return JsonResponse({'message': 'Profils ajoutés avec succès !'})
+
+        except Exception as e:
+            return JsonResponse({'error': str(e)})
+    else:
+        return JsonResponse({'error': 'Invalid request method'})
+
+def GetURL(driver):
+    page_source = BeautifulSoup(driver.page_source)
+    profiles = page_source.find_all('a', class_="app-aware-link")
+    all_profile_URL = []
+    for profile in profiles:
+        profile_ID = profile.get('href')
+        decoded_profile_URL = urllib.parse.unquote(profile_ID)
+        profile_URL = decoded_profile_URL.split('?')[0] + '/'
+        if profile_URL not in all_profile_URL:
+            all_profile_URL.append(profile_URL)
+    return all_profile_URL
+
+def extractSkills(driver):
+    # Obtenez le code HTML de la page
+    page_source = BeautifulSoup(driver.page_source, "html.parser")
+
+    # Recherchez tous les éléments <a> avec la classe spécifiée hedhy feha afficher les competences, projets...
+    # On cherche le bouton qui mène à la liste complète des compétences
+    elements = page_source.find_all('a', {'class': 'optional-action-target-wrapper artdeco-button artdeco-button--tertiary artdeco-button--standard artdeco-button--2 artdeco-button--muted inline-flex justify-center full-width align-items-center artdeco-button--fluid'})
+
+    # Parcourez les éléments pour trouver celui contenant les compétences
+    competences_element = None
+    for element in elements:
+        span_text = element.find('span', {'class': 'pvs-navigation__text'})
+        # Recherchez le bouton permettant l'affichage de la liste complète des compétences
+        if span_text and ('compétences' in span_text.text.lower() or 'skills' in span_text.text.lower()): 
+            competences_element = element
+            break
+
+    # Cas 1: Aucune compétence n'a été trouvée
+    page_source = BeautifulSoup(driver.page_source, "html.parser")
+    les_balises_a =  page_source.find_all('a', {'data-field': 'skill_card_skill_topic'})
+    if les_balises_a ==[]:
+        competences=[]
+        
+
+    
+    # Cas 2: Le nombre de compétences est supérieur à 3
+    elif competences_element is not None:
+        # Récupérer l'URL du lien
+        href = competences_element['href']
+    
+        # Construire le script JavaScript pour cliquer sur le lien
+        script = f"window.location = '{href}';"
+    
+        # Exécuter le script en utilisant execute_script()
+        driver.execute_script(script)
+        sleep(2)
+    
+        # Obtenez le code HTML de la page après avoir cliqué sur le bouton
+        page_source_skills = BeautifulSoup(driver.page_source, "html.parser")
+    
+        # Liste pour stocker les compétences extraites
+        competences = []  
+
+        # Les balises <a> contenant les compétences
+        skills_list = page_source_skills.find_all('a',{'data-field':'skill_page_skill_topic'})
+        for a in skills_list:
+            spans=a.find_all('span',{'aria-hidden':'true'})
+            for span in spans:
+                skill=span.get_text()
+                if skill not in competences:
+                    competences.append(skill)
+                
+        # Naviguer en arrière pour retourner au profil
+        driver.back()
+
+
+    
+    #Cas 2: Le nombre de compétences est inférieur ou égale à 3
+    else:
+        #print("Le bouton 'Afficher les compétences' n'a pas été trouvé.")
+        # Les balises <a> conteneant les compétences
+        info_skills_alt =  page_source.find_all('a', {'data-field': 'skill_card_skill_topic'})
+        # Liste pour stocker les compétences extraites
+        competences=[]
+        for a in info_skills_alt:
+            spans=a.find_all('span',{'aria-hidden':'true'})
+            for span in spans:
+                # Extraire les textes à partir des balises <span>
+                skill=span.get_text()
+                if skill not in competences:
+                    competences.append(skill)
+    return competences

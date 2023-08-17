@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'offre',
     'social_django', 
     'candidature',
+    'profil.apps.ProfilConfig'
     
 ]
 # Generate a random key and store it securely

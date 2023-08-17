@@ -65,6 +65,7 @@ function App() {
             <Route path='/OffersByCoordinator' element={<OffersByCoordinator />} />
             <Route path="/candidaturesbyoffer/:id" element={<CandidaturesByOffers/>}/>
 
+
           </>
         ) : (
           // Redirect unauthorized routes to the login page

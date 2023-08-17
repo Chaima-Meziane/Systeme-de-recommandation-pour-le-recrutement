@@ -6,10 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from './UserContext';
 import axios from "axios";
-
+import qs from 'qs';
 export default function AddOffre() {
 
   const [offres, setOffres] = useState([]);
+  const [profiles, setProfiles] = useState([]); // Ajoutez cette ligne pour déclarer l'état des profils
+  const [addedOffreId, setAddedOffreId] = useState(null);
 
   const [statut, setStatut] = useState('Ouvert');
   const [typeEmploi, setTypeEmploi] = useState('Permanent');
@@ -49,10 +51,43 @@ export default function AddOffre() {
       .post(`http://127.0.0.1:8000/api/addOffre/`, formData, config)
       .then((response) => {
         setOffres(response.data);
+        setAddedOffreId(response.data.id); // Mettre à jour l'ID de l'offre ajoutée
+       
+
+        // Récupérer l'ID de l'offre ajoutée depuis la réponse de l'API
+        const addedOffreId = response.data.id;
 
         // Gérer la réussite de l'ajout de l'offre
         console.log('Offre ajoutée avec succès !');
+        console.log('ID de l\'offre ajoutée:', addedOffreId);
         console.log(response.data);
+        // Effectuer la recherche LinkedIn en utilisant les données de formulaire
+      const linkedInFormData = {
+        profile_to_search: titreDuPoste,
+        username: 'gharbimonia08@gmail.com',
+        password: '21285728',
+        offre: addedOffreId,
+      };
+
+      axios
+        .post(
+          `http://127.0.0.1:8000/api/login_to_linkedin/`,
+          qs.stringify(linkedInFormData), // Utiliser qs.stringify pour convertir les données en format de formulaire
+          {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+          }
+        )
+        .then((response) => {
+          setProfiles(response.data.profiles_data);
+          console.log('API Response:', response.data);
+        })
+        .catch((error) => {
+          console.error('Erreur lors de la recherche LinkedIn:', error);
+        });
+    
+
       })
       .catch((error) => {
         // Gérer les erreurs
