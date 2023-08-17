@@ -35,7 +35,6 @@ const Offers = () => {
           <Heading subtitle='our job offers' title='explore available job offers' />
           <Link to={`/OffersByCoordinator`}><button className='outline-btn'>coordinator offers</button></Link>
           <Link to={`/addoffre`}><button className='outline-btn'>add offer</button></Link>
-          <Link to={`/LinkedInProfiles`}><button className='outline-btn'>LinkedIn Profiles</button></Link>
 
           <div className='coursesCard'>
             {/* copy code form  coursesCard */}
