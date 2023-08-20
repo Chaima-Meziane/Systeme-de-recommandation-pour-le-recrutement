@@ -20,6 +20,7 @@ urlpatterns = [
     path('offres/coordinator/<int:coordinator_id>/', getOffresByCoordinator),
     path('candidatures/offre/<int:offre_id>/', get_candidatures_by_offre),
     path('login_to_linkedin/',login_to_linkedin),
+    path('profiles_recommendations/<int:offer_id>/', get_offer_recommendations, name='profiles_recommendations'),
 
 
 ]

@@ -410,3 +410,75 @@ def extractSkills(driver):
                 if skill not in competences:
                     competences.append(skill)
     return competences
+# views.py
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.db.models import Q
+from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
+
+
+def calculate_cosine_similarity(vector1, vector2):
+    # Calculate cosine similarity between two vectors
+    similarity = cosine_similarity([vector1], [vector2])[0][0]
+    return similarity
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+import re  # Import the regular expression module
+
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+
+def get_offer_recommendations(request, offer_id):
+    offer = get_object_or_404(Offre, id=offer_id)
+    offer_skills = offer.competences.split(',')  # Split skills into a list
+
+    related_profiles = Profil.objects.filter(offre=offer_id)
+
+    # Collect all skills for related profiles
+    profile_skills = []
+
+    for profile in related_profiles:
+        cleaned_skills = [skill.strip() for skill in profile.skills.split(',')]
+        profile_skills.append(' '.join(cleaned_skills))
+
+    # Combine offer and profile skills for Count Vectorization
+    all_skills = offer_skills + profile_skills
+
+    # Convert skills to numerical vectors using Count Vectorization
+    vectorizer = CountVectorizer()
+    skill_vectors = vectorizer.fit_transform(all_skills)
+
+    # Get the vector for the offer
+    offer_vector = skill_vectors[0]
+
+    recommendations = []
+
+    for idx, profile in enumerate(related_profiles):
+        profile_vector = skill_vectors[idx + 1]  # Skip the first vector (offer vector)
+        similarity = cosine_similarity(offer_vector.reshape(1, -1), profile_vector.reshape(1, -1))[0][0]
+        if similarity !=0:
+            recommendations.append((profile, similarity))
+
+    recommendations.sort(key=lambda x: x[1], reverse=True)
+
+    recommended_data = [
+        {
+            "id": profile.id,
+            "name": profile.name,
+            "skills": profile.skills,
+            "url": profile.url,  # Adjust this field to the actual URL field of the profile
+            "similarity_score": similarity
+        }
+        for profile, similarity in recommendations
+    ]
+
+    return JsonResponse({"offer": offer.titreDuPoste, "recommended_profiles": recommended_data})

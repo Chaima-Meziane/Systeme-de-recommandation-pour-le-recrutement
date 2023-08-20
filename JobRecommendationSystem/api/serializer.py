@@ -3,6 +3,7 @@ from entretien.models import Entretien
 from account.models import User
 from candidature.models import Candidature
 from offre.models import Offre
+from profil.models import Profil
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -45,3 +46,8 @@ class OffreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Offre
         fields = '__all__'
+
+class ProfilSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profil
+        fields = '__all__'  
