@@ -539,6 +539,19 @@ def calculate_cosine_similarity__(offer_skills, cv_text):
 
     return similarity[0][0]
 
+def filter_matching_skills(cv_text, offre_skills):
+    cv_words = cv_text.split()  # Divisez le texte du CV en mots individuels
+    matching_skills = []
+
+    for word in cv_words:
+        if word in offre_skills:
+            matching_skills.append(word)
+
+    filtered_cv_text = ' '.join(matching_skills)  # Rejoignez les mots filtrés en un texte
+    return filtered_cv_text
+
+
+
 @csrf_exempt
 def get_sorted_candidatures(request, offre_id):
     if request.method == 'GET':
@@ -553,7 +566,8 @@ def get_sorted_candidatures(request, offre_id):
             for candidature in candidatures:
                 if candidature.candidat.resume:  # Vérifier si le candidat a un CV
                     cv_text = extract_text_from_pdf(candidature.candidat.resume.path)
-                    cv_texts.append(cv_text.lower())  # Convertir en minuscules pour une comparaison insensible à la casse
+                    filtered_cv_text = filter_matching_skills(cv_text.lower(), offre_skills)
+                    cv_texts.append(filtered_cv_text)  # Ajoutez le texte filtré à la liste
 
 
             # Calculer la similarité cosinus entre les vecteurs de CVs extraits et les compétences de l'offre
