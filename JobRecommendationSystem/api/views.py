@@ -482,3 +482,95 @@ def get_offer_recommendations(request, offer_id):
     ]
 
     return JsonResponse({"offer": offer.titreDuPoste, "recommended_profiles": recommended_data})
+
+
+
+
+from django.views.decorators.csrf import csrf_exempt
+
+import PyPDF2
+
+
+def extract_text_from_pdf(pdf_file_path):
+    with open(pdf_file_path, 'rb') as pdf_file:
+        pdf_reader = PyPDF2.PdfReader(pdf_file)
+        
+        cv_text = ''
+        for page in pdf_reader.pages:
+            cv_text += page.extract_text()
+        
+        return cv_text
+
+
+
+
+
+import re
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+
+
+# Fonction pour calculer la similarité cosinus entre deux ensembles de compétences
+def calculate_cosine_similarity__(offer_skills, cv_text):
+    offer_skills_list = [skill.strip() for skill in offer_skills.split(',')]
+    cv_text_list = [skill.strip() for skill in cv_text.split(',')]
+
+    # Créer un ensemble de toutes les compétences uniques
+    all_skills = set(offer_skills_list + cv_text_list)
+
+    # Convertir l'ensemble de compétences en une chaîne de texte avec des virgules
+    all_skills_text = ', '.join(all_skills)
+
+    # Créer un objet CountVectorizer
+    vectorizer = CountVectorizer()
+
+    # Calculer la matrice des fréquences de termes pour les compétences
+    skill_matrix = vectorizer.fit_transform([all_skills_text, offer_skills, cv_text])
+
+    # Extraire le vecteur de l'offre
+    offer_vector = skill_matrix[1]
+
+    # Extraire le vecteur du profil
+    cv_text_vector = skill_matrix[2]
+
+    # Calculer la similarité cosinus entre les vecteurs de compétences
+    similarity = cosine_similarity(offer_vector, cv_text_vector)
+
+    return similarity[0][0]
+
+@csrf_exempt
+def get_sorted_candidatures(request, offre_id):
+    if request.method == 'GET':
+        try:
+            offre = Offre.objects.get(pk=offre_id)
+            candidatures = Candidature.objects.filter(offre=offre)
+            cv_texts = []
+
+            # Compétences de l'offre
+            offre_skills = offre.competences.lower()
+
+            for candidature in candidatures:
+                if candidature.candidat.resume:  # Vérifier si le candidat a un CV
+                    cv_text = extract_text_from_pdf(candidature.candidat.resume.path)
+                    cv_texts.append(cv_text.lower())  # Convertir en minuscules pour une comparaison insensible à la casse
+
+
+            # Calculer la similarité cosinus entre les vecteurs de CVs extraits et les compétences de l'offre
+            similarity_scores = [calculate_cosine_similarity__(offre_skills, cv) for cv in cv_texts]
+
+            # Trier les candidatures en fonction de la similarité cosinus
+            sorted_candidatures = sorted(zip(candidatures, similarity_scores), key=lambda x: x[1], reverse=True)
+
+            # Retourner les candidatures triées avec toutes les informations et la similarité cosinus
+            sorted_candidatures_data = []
+            for candidature, score in sorted_candidatures:
+                candidature_data = CandidatureDisplaySerializer(candidature).data
+                candidature_data['score'] = score  # Ajouter la similarité cosinus
+                sorted_candidatures_data.append(candidature_data)
+
+            return JsonResponse({'sorted_candidatures': sorted_candidatures_data})
+        except Offre.DoesNotExist:
+            return JsonResponse({'error': 'Offre not found'})
+    else:
+        return JsonResponse({'error': 'Invalid request method'})
