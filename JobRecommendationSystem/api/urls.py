@@ -22,7 +22,6 @@ urlpatterns = [
     path('login_to_linkedin/',login_to_linkedin),
     path('profiles_recommendations/<int:offer_id>/', get_offer_recommendations, name='profiles_recommendations'),
     path('get_sorted_candidatures/<int:offre_id>/', get_sorted_candidatures),
-
-
+    path('recommend_offers_to_user/<int:user_id>/', recommend_offers_to_user),
 
 ]

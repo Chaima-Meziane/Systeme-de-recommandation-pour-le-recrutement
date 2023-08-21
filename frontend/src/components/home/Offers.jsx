@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import OnlineCourses from "../allcourses/OnlineCourses"
 import Heading from "../common/heading/Heading"
 import "../allcourses/courses.css"
@@ -6,8 +6,12 @@ import { Link } from 'react-router-dom';
 
 import { getoffre } from "../../services/ApiService";
 
+
+
+
 const Offers = () => {
   const [offres, setOffres] = useState([]);
+
    // Fetch data from the backend using Axios
    useEffect(() => {
     let isMounted = true; // Add a flag to check if the component is still mounted
@@ -35,6 +39,7 @@ const Offers = () => {
           <Heading subtitle='our job offers' title='explore available job offers' />
           <Link to={`/OffersByCoordinator`}><button className='outline-btn'>coordinator offers</button></Link>
           <Link to={`/addoffre`}><button className='outline-btn'>add offer</button></Link>
+          <Link to={`/recommendedoffers`}><button className='outline-btn'>offres recommandées</button></Link>
 
           <div className='coursesCard'>
             {/* copy code form  coursesCard */}

@@ -22,6 +22,7 @@ import UpdateOffre from './components/UpdateOffre';
 import OffersByCoordinator from './components/OffersByCoordinator';
 import CandidaturesByOffers from './components/CandidaturesByOffer';
 import RecommendedProfiles from './components/about/RecommendedProfiles';
+import RecommendedOffers from './components/home/RecommendedOffers';
 
 function shouldShowHeaderandFooter(location) {
   const { pathname } = location;
@@ -66,6 +67,8 @@ function App() {
             <Route path='/OffersByCoordinator' element={<OffersByCoordinator />} />
             <Route path="/candidaturesbyoffer/:id" element={<CandidaturesByOffers/>}/>
             <Route path="/recommendations/:id" element={<RecommendedProfiles/>}/>
+            <Route path="/recommendedoffers" element={<RecommendedOffers/>}/>
+
 
 
           </>

@@ -69,3 +69,4 @@ export function addcandidature(candidature){
         return res.data
     })
 }
+

@@ -588,3 +588,40 @@ def get_sorted_candidatures(request, offre_id):
             return JsonResponse({'error': 'Offre not found'})
     else:
         return JsonResponse({'error': 'Invalid request method'})
+
+
+
+
+
+def recommend_offers_to_user(request, user_id):
+    if request.method == 'GET':
+        try:
+            user = User.objects.get(pk=user_id)
+            user_cv = extract_text_from_pdf(user.resume.path)
+
+            offers = Offre.objects.all()
+            recommended_offers = []
+
+            for offre in offers:
+                offer_skills = offre.competences.lower()
+                filtered_user_cv = filter_matching_skills(user_cv.lower(), offer_skills)
+                if filtered_user_cv:  # Vérifier si le texte filtré n'est pas vide
+                    similarity = calculate_cosine_similarity__(offre.competences.lower(), filtered_user_cv)
+                    if similarity != 0:
+                        recommended_offers.append({'offer': offre, 'similarity': similarity})
+
+            sorted_recommended_offers = sorted(recommended_offers, key=lambda x: x['similarity'], reverse=True)
+
+            recommended_offers_data = []
+            for recommended_offer in sorted_recommended_offers:
+                offer_data = OffreSerializer(recommended_offer['offer']).data
+                offer_data['similarity'] = recommended_offer['similarity']
+                recommended_offers_data.append(offer_data)
+
+            return JsonResponse({'recommended_offers': recommended_offers_data})
+        except User.DoesNotExist:
+            return JsonResponse({'error': 'User not found'})
+    else:
+        return JsonResponse({'error': 'Invalid request method'})
+
+
