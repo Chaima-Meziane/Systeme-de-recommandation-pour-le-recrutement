@@ -9,13 +9,28 @@ import { Link } from 'react-router-dom';
 const OffersByCoordinator = () => {
   const { user } = useContext(UserContext);
   const [offers, setOffers] = useState([]);
-
+  const [searchQuery, setSearchQuery] = useState(""); // State to store search query
+  const filterOffers = (offers) => {
+    return offers.filter((offre) => {
+      // You can customize this filtering logic based on your use case
+      const lowerCaseQuery = searchQuery.toLowerCase();
+      return (
+        offre.titreDuPoste.toLowerCase().includes(lowerCaseQuery) ||
+        offre.localisation.toLowerCase().includes(lowerCaseQuery) ||
+        offre.competences.toLowerCase().includes(lowerCaseQuery) ||
+        offre.entreprise.toLowerCase().includes(lowerCaseQuery) ||
+        offre.typeEmploi.toLowerCase().includes(lowerCaseQuery)
+        );
+    });
+  };
   useEffect(() => {
     if (user) {
       // Fetch offers for the logged-in coordinator
       axios.get(`http://localhost:8000/api/offres/coordinator/${user.id}/`)
         .then(response => {
           setOffers(response.data);
+          const filteredOffers = filterOffers(response.data); // Filter offers based on search query
+
         })
         .catch(error => {
           console.error('Error fetching offers:', error);
@@ -28,11 +43,16 @@ const OffersByCoordinator = () => {
     <div className='container'>
       <Heading subtitle='our job offers' title='explore available job offers' />
       <Link to={`/addoffre`}><button className='outline-btn'>add offre</button></Link>
-
+      <input
+            type="text"
+            placeholder="Search job offers..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
       <div className='coursesCard'>
         {/* copy code form  coursesCard */}
         <div className='grid2'>
-          {offers.map((offre) => (
+        {filterOffers(offers).map((offre) => (
             <div className='items'key={offre.id}>
               <div className='content flex'>
                 <div className='left'>

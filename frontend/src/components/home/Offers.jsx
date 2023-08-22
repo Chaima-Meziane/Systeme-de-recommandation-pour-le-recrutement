@@ -14,6 +14,20 @@ const Offers = () => {
   const [liked, setLiked] = useState(false); // Define liked state
   const { user } = useContext(UserContext); 
   const [offres, setOffres] = useState([]);
+  const [searchQuery, setSearchQuery] = useState(""); // State to store search query
+  const filterOffers = (offers) => {
+    return offers.filter((offre) => {
+      // You can customize this filtering logic based on your use case
+      const lowerCaseQuery = searchQuery.toLowerCase();
+      return (
+        offre.titreDuPoste.toLowerCase().includes(lowerCaseQuery) ||
+        offre.localisation.toLowerCase().includes(lowerCaseQuery) ||
+        offre.competences.toLowerCase().includes(lowerCaseQuery) ||
+        offre.entreprise.toLowerCase().includes(lowerCaseQuery) ||
+        offre.typeEmploi.toLowerCase().includes(lowerCaseQuery)
+        );
+    });
+  };
 
    // Fetch data from the backend using Axios
    useEffect(() => {
@@ -23,6 +37,7 @@ const Offers = () => {
       .then((res) => {
         if (isMounted) {
           console.log("resultat api", res)
+          const filteredOffers = filterOffers(res); // Filter offers based on search query
           setOffres(res)
         }
       })
@@ -62,10 +77,17 @@ const Offers = () => {
           <Link to={`/addoffre`}><button className='outline-btn'>add offer</button></Link>
           <Link to={`/recommendedoffers`}><button className='outline-btn'>offres recommandées</button></Link>
           <Link to={`/recommendedoffersbylikes/${user.id}`}><button className='outline-btn'>Recommended offers</button></Link>
+          <input
+            type="text"
+            placeholder="Search job offers..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+
           <div className='coursesCard'>
             {/* copy code form  coursesCard */}
             <div className='grid2'>
-              {offres.map((offre) => (
+            {filterOffers(offres).map((offre) => (
                 <div className='items'key={offre.id}>
                   <div className='content flex'>
                     <div className='left'>
