@@ -23,5 +23,7 @@ urlpatterns = [
     path('profiles_recommendations/<int:offer_id>/', get_offer_recommendations, name='profiles_recommendations'),
     path('get_sorted_candidatures/<int:offre_id>/', get_sorted_candidatures),
     path('recommend_offers_to_user/<int:user_id>/', recommend_offers_to_user),
+    path('updateCandidature/<int:id>/', updateCandidature),
+    path('getCandidatureByID/<int:candidature_id>/', GetCandidatureByID.as_view(), name='get-candidature-by-id'),
 
 ]

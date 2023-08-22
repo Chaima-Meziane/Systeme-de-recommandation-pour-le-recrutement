@@ -115,32 +115,31 @@ const Offers = () => {
                       {offre.competences}
                     </h3>
                   </div>
-                  <Link to={`/details/${offre.id}`}><button className='outline-btn'>VIEW JOB DETAILS</button></Link>
-                  <button
-  className={`like-button ${offre.liked ? "liked" : ""}`}
-  onClick={() => handleLike(offre.id)}
->
-  {offre.liked ? (
-    <span>
-      <i className="fas fa-thumbs-up"></i> Liked
-    </span>
-  ) : (
-    <span>
-      <i className="far fa-thumbs-up"></i> Like
-    </span>
-  )}
-</button>
+                  
                  
 
 
-                  {/*
-                  <Link to={`/details/${parseInt(offre.url.split('/').filter(Boolean).pop())}`}>
+                  
+                  <Link to={`/details/${offre.id}`}>
                   <button className='outline-btn'>VIEW JOB DETAILS</button>
                   </Link>
-                  <Link to={`/${parseInt(offre.url.split('/').filter(Boolean).pop())}/addcandidature`}>
+                  <Link to={`/${offre.id}/addcandidature`}>
                   <button className='outline-btn'>POSTULER</button>
                   </Link>
-              */}
+                  
+
+                  <button className={`like-button ${offre.liked ? "liked" : ""}`} onClick={() => handleLike(offre.id)}>
+                  {offre.liked ? (
+                      <span>
+                        <i className="fas fa-thumbs-up"></i> Liked
+                      </span>
+                    ) : (
+                      <span>
+                        <i className="far fa-thumbs-up"></i> Like
+                      </span>
+                    )}
+                  </button>
+              
                 </div>
               ))}
             </div>

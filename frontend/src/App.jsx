@@ -24,6 +24,7 @@ import CandidaturesByOffers from './components/CandidaturesByOffer';
 import RecommendedProfiles from './components/about/RecommendedProfiles';
 import RecommendedOffers from './components/home/RecommendedOffers';
 import RecommendedOffersByLikes from './components/RecommendedOffersByLikes';
+import UpdateCandidature from './components/UpdateCandidature';
 
 
 function shouldShowHeaderandFooter(location) {
@@ -71,6 +72,7 @@ function App() {
             <Route path="/recommendations/:id" element={<RecommendedProfiles/>}/>
             <Route path="/recommendedoffers" element={<RecommendedOffers/>}/>
             <Route path="/recommendedoffersbylikes/:id" element={<RecommendedOffersByLikes/>}/>
+            <Route path='/updateCandidature/:id' element={<UpdateCandidature />} />
 
 
 

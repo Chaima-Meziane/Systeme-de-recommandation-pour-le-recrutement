@@ -13,7 +13,7 @@ export default function AddCandidature() {
     
     const { id } = useParams();
     const [lettreDeMotivation, setLettreDeMotivation] = useState(null);
-    const [etat, setEtat] = useState("");
+    const [etat, setEtat] = useState("En attente");
     const [jobOffer, setJobOffer] = useState("");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -132,6 +132,7 @@ export default function AddCandidature() {
 
               
 
+              {/*
               <div className='form-field'>
           
                 <select name='etat' value={etat} onChange={(e) => setEtat(e.target.value)} id='etat'>
@@ -139,7 +140,7 @@ export default function AddCandidature() {
                   <option value='Acceptée'>Acceptée</option>
                   <option value='Rejetée'>Rejetée</option>
                 </select>
-              </div>
+  </div>*/}
               
              
               <button className='primary-btn' type='submit'>Ajouter</button>

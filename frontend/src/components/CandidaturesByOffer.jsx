@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 const CandidaturesByOffers = () => {
   const { id } = useParams();
@@ -51,6 +51,8 @@ const CandidaturesByOffers = () => {
                   Voir la lettre de motivation
                 </a>
               )}
+              <Link to={`/updateCandidature/${candidature.id}`}><button className='outline-btn'>Modifier l'état de la candidature</button></Link>
+
             </div>
           ))}
         </div>

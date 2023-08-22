@@ -160,6 +160,16 @@ def updateOffre(request, id=None):
         return Response(serializer.data, status=status.HTTP_200_OK)  # Use 200 for successful updates
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['PUT'])
+def updateCandidature(request, id=None):
+    candidature = get_object_or_404(Candidature, id=id)
+
+    serializer = CandidatureSerializer(instance=candidature, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)  # Use 200 for successful updates
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 @api_view(['GET'])
 def getOffres(request):
     offres = Offre.objects.all()
@@ -175,6 +185,15 @@ class GetOffreByID(APIView):
             serializer = OffreSerializer(offre)  # Utilisez votre serializer pour sérialiser l'offre
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Offre.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        
+class GetCandidatureByID(APIView):
+    def get(self, request, candidature_id):
+        try:
+            candidature = Candidature.objects.get(pk=candidature_id)
+            serializer = CandidatureSerializer(candidature)  
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Candidature.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['GET'])
