@@ -160,15 +160,6 @@ def updateOffre(request, id=None):
         return Response(serializer.data, status=status.HTTP_200_OK)  # Use 200 for successful updates
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['PUT'])
-def updateCandidature(request, id=None):
-    candidature = get_object_or_404(Candidature, id=id)
-
-    serializer = CandidatureSerializer(instance=candidature, data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_200_OK)  # Use 200 for successful updates
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 def getOffres(request):
@@ -644,3 +635,89 @@ def recommend_offers_to_user(request, user_id):
         return JsonResponse({'error': 'Invalid request method'})
 
 
+
+
+
+@csrf_exempt
+def mes_candidatures(request, candidat_id):
+    candidatures = Candidature.objects.filter(candidat__id=candidat_id)
+    
+    candidatures_data = []
+    for candidature in candidatures:
+        offre = candidature.offre
+        candidatures_data.append({
+            'offre_id': offre.id,
+            'titre_du_poste': offre.titreDuPoste,
+            'entreprise': offre.entreprise,
+            'localisation': offre.localisation,
+            'competences': offre.competences,
+            'etat': candidature.etat,
+        })
+    
+    return JsonResponse({'candidatures': candidatures_data})
+
+
+
+
+
+
+from django.core.mail import send_mail
+from django.conf import settings  # Importez les paramètres de votre fichier settings.py
+
+
+
+
+
+
+from django.core.mail import send_mail
+from django.conf import settings
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from django.views.decorators.csrf import csrf_exempt
+
+@api_view(['PUT'])
+def updateCandidature(request, id=None):
+    candidature = get_object_or_404(Candidature, id=id)
+    serializer = CandidatureSerializer(instance=candidature, data=request.data)
+
+    if serializer.is_valid():
+        ancien_etat = candidature.etat
+        serializer.save()
+
+        # Si le nouvel état est "Acceptée" ou "Refusée" et l'ancien état était "En attente"
+        if candidature.etat in ['Acceptée', 'Rejetée'] and ancien_etat == 'En attente':
+            envoyer_email(candidature.candidat, candidature)  # Passer l'objet User et la candidature
+
+            return Response({'message': f'État de candidature mis à jour et e-mail envoyé à {candidature.candidat.email}.'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'message': 'État de candidature mis à jour, mais aucun e-mail envoyé.'}, status=status.HTTP_200_OK)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def envoyer_email(user, candidature):
+    subject = 'Etat de candidature'
+
+    if candidature.etat == 'Acceptée':
+        message = f"Cher(e) {user.first_name} {user.last_name},\n\nNous vous remercions vivement de l'intérêt que vous portez à notre offre pour le poste de '{candidature.offre.titreDuPoste}'. Après une évaluation attentive, nous tenons à vous informer que votre candidature a été {candidature.etat.lower()}.\n\nNous souhaitons vous informer que la date de l'entretien vous sera communiquée directement via notre application. Nous sommes ravis de poursuivre ce processus avec vous et vous souhaitons le meilleur dans vos recherches d'opportunités professionnelles.\n\nCordialement,\n"
+    elif candidature.etat == 'Rejetée':
+        message = f"Cher(e) {user.first_name} {user.last_name},\n\nNous vous remercions d'avoir pris le temps de postuler à notre offre pour le poste de '{candidature.offre.titreDuPoste}'. Après une évaluation minutieuse, nous regrettons de vous informer que votre candidature a été {candidature.etat.lower()}.\n\nNous apprécions votre intérêt pour notre entreprise et vous souhaitons succès dans vos futures opportunités professionnelles.\n\nCordialement,\n"
+
+    from_email = settings.DEFAULT_FROM_EMAIL
+    recipient_list = [user.email]
+        
+    send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+
+
+@csrf_exempt
+def changer_etat_candidature(request, candidature_id, nouvel_etat):
+    candidature = get_object_or_404(Candidature, id=candidature_id)
+
+    if nouvel_etat in ['Acceptée', 'Rejetée'] and candidature.etat == 'En attente':
+        candidature.etat = nouvel_etat
+        candidature.save()
+        envoyer_email(candidature.candidat, candidature)  # Passer l'objet User et la candidature
+
+        return JsonResponse({'message': f'État de candidature mis à jour et e-mail envoyé à {candidature.candidat.email}.'})
+    else:
+        return JsonResponse({'message': 'Impossible de mettre à jour l\'état de la candidature ou d\'envoyer un e-mail.'})

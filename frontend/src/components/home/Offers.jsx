@@ -77,6 +77,8 @@ const Offers = () => {
           <Link to={`/addoffre`}><button className='outline-btn'>add offer</button></Link>
           <Link to={`/recommendedoffers`}><button className='outline-btn'>offres recommandées</button></Link>
           <Link to={`/recommendedoffersbylikes/${user.id}`}><button className='outline-btn'>Recommended offers</button></Link>
+          <Link to={`/MesCandidatures`}><button className='outline-btn'>Mes Candidatures</button></Link>
+
           <input
             type="text"
             placeholder="Search job offers..."
