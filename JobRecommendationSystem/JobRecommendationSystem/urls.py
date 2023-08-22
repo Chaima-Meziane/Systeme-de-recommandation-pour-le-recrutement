@@ -25,6 +25,7 @@ urlpatterns = [
     path('entretien/', include('entretien.urls')),
     path('api/', include('api.urls')),
     path('offre/', include('offre.urls')),
+    path('like/', include('like.urls')),
     
 
 ]
