@@ -52,6 +52,7 @@ const CandidaturesByOffers = () => {
                 </a>
               )}
               <Link to={`/updateCandidature/${candidature.id}`}><button className='outline-btn'>Modifier l'état de la candidature</button></Link>
+              <Link to={`/addentretien/${candidature.id}`}><button className='outline-btn'>Fixer un entretien</button></Link>
 
             </div>
           ))}

@@ -20,8 +20,12 @@ class UserSerializer(serializers.ModelSerializer):
         return ret
 
 
-class EntretienSerializer(serializers.ModelSerializer):
 
+class EntretienSerializer(serializers.ModelSerializer):
+    resultat = serializers.CharField(default='en_attente', required=False)
+    candidature = serializers.PrimaryKeyRelatedField(queryset=Candidature.objects.all(), required=False)
+    coordinateur = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required=False)
+    
     class Meta:
         model = Entretien
         fields = '__all__'
@@ -31,6 +35,8 @@ class CandidatureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Candidature
         fields = '__all__'
+
+
 
 
 class CandidatureDisplaySerializer(serializers.ModelSerializer):

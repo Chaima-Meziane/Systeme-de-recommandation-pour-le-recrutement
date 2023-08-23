@@ -28,10 +28,12 @@ def getEntretiens(request):
 
 
 
+
+
 @api_view(['POST'])
-def addEntretien(request):
+def addCandidature(request):
     try:
-        serializer = EntretienSerializer(data=request.data)
+        serializer = CandidatureSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -41,9 +43,9 @@ def addEntretien(request):
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['POST'])
-def addCandidature(request):
+def addEntretien(request):
     try:
-        serializer = CandidatureSerializer(data=request.data)
+        serializer = EntretienSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -110,6 +112,7 @@ class LoginAPIView(APIView):
                 'id': user.id,
                 'username': user.username,
                 'email': user.email,
+                'is_candidat':user.is_candidat,
                 # Add other user fields you want to include
             }
             return Response({"message": "Login successful", "user": user_data}, status=status.HTTP_200_OK)
@@ -177,6 +180,8 @@ class GetOffreByID(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Offre.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+
         
 class GetCandidatureByID(APIView):
     def get(self, request, candidature_id):
@@ -193,6 +198,25 @@ def getOffresByCoordinator(request, coordinator_id):
     serializer = OffreSerializer(offres, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def getEntretiensByCoordinateur(request, coordinator_id):
+    entretiens = Entretien.objects.filter(coordinateur=coordinator_id)
+    serializer =EntretienSerializer(entretiens, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getEntretiensByCandidat(request, candidat_id):
+    try:
+        candidatures = Candidature.objects.filter(candidat=candidat_id)
+        candidature_ids = [candidature.id for candidature in candidatures]
+        entretiens = Entretien.objects.filter(candidature__id__in=candidature_ids)
+        serializer = EntretienSerializer(entretiens, many=True)
+        return Response(serializer.data)
+    except Entretien.DoesNotExist:
+        return Response({'error': 'No Entretien found for the given Candidat ID'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['GET'])
 def get_candidatures_by_offre(request, offre_id):
@@ -205,6 +229,7 @@ def get_candidatures_by_offre(request, offre_id):
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
+
 
 
 

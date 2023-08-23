@@ -26,8 +26,8 @@ import RecommendedOffers from './components/home/RecommendedOffers';
 import RecommendedOffersByLikes from './components/RecommendedOffersByLikes';
 import UpdateCandidature from './components/UpdateCandidature';
 import MesCandidatures from './components/home/MesCandidatures';
-
-
+import AddEntretien from './components/AddEntretien';
+import CalendarComponent from './components/Calendar';
 function shouldShowHeaderandFooter(location) {
   const { pathname } = location;
   return !['/login', '/register', '/offre', '/completeprofile'].includes(pathname);
@@ -75,6 +75,8 @@ function App() {
             <Route path="/recommendedoffersbylikes/:id" element={<RecommendedOffersByLikes/>}/>
             <Route path='/updateCandidature/:id' element={<UpdateCandidature />} />
             <Route path="/MesCandidatures" element={<MesCandidatures/>}/>
+            <Route path="/addentretien/:id" element={<AddEntretien/>}/>
+            <Route path="/calendar" element={<CalendarComponent/>}/>
 
 
 
