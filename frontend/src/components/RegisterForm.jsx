@@ -76,23 +76,23 @@ const RegisterForm = () => {
               <form onSubmit={handleFormSubmit} className="register-form1" id="register-form">
               <div className="form-group1" style={formGroup1Style}>
                 <label htmlFor="firstName"><i className="zmdi zmdi-account material-icons-name"></i></label>
-                <input type="text" name="firstName" id="firstName" onChange={handleFirstNameChange} placeholder="First Name"/>
-                <input type="text" name="lastName" id="lastName" onChange={handleLastNameChange} placeholder="Last Name"/>
+                <input type="text" name="firstName" id="firstName" onChange={handleFirstNameChange} placeholder="First Name" required/>
+                <input type="text" name="lastName" id="lastName" onChange={handleLastNameChange} placeholder="Last Name" required/>
               </div>
               
                 
                 
                 <div className="form-group1">
                   <label htmlFor="name"><i className="zmdi zmdi-account material-icons-name"></i></label>
-                  <input type="text" name="name" id="name" onChange={handleNameChange} placeholder="Your Name"/>
+                  <input type="text" name="name" id="name" onChange={handleNameChange} placeholder="Your Name" required/>
                 </div>
                 <div className="form-group1">
                   <label htmlFor="email"><i className="zmdi zmdi-email"></i></label>
-                  <input type="email" name="email" id="email" value={email} onChange={handleEmailChange} placeholder="Your Email"/>
+                  <input type="email" name="email" id="email" value={email} onChange={handleEmailChange} placeholder="Your Email" required/>
                 </div>
                 <div className="form-group1">
                   <label htmlFor="pass"><i className="zmdi zmdi-lock"></i></label>
-                  <input type="password" name="pass" id="pass" value={password} onChange={handlePasswordChange} placeholder="Password"/>
+                  <input type="password" name="pass" id="pass" value={password} onChange={handlePasswordChange} placeholder="Password" required/>
                 </div>
 
                 <div className="form-group1 form-button1">
@@ -103,7 +103,7 @@ const RegisterForm = () => {
 
             <div className="signup-image">
                 <figure><img src='./images/about.webp' alt='sign up image' /> </figure>
-                <a href="/login" className="signup-image-link">I am already a member</a>
+                <a href="/login" className="signup-image-link"><u>I am already a member</u></a>
 
             </div>
 

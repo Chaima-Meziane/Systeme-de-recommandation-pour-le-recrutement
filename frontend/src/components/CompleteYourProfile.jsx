@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { UserContext } from './UserContext';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const CompleteYourProfile = () => {
@@ -77,16 +78,16 @@ const { user } = useContext(UserContext);
               <form onSubmit={handleFormSubmit} className="register-form" id="register-form" encType="multipart/form-data">
                 <div className="form-group1">
                   <label htmlFor="phone_number"><i className="material-icons" style={iconStyle}>phone</i></label>
-                  <input type="text" name="phone_number" id="phone_number" onChange={handlePhoneNumberChange} placeholder="Your Phone Number"/>
+                  <input type="text" name="phone_number" id="phone_number" onChange={handlePhoneNumberChange} placeholder="Your Phone Number" required/>
                 </div>
                 <div className="form-group1">
                   <label htmlFor="address"><i className="material-icons" style={iconStyle}>gps_fixed</i></label>
-                  <input type="text" name="address" id="address" value={address} onChange={handleAddressChange} placeholder="Your Address"/>
+                  <input type="text" name="address" id="address" value={address} onChange={handleAddressChange} placeholder="Your Address" required/>
                 </div>
                 <div className="form-group1">
                     <label htmlFor="resume"> Add Your Resume</label>
                     <br/><br/><br/>
-                    <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" onChange={handleFileChange}/>
+                    <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" onChange={handleFileChange} required/>
                 </div>
                 
                 <div className="form-group1 form-button1">
@@ -98,7 +99,8 @@ const { user } = useContext(UserContext);
             <div className="signup-image">
                 {/* Replace the source path with the correct path to your image */}
                 <figure><img src="./images/about.webp" alt='sign up image' /> </figure>
-                <a href="#" className="signup-image-link">I am already a member</a>
+                <Link to="/login" className="signup-image-link"><u>I am already a member</u></Link>
+
             </div>
 
           </div>

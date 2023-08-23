@@ -124,7 +124,7 @@ export default function AddCandidature() {
                 
                 <div className='input-container'>
                     <p>Ajouer votre lettre de motivation</p>
-                <input type="file" id="lettreDeMotivation" name="lettreDeMotivation" accept=".pdf,.doc,.docx" onChange={handleFileChange}/>
+                <input type="file" id="lettreDeMotivation" name="lettreDeMotivation" accept=".pdf,.doc,.docx" onChange={handleFileChange} required/>
                 </div>
               </div>
 

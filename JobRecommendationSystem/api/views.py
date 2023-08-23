@@ -12,6 +12,7 @@ from django.views import View
 from offre.models import Offre
 from django.shortcuts import get_object_or_404
 from candidature.models import Candidature
+from django.core.exceptions import ObjectDoesNotExist
 
 
 @api_view(['POST'])
@@ -33,14 +34,25 @@ def getEntretiens(request):
 @api_view(['POST'])
 def addCandidature(request):
     try:
-        serializer = CandidatureSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        candidat_id = request.data.get('candidat')  # Récupérez l'objet User à partir du corps de la requête
+        offre_id = request.data.get('offre')  # Récupérez l'objet Offre à partir du corps de la requête
+        
+        candidat = User.objects.get(id=candidat_id)
+        offre = Offre.objects.get(id=offre_id)
+        
+        try:
+            existing_candidature = Candidature.objects.get(candidat=candidat, offre=offre)
+            return Response({'message': 'Vous avez déjà postulé à cette offre.'}, status=status.HTTP_400_BAD_REQUEST)
+        except ObjectDoesNotExist:
+            serializer = CandidatureSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
 
 @api_view(['POST'])
 def addEntretien(request):
@@ -253,6 +265,20 @@ from profil.models import Profil
 def login_to_linkedin(request):
     if request.method == 'POST':
         try:
+
+            """
+            ## Chemin du ChromeDriver
+            chemin_du_chromedriver = "C:\\Users\\Admin\\Downloads\\chromedriver.exe"
+
+            # Configurez les options du navigateur avec le chemin du ChromeDriver
+            chrome_options = Options()
+            chrome_options.binary_location = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+            chrome_options.add_argument(f"webdriver.chrome.driver={chemin_du_chromedriver}")
+
+            # Initialisez le navigateur Chrome avec les options
+            driver = webdriver.Chrome(options=chrome_options)
+            """
+
             profile_to_search = request.POST.get('profile_to_search')
             driver = webdriver.Chrome()
             url = 'https://www.linkedin.com/login'

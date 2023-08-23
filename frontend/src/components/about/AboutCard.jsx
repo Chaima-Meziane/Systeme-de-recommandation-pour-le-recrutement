@@ -3,16 +3,27 @@ import Heading from "../common/heading/Heading"
 import "./about.css"
 import Awrapper from "./Awrapper"
 import { UserContext } from '../UserContext'
+import axios from 'axios';
 
 import { useParams, Link } from "react-router-dom";
 import { getoffrebyid } from "../../services/ApiService";
 import on_recrute_image from '../../../public/images/on_recrute.png';
 const AboutCard = () => {
   const { id } = useParams();
+  const { user } = useContext(UserContext);
   const { setUser } = useContext(UserContext);
   const [jobOffer, setJobOffer] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userCandidatures, setUserCandidatures] = useState([]);
+  const getCandidaturesByUserId = (userId) => {
+    return axios.get(`http://127.0.0.1:8000/api/mesCandidatures/${userId}`)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error("Error fetching user candidatures:", error);
+        throw error;
+      });
+  };
   
   useEffect(() => {
     let isMounted = true; // Add a flag to check if the component is still mounted
@@ -30,12 +41,18 @@ const AboutCard = () => {
           setLoading(false);
         }
       });
+      getCandidaturesByUserId(user.id)
+    .then((res) => {
+      if (isMounted) {
+        setUserCandidatures(res.candidatures);
+      }
+    });
 
     // Clean-up function to prevent setting state on an unmounted component
     return () => {
       isMounted = false;
     };
-  }, [id]);
+  }, [id, user.id]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -129,9 +146,13 @@ const AboutCard = () => {
                     <p> Êtes-vous intéressé(e) par cette offre ? </p></div></div>
 
                     <Link to={`/${id}/addCandidature`}>
-                    <button className='outline-btn'>Postuler</button>
-                  
-                    </Link>
+                    {userCandidatures.some((candidature) => candidature.offre_id === jobOffer.id) ? (
+                      <button className='outline-btn' disabled>Vous avez déjà postulé</button>
+                    ) : (
+                      <button className='outline-btn'>Postuler</button>
+                    )}
+                  </Link>
+
                  
                   
                   

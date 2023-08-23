@@ -15,6 +15,15 @@ const Offers = () => {
   const { user } = useContext(UserContext); 
   const [offres, setOffres] = useState([]);
   const [searchQuery, setSearchQuery] = useState(""); // State to store search query
+  const [userCandidatures, setUserCandidatures] = useState([]);
+  const getCandidaturesByUserId = (userId) => {
+    return axios.get(`http://127.0.0.1:8000/api/mesCandidatures/${userId}`)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error("Error fetching user candidatures:", error);
+        throw error;
+      });
+  };
   const filterOffers = (offers) => {
     return offers.filter((offre) => {
       // You can customize this filtering logic based on your use case
@@ -41,6 +50,13 @@ const Offers = () => {
           setOffres(res)
         }
       })
+      // Charger les candidatures de l'utilisateur depuis l'API
+    getCandidaturesByUserId(user.id)
+    .then((res) => {
+      if (isMounted) {
+        setUserCandidatures(res.candidatures);
+      }
+    });
 
     // Clean-up function to prevent setting state on an unmounted component
     return () => {
@@ -148,9 +164,17 @@ const Offers = () => {
                   <Link to={`/details/${offre.id}`}>
                   <button className='outline-btn'>VIEW JOB DETAILS</button>
                   </Link>
+                   {/* Vérification si l'utilisateur a déjà postulé à cette offre */}
+                {userCandidatures.some(
+                  (candidature) => candidature.offre_id === offre.id
+                ) ? (
+                  <button className="outline-btn" disabled>Vous avez déjà postulé</button>
+
+                ) : (
                   <Link to={`/${offre.id}/addcandidature`}>
-                  <button className='outline-btn'>POSTULER</button>
+                    <button className="outline-btn">POSTULER</button>
                   </Link>
+                )}
                   
 
                   <button className={`like-button ${offre.liked ? "liked" : ""}`} onClick={() => handleLike(offre.id)}>

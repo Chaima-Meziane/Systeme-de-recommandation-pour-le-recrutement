@@ -114,24 +114,24 @@ export default function AddOffre() {
               <div className='form-field'>
 
                 <div className='input-container'>
-                <input type='text' placeholder='Titre Du Poste' name='titreDuPoste' id='titreDuPoste' />
+                <input type='text' placeholder='Titre Du Poste' name='titreDuPoste' id='titreDuPoste' required/>
                 </div>
               </div>
 
               
               <div className='form-field'>
                 
-                <input type='text' placeholder='Competences' name='competences' id='competences' />
+                <input type='text' placeholder='Competences' name='competences' id='competences' required/>
               </div>
 
               <div className='form-field'>
               
-                <input type='text' placeholder='Entreprise' name='entreprise' id='entreprise' />
+                <input type='text' placeholder='Entreprise' name='entreprise' id='entreprise' required/>
               </div>
 
               <div className='form-field'>
              
-                <input type='text' placeholder='Localisation' name='localisation' id='localisation' />
+                <input type='text' placeholder='Localisation' name='localisation' id='localisation' required/>
               </div>
 
               <div className='form-field'>
@@ -150,7 +150,7 @@ export default function AddOffre() {
                 </select>
               </div>
               <div className='form-field'>
-                <textarea cols='30' rows='10' placeholder='Description' name='description' id='description'>
+                <textarea cols='30' rows='10' placeholder='Description' name='description' id='description'required>
                 
               </textarea>
               </div>

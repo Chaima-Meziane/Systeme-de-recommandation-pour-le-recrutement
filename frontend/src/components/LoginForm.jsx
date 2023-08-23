@@ -3,10 +3,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from './UserContext';
 import jwtDecode from "jwt-decode";
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
   let navigate = useNavigate();
   const { user, setUser } = useContext(UserContext); // Assurez-vous d'obtenir la valeur actuelle de l'utilisateur depuis le contexte
   
@@ -47,8 +49,8 @@ const LoginForm = () => {
       .catch((error) => {
         // Handle login error
         console.error("Login failed:", error);
-        // You can display an error message to the user
-      });
+        setLoginError("Invalid username or password."); 
+            });
       
 
 
@@ -79,9 +81,8 @@ const LoginForm = () => {
         <div className="signin-content">
           <div className="signin-image">
            
-            <a href="#" className="signup-image-link">
-              Create an account
-            </a>
+            <Link to="/register" className="signup-image-link"><u>Create an account</u></Link>
+
           </div>
 
           <div className="signin-form">
@@ -98,7 +99,7 @@ const LoginForm = () => {
                   placeholder="Your Name"
                   value={username}
                   onChange={handleUsernameChange}
-                />
+                required/>
               </div>
               <div className="form-group1">
                 <label htmlFor="your_pass">
@@ -111,7 +112,7 @@ const LoginForm = () => {
                   placeholder="Password"
                   value={password}
                   onChange={handlePasswordChange}
-                />
+                  required/>
               </div>
               <div className="form-group1">
                 <input
@@ -132,7 +133,14 @@ const LoginForm = () => {
                   className="form-submit"
                   value="Log in"
                 />
+              
+              
               </div>
+              
+              <div>
+              {loginError && <label className="label-agree-term">{loginError}</label>} {/* Afficher le message d'erreur */}
+              </div>
+
             </form>
             <div className="social-login">
               
