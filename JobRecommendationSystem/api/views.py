@@ -78,13 +78,38 @@ def addEntretien(request):
 
 @api_view(['PUT'])
 def updateEntretien(request, id=None):
-    entretien = Entretien.objects.get(id=id)
-
+    entretien = get_object_or_404(Entretien, id=id)
     serializer = EntretienSerializer(instance=entretien, data=request.data)
+
     if serializer.is_valid():
+        ancien_etat = entretien.resultat
         serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        # If the new state is "Accepted" or "Rejected" and the old state was "Pending"
+        if entretien.resultat in ['accepte', 'refuse'] and ancien_etat == 'en_attente':
+            candidature = Candidature.objects.get(id=entretien.candidature.id)
+            candidat_id = candidature.candidat.id
+            candidat = User.objects.get(id=candidat_id)
+            envoyer_email_resultat(candidat, entretien)  # Pass the User object and the entretien
+
+            return Response({'message': f"Entretien state updated and email sent to {candidat.email}."}, status=status.HTTP_200_OK)
+        else:
+            return Response({'message': "Entretien state updated, but no email sent."}, status=status.HTTP_200_OK)
+
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def envoyer_email_resultat(user, entretien):
+    subject = "Résultat de l'entretien"
+
+    if entretien.resultat == 'accepte':
+        message = f"Cher(e) {user.first_name} {user.last_name},\n\nFélicitations ! Nous sommes ravis de vous informer que vous avez été retenu(e) pour le poste de '{entretien.candidature.offre.titreDuPoste}'. Votre performance lors de l'entretien a été remarquable, et nous sommes convaincus que vous apporterez une grande valeur à notre équipe.\n\nToutes nos félicitations encore une fois, et nous avons hâte de vous accueillir dans notre entreprise. Vous recevrez bientôt des informations détaillées sur le processus d'intégration.\n\nCordialement,\n"
+    elif entretien.resultat == 'refuse':
+        message = f"Cher(e) {user.first_name} {user.last_name},\n\nNous tenons à vous exprimer notre sincère gratitude pour l'intérêt que vous avez manifesté envers le poste de '{entretien.candidature.offre.titreDuPoste}' au sein de notre entreprise. Après une évaluation attentive de votre candidature et de l'entretien, nous regrettons de vous informer que nous avons décidé de poursuivre avec d'autres candidats.\n\nNous reconnaissons la valeur de vos compétences et de votre expérience, et espérons que vous trouverez bientôt une opportunité qui correspondra parfaitement à votre profil. Nous vous souhaitons le meilleur dans vos recherches professionnelles futures.\n\nCordialement,\n"
+
+    from_email = settings.DEFAULT_FROM_EMAIL
+    recipient_list = [user.email]
+        
+    send_mail(subject, message, from_email, recipient_list, fail_silently=False)
 
 @api_view(['PUT'])
 def updateUser(request, id=None):
