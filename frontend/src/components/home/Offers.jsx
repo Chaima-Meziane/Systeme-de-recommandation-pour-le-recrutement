@@ -25,6 +25,18 @@ const Offers = () => {
         throw error;
       });
   };
+  const getLikeStatus = (userId, offreId) => {
+    return axios.get(`http://127.0.0.1:8000/like/getLikeStatus/${offreId}`, {
+      params: {
+        userId: userId,
+      }
+    })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error("Error fetching like status:", error);
+        throw error;
+      });
+  };
   const filterOffers = (offers) => {
     return offers.filter((offre) => {
       // You can customize this filtering logic based on your use case
@@ -49,8 +61,36 @@ const Offers = () => {
           console.log("resultat api", res)
           const filteredOffers = filterOffers(res); // Filter offers based on search query
           setOffres(res)
+          const offersWithLikedStatus = res.map((offer) => {
+            // Fetch liked status for each offer
+            return getLikeStatus(user.id, offer.id)
+              .then((likeStatus) => {
+                return {
+                  ...offer,
+                  liked: likeStatus.liked,
+                };
+              })
+              .catch((error) => {
+                console.error(`Error fetching like status for offer ${offer.id}:`, error);
+                return {
+                  ...offer,
+                  liked: false,
+                };
+              });
+          });
+
+          Promise.all(offersWithLikedStatus)
+            .then((offersWithStatus) => {
+              setOffres(offersWithStatus);
+            })
+            .catch((error) => {
+              console.error("Error fetching like statuses:", error);
+            });
         }
       })
+      .catch((error) => {
+        console.error("Error fetching offers:", error);
+      });
       // Charger les candidatures de l'utilisateur depuis l'API
       getCandidaturesByUserId(user.id)
       .then((res) => {
