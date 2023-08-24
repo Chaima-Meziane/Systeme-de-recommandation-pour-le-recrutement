@@ -16,6 +16,7 @@ const Offers = () => {
   const [offres, setOffres] = useState([]);
   const [searchQuery, setSearchQuery] = useState(""); // State to store search query
   const [userCandidatures, setUserCandidatures] = useState([]);
+  const [userCandidaturesLoading, setUserCandidaturesLoading] = useState(true);
   const getCandidaturesByUserId = (userId) => {
     return axios.get(`http://127.0.0.1:8000/api/mesCandidatures/${userId}`)
       .then((response) => response.data)
@@ -51,18 +52,22 @@ const Offers = () => {
         }
       })
       // Charger les candidatures de l'utilisateur depuis l'API
-    getCandidaturesByUserId(user.id)
-    .then((res) => {
-      if (isMounted) {
-        setUserCandidatures(res.candidatures);
-      }
-    });
+      getCandidaturesByUserId(user.id)
+      .then((res) => {
+        if (isMounted) {
+          setUserCandidatures(res.candidatures);
+          setUserCandidaturesLoading(false); // Set loading state to false after fetching data
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching user candidatures:', error);
+      });
 
-    // Clean-up function to prevent setting state on an unmounted component
     return () => {
       isMounted = false;
-    }
-  }, [])
+    };
+  }, []);
+
   const handleLike = async (offreId) => {
     try {
       // Send the like/dislike request to the server
@@ -164,6 +169,13 @@ const Offers = () => {
                   <Link to={`/details/${offre.id}`}>
                   <button className='outline-btn'>VIEW JOB DETAILS</button>
                   </Link>
+
+                  {/* Check if user candidatures are still loading */}
+              {userCandidaturesLoading ? (
+                <button className='outline-btn' disabled>Loading...</button>
+              ) : (
+                <>
+
                    {/* Vérification si l'utilisateur a déjà postulé à cette offre */}
                 {userCandidatures.some(
                   (candidature) => candidature.offre_id === offre.id
@@ -175,7 +187,8 @@ const Offers = () => {
                     <button className="outline-btn">POSTULER</button>
                   </Link>
                 )}
-                  
+                </>  
+              )}
 
                   <button className={`like-button ${offre.liked ? "liked" : ""}`} onClick={() => handleLike(offre.id)}>
                   {offre.liked ? (

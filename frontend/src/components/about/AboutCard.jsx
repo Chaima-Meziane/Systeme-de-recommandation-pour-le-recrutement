@@ -16,6 +16,8 @@ const AboutCard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [userCandidatures, setUserCandidatures] = useState([]);
+  const [userCandidaturesLoading, setUserCandidaturesLoading] = useState(true);
+
   const getCandidaturesByUserId = (userId) => {
     return axios.get(`http://127.0.0.1:8000/api/mesCandidatures/${userId}`)
       .then((response) => response.data)
@@ -45,8 +47,9 @@ const AboutCard = () => {
     .then((res) => {
       if (isMounted) {
         setUserCandidatures(res.candidatures);
-      }
-    });
+          setUserCandidaturesLoading(false); // Set loading to false after fetching data
+        }
+      });
 
     // Clean-up function to prevent setting state on an unmounted component
     return () => {
@@ -146,25 +149,21 @@ const AboutCard = () => {
                     <p> Êtes-vous intéressé(e) par cette offre ? </p></div></div>
 
                     <Link to={`/${id}/addCandidature`}>
-                    {userCandidatures.some((candidature) => candidature.offre_id === jobOffer.id) ? (
-                      <button className='outline-btn' disabled>Vous avez déjà postulé</button>
-                    ) : (
-                      <button className='outline-btn'>Postuler</button>
-                    )}
-                  </Link>
-
-                 
-                  
-                  
-
-                
+                {userCandidaturesLoading ? ( // Check if data is still loading
+                  <button className='outline-btn' disabled>Loading...</button>
+                ) : userCandidatures.some((candidature) => candidature.offre_id === jobOffer.id) ? (
+                  <button className='outline-btn' disabled>Vous avez déjà postulé</button>
+                ) : (
+                  <button className='outline-btn'>Postuler</button>
+                )}
+              </Link>
             </div>
           </div>
         </div>
       </section>
       <Awrapper />
     </>
-  )
-}
+  );
+};
 
-export default AboutCard
+export default AboutCard;
