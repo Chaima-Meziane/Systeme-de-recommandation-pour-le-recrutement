@@ -5,7 +5,7 @@ from .views import LinkedInAuthView
 urlpatterns = [
     path('getEntretiens/', getEntretiens),
     path('add/', addEntretien),
-    path('update/<int:id>', updateEntretien),
+    path('updateEntretien/<int:id>/', updateEntretien),
     path('delete/<int:id>', deleteEntretien),
     path('register/', register_api),
     path('login/', LoginAPIView.as_view(), name='post'),
@@ -29,6 +29,7 @@ urlpatterns = [
     path('entretien/add/', addEntretien),
     path('getEntretiensByCoordinateur/<int:coordinator_id>/', getEntretiensByCoordinateur),
     path('getEntretiensByCandidat/<int:candidat_id>/', getEntretiensByCandidat),
+    path('getEntretienByID/<int:entretien_id>/', GetEntretienByID.as_view(), name='get-entretien-by-id'),
     
 
 ]

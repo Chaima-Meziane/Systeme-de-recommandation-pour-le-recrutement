@@ -15,6 +15,15 @@ from candidature.models import Candidature
 from django.core.exceptions import ObjectDoesNotExist
 
 
+class GetEntretienByID(APIView):
+    def get(self, request, entretien_id):
+        try:
+            entretien = Entretien.objects.get(pk=entretien_id)
+            serializer = EntretienSerializer(entretien)  
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Entretien.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
 @api_view(['POST'])
 def logout_view(request):
     logout(request)

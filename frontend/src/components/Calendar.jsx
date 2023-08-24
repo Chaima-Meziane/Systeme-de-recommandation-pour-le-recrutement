@@ -6,11 +6,14 @@ import CustomEvent from './CustomEvent';
 import { UserContext } from './UserContext';
 import Heading from './common/heading/Heading'; 
 import "./allcourses/courses.css"
+import { useNavigate } from 'react-router-dom';
+
 const localizer = momentLocalizer(moment);
 
 const CalendarComponent = () => {
   const [entretiens, setEntretiens] = useState([]);
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch entretiens data from your Django API endpoint
@@ -43,6 +46,13 @@ const CalendarComponent = () => {
       end: endDateTime,
     };
   };
+ 
+
+  const handleEventClick = (event) => {
+    // Redirect to a page when event is clicked
+    // Assuming you have a route like "/event/:eventId" where eventId is the ID of the clicked event
+    navigate(`/updateoptions/${event.id}`);
+  };
 
   return (
     <section className='homeAbout'>
@@ -57,6 +67,8 @@ const CalendarComponent = () => {
         components={{
           event: CustomEvent, // Use the custom Event component
         }}
+        onSelectEvent={handleEventClick}
+        
       />
     </div>
     </div>
