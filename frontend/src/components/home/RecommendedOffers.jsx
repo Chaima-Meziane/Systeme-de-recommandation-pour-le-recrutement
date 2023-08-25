@@ -5,6 +5,7 @@ import OnlineCourses from "../allcourses/OnlineCourses"
 import Heading from "../common/heading/Heading"
 import "../allcourses/courses.css"
 import { Link } from 'react-router-dom';
+import Back from "../common/back/Back"
 
 const RecommendedOffers = () => {
   const [recommendedOffers, setRecommendedOffers] = useState([]);
@@ -24,6 +25,7 @@ const RecommendedOffers = () => {
 
   return (
     <>
+    <Back title='Contact us' />
     <section className='homeAbout'>
       <div className='container'>
         <Heading subtitle='our job offers' title='explore available job offers' />

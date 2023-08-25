@@ -5,6 +5,8 @@ import OnlineCourses from "./allcourses/OnlineCourses"
 import Heading from './common/heading/Heading'; 
 import "./allcourses/courses.css"
 import { Link } from 'react-router-dom';
+import Back from "./common/back/Back"
+
 
 const OffersByCoordinator = () => {
   const { user } = useContext(UserContext);
@@ -39,10 +41,12 @@ const OffersByCoordinator = () => {
   }, [user]);
 
   return (
+    <>
+    <Back title='Contact us' />
     <section className='homeAbout'>
     <div className='container'>
       <Heading subtitle='our job offers' title='explore available job offers' />
-      <Link to={`/addoffre`}><button className='outline-btn'>add offre</button></Link>
+      {/*<Link to={`/addoffre`}><button className='outline-btn'>add offre</button></Link>*/}
       <input
             type="text"
             placeholder="Search job offers..."
@@ -113,6 +117,7 @@ const OffersByCoordinator = () => {
     </div>
     <OnlineCourses />
   </section>
+  </>
   );
 };
 

@@ -134,13 +134,14 @@ const Offers = () => {
       <section className='homeAbout'>
         <div className='container'>
           <Heading subtitle='our job offers' title='explore available job offers' />
+          {/*
           <Link to={`/OffersByCoordinator`}><button className='outline-btn'>coordinator offers</button></Link>
           <Link to={`/addoffre`}><button className='outline-btn'>add offer</button></Link>
           <Link to={`/recommendedoffers`}><button className='outline-btn'>offres recommandées</button></Link>
           <Link to={`/recommendedoffersbylikes/${user.id}`}><button className='outline-btn'>Recommended offers</button></Link>
           <Link to={`/MesCandidatures`}><button className='outline-btn'>Mes Candidatures</button></Link>
           <Link to={`/calendar`}><button className='outline-btn'>Mes entretiens</button></Link>
-
+        */}
           <input
             type="text"
             placeholder="Search job offers..."

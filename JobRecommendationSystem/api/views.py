@@ -159,6 +159,7 @@ class LoginAPIView(APIView):
                 'username': user.username,
                 'email': user.email,
                 'is_candidat':user.is_candidat,
+                'is_coordinateur':user.is_coordinateur,
                 # Add other user fields you want to include
             }
             return Response({"message": "Login successful", "user": user_data}, status=status.HTTP_200_OK)

@@ -5,6 +5,7 @@ import OnlineCourses from "../allcourses/OnlineCourses"
 import Heading from "../common/heading/Heading"
 import "../allcourses/courses.css"
 import { Link } from 'react-router-dom';
+import Back from "../common/back/Back"
 
 function MesCandidatures() {
     const [candidatures, setCandidatures] = useState([]);
@@ -22,6 +23,7 @@ function MesCandidatures() {
 
     return (
     <>
+    <Back title='Contact us' />
     <section className='homeAbout'>
       <div className='container'>
         <Heading subtitle='our job offers' title='explore available job offers' />

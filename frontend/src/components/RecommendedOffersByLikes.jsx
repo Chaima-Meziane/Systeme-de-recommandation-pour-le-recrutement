@@ -8,6 +8,8 @@ import { UserContext } from './UserContext';
 import { Link } from 'react-router-dom';
 import job_offer from '../../public/images/job_offer.png';
 import logo_esprit from '../../public/images/logo_esprit.png';
+import Back from "./common/back/Back"
+
 const RecommendedOffersByLikes = () => {
     const [bestOffers, setBestOffers] = useState([]);
     const { user } = useContext(UserContext);
@@ -21,7 +23,11 @@ const RecommendedOffersByLikes = () => {
             });
     }, []);
 
-    return (<section className='homeAbout'>
+    return (
+      <>
+      <Back title='Contact us' />
+    
+    <section className='homeAbout'>
     <div className='container'>
       <Heading subtitle='our job offers' title='explore available job offers' />
         
@@ -89,6 +95,7 @@ const RecommendedOffersByLikes = () => {
     </div>
     
   </section>
+  </>
         
     );
 };

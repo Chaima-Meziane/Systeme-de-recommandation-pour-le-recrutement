@@ -7,6 +7,7 @@ import { UserContext } from './UserContext';
 import Heading from './common/heading/Heading'; 
 import "./allcourses/courses.css"
 import { useNavigate } from 'react-router-dom';
+import Back from "./common/back/Back"
 
 const localizer = momentLocalizer(moment);
 
@@ -55,6 +56,8 @@ const CalendarComponent = () => {
   };
 
   return (
+    <>
+      <Back title='Contact us' />
     <section className='homeAbout'>
     <div className='container'>
       <Heading subtitle='Votre agenda' title="Explorez votre agenda d'entretiens" />
@@ -73,6 +76,7 @@ const CalendarComponent = () => {
     </div>
     </div>
     </section>
+    </>
   );
 };
 
