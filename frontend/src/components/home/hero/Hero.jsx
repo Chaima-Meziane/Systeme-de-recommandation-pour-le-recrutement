@@ -5,6 +5,8 @@ import "./Hero.css"
 const Hero = () => {
   return (
     <>
+      
+      <section id='scrollToSection' className='hero'> {/* Ajoutez l'identifiant "scrollToSection" */}
       <section className='hero'>
         <div  className='container'>
           <div className='row'>
@@ -20,6 +22,7 @@ const Hero = () => {
             </div>
           </div>
         </div>
+      </section>
       </section>
       <div className='margin'></div>
     </>

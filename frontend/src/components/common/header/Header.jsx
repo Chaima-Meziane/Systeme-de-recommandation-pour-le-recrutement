@@ -37,7 +37,7 @@ const Header = () => {
         <nav className='flexSB'>
           <ul className={click ? "mobile-nav" : "flexSB "} onClick={() => setClick(false)}>
             <li>
-              <Link to='/'>Home</Link>
+              <Link to='/'>Accueil</Link>
             </li>
             {isCandidat && (
               <>
@@ -61,10 +61,10 @@ const Header = () => {
                   <Link to='/OffersByCoordinator'>Mes Offres</Link>
                 </li>
                 <li>
-                  <Link to='/addoffre'>Ajouter Mon Offre</Link>
+                  <Link to='/calendar'>Mes Entretiens</Link>
                 </li>
                 <li>
-                  <Link to='/calendar'>Mes Entretiens</Link>
+                  <Link to='/addoffre'>Ajouter Une Offre</Link>
                 </li>
               </>
             )}
@@ -89,7 +89,7 @@ const Header = () => {
           </ul>
           <div className='start'>
             <div className='button'>
-              <a href="#" style={{ color: 'white' }} onClick={handleLogout}>Logout</a>
+              <a href="#" style={{ color: 'white' }} onClick={handleLogout}>Se déconnecter</a>
             </div>
           </div>
           <button className='toggle' onClick={() => setClick(!click)}>
