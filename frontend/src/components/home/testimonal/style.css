@@ -1,6 +1,7 @@
 .testimonal .items {
   padding: 30px;
   transition: 0.5s;
+  
 }
 
 .testimonal .img {
@@ -18,8 +19,8 @@
   background-color: #1eb2a6;
   color: #fff;
 }
-.testimonal .name {
-  margin: 25px;
+#nom{
+  font-size: 28px;
 }
 .testimonal .name h2 {
   font-size: 20px;
@@ -27,6 +28,8 @@
 }
 .testimonal .name span {
   color: #1eb2a6;
+  
+
   
 }
 .testimonal p {
