@@ -10,8 +10,13 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
   let navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext); // Assurez-vous d'obtenir la valeur actuelle de l'utilisateur depuis le contexte
+  const { user, setUser } = useContext(UserContext); // Make sure to set the user using context
   
+  // Clear user data from local storage when redirected to login
+  useEffect(() => {
+    localStorage.removeItem('user');
+    setUser(null);
+  }, [setUser]);
   
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);

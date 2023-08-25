@@ -16,6 +16,7 @@ const Header = () => {
       .then((response) => {
         
         // Set the user to null upon successful logout
+        localStorage.removeItem('user');
         setUser(null);
 
         // Redirect the user to the login page after successful logout
@@ -25,6 +26,7 @@ const Header = () => {
         console.error("Logout error:", error);
       });
   };
+ 
 
 
 

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from 'axios';
 import { UserContext } from './UserContext';
 import { useNavigate } from "react-router-dom";
@@ -8,9 +8,17 @@ const RegisterForm = () => {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const { setUser } = useContext(UserContext);
+  
   const userType = "candidat"; // Set the default value to "candidat" directly
   let navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext); // Make sure to set the user using context
+  
+  // Clear user data from local storage when redirected to login
+  useEffect(() => {
+    localStorage.removeItem('user');
+    setUser(null);
+  }, [setUser]);
+
   const handleNameChange = (e) => {
     setUsername(e.target.value);
   };
