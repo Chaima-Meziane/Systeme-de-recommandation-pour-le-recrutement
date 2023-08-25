@@ -13,6 +13,16 @@
   font-weight: 500;
   margin-bottom: 15px;
 }
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 400px;
+    height: 40px;
+    margin-top: 15px;
+  }
+
 .newletter .right {
   display: flex;
   justify-content: space-between;
@@ -32,6 +42,9 @@
 }
 footer {
   background-color: #eeeeee;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-left:40px;
 }
 footer .container {
   display: grid;
@@ -47,9 +60,23 @@ footer .logo span {
   color: #1eb2a6;
   font-size: 14px;
 }
-footer .logo p {
+footer .logo  {
+  width: 350px;
+}
+footer .link  {
+  width: 200px;
+}
+footer .last  {
+  width: 400px;
+}
+
+footer .logo p  {
   color: grey;
   margin: 30px 0 15px 0;
+}
+footer .logo a {
+  color: grey;
+  margin-left: 30px;
 }
 footer .logo .icon {
   background-color: #1eb2a6;
@@ -58,7 +85,7 @@ footer .logo .icon {
 }
 footer h3 {
   margin-bottom: 40px;
-  font-weight: 500;
+  font-weight: 600;
 }
 footer ul li {
   margin-bottom: 20px;
@@ -86,27 +113,30 @@ footer .items i {
   text-transform: capitalize;
 }
 footer h4 {
-  font-weight: 400;
+  font-weight: 600;
   margin-top: 5px;
 }
 footer .last ul li {
   display: flex;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+}
+a{
+  color:black;
 }
 footer .last i {
-  width: 60px;
+  width: 70px;
   font-size: 20px;
   color: #1eb2a6;
 }
-.legal {
+.pays {
   text-align: center;
-  padding: 50px 0;
+  padding: 20px 0;
   color: grey;
   background-color: #e9e9e9;
 }
-.legal p {
+.pays p {
   font-size: 15px;
 }
-.legal i {
+.pays i {
   color: #1eb2a6;
 }

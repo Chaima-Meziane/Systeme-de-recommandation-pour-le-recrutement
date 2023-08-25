@@ -1,97 +1,92 @@
-import React from "react"
-import { blog } from "../../../dummydata"
+import React, { useContext} from 'react';
 import "./footer.css"
+import { UserContext } from '../../UserContext';
+import { Link} from 'react-router-dom';
 
 const Footer = () => {
+  const { user } = useContext(UserContext);
+console.log(user);
   return (
     <>
       <section className='newletter'>
         <div className='container flexSB'>
-          <div className='left row'>
-            <h1>Newsletter - Stay tune and get the latest update</h1>
-            <span>Far far away, behind the word mountains</span>
-          </div>
-          <div className='right row'>
+          
+        <div className="center-container">
+      <h1>Naviguez vers une carrière réussie.</h1>
+    </div>
+            {/*<span>Far far away, behind the word mountains</span>*/}
+          
+          {/*<div className='right row'>
             <input type='text' placeholder='Enter email address' />
             <i className='fa fa-paper-plane'></i>
-          </div>
+          </div>*/}
         </div>
       </section>
       <footer>
         <div className='container padding'>
           <div className='box logo'>
-            <h1>ACADEMIA</h1>
-            <span>ONLINE EDUCATION & LEARNING</span>
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+            <h1>Esprit's Job Center</h1><br/>
+            <span>ÉPANOUISSEMENT PROFESSIONNEL ASSURÉ</span>
+            <p> Votre parcours sur mesure vers des correspondances professionnelles idéales.</p>
+            
+          </div>
+          {user.is_candidat ? (
+          <div className='box link'>
+            <h3>Menu</h3>
+            <ul>
+              <a href='/'><li>Accueil</li></a>
+              <a href='/MesCandidatures'><li>Mes candidatures</li></a>
+              <a href='/recommendedoffers'><li>Meilleures offres pour vous</li></a>
+              <a href={`/recommendedoffersbylikes/${user.id}`}><li>Meilleures offres pour vous</li></a>
 
-            <i className='fab fa-facebook-f icon'></i>
-            <i className='fab fa-twitter icon'></i>
-            <i className='fab fa-instagram icon'></i>
-          </div>
-          <div className='box link'>
-            <h3>Explore</h3>
-            <ul>
-              <li>About Us</li>
-              <li>Services</li>
-              <li>Courses</li>
-              <li>Blog</li>
-              <li>Contact us</li>
+              <a href='/calendar'><li>Mes entretiens</li></a>
             </ul>
           </div>
+        ) : (
           <div className='box link'>
-            <h3>Quick Links</h3>
+            <h3>Menu</h3>
             <ul>
-              <li>Contact Us</li>
-              <li>Pricing</li>
-              <li>Terms & Conditions</li>
-              <li>Privacy</li>
-              <li>Feedbacks</li>
+              <a href='/'><li>Accueil</li></a>
+              <a href='/OffersByCoordinator'><li>Mes offres</li></a>
+              <a href='/addoffre'><li>Ajouter une offre</li></a>
+              <a href='/calendar'><li>Mes entretiens</li></a>
+              
             </ul>
           </div>
-          <div className='box'>
-            <h3>Recent Post</h3>
-            {blog.slice(0, 3).map((val) => (
-              <div className='items flexSB'>
-                <div className='img'>
-                  <img src={val.cover} alt='' />
-                </div>
-                <div className='text'>
-                  <span>
-                    <i className='fa fa-calendar-alt'></i>
-                    <label htmlFor=''>{val.date}</label>
-                  </span>
-                  <span>
-                    <i className='fa fa-user'></i>
-                    <label htmlFor=''>{val.type}</label>
-                  </span>
-                  <h4>{val.title.slice(0, 40)}...</h4>
-                </div>
-              </div>
-            ))}
-          </div>
+        )}
+       
+          
+          
+          
           <div className='box last'>
-            <h3>Have a Questions?</h3>
+            <h3>Contactez-nous</h3>
             <ul>
               <li>
-                <i className='fa fa-map'></i>
-                203 Fake St. Mountain View, San Francisco, California, USA
+              <i className='fas fa-map-marker-alt'></i>
+                <a href='https://www.google.com/maps/place/ESPRIT/@36.8988892,10.1871341,17z/data=!4m10!1m2!2m1!1sESPRIT,+Cebalat+Ben+Ammar,+Ariana,+Tunisia!3m6!1s0x12e2cb7454c6ed51:0x683b3ab5565cd357!8m2!3d36.8992878!4d10.1893674!15sCipFU1BSSVQsIENlYmFsYXQgQmVuIEFtbWFyLCBBcmlhbmEsIFR1bmlzaWGSARJwcml2YXRlX3VuaXZlcnNpdHngAQA!16s%2Fg%2F11bwdw7k77?entry=ttu'> lot 13, V5XR+M37 Résidence Essalem II, Av. Fethi Zouhir, Cebalat Ben Ammar 2083</a>
               </li>
               <li>
                 <i className='fa fa-phone-alt'></i>
-                +2 392 3929 210
+                +(216) 70 685 685
               </li>
               <li>
                 <i className='fa fa-paper-plane'></i>
-                info@yourdomain.com
+                contact@esprit.tn
               </li>
             </ul>
+            
           </div>
+          <div className='box logo'>
+            
+            <h3> Suivez-nous</h3>
+            
+            <a href='https://www.facebook.com/esprit.tn'><i className='fab fa-facebook-f icon'></i></a><br/><br/>
+            <a href='https://twitter.com/esprittn?lang=fr'><i className='fab fa-twitter icon'></i></a><br/><br/>
+            <a href='https://www.instagram.com/esprit_ingenieur/?hl=fr'><i className='fab fa-instagram icon'></i></a></div>
         </div>
       </footer>
-      <div className='legal'>
-        <p>
-          Copyright ©2022 All rights reserved | This template is made with <i className='fa fa-heart'></i> by GorkhCoder
-        </p>
+      <div className='pays'>
+      <p><i className="fas fa-globe"></i> Tunisie | Français</p>
       </div>
     </>
   )
