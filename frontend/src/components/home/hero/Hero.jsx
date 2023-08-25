@@ -3,27 +3,33 @@ import Heading from "../../common/heading/Heading"
 import "./Hero.css"
 
 const Hero = () => {
+  const scrollToOffers = () => {
+    const offersSection = document.getElementById("offers-section");
+    offersSection.scrollIntoView({ behavior: "smooth" });
+  };
+  
   return (
     <>
       
-      <section id='scrollToSection' className='hero'> {/* Ajoutez l'identifiant "scrollToSection" */}
-      <section className='hero'>
+      <section className='hero'> {/* Ajoutez l'identifiant "scrollToSection" */}
+      
         <div  className='container'>
           <div className='row'>
-            <Heading subtitle='WELCOME TO ACADEMIA' title='Best Online Education Expertise' />
-            <p style={{color: 'white'}}>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-            <div className='button'>
-              <button className='primary-btn'>
-                GET STARTED NOW <i className='fa fa-long-arrow-alt-right'></i>
-              </button>
-              <button>
-                VIEW COURSE <i className='fa fa-long-arrow-alt-right'></i>
-              </button>
-            </div>
+            <Heading subtitle='BIENVENUE SUR EPRIT’S JOB CENTER' title='Développez Votre Carrière Avec Nous' />
+            {/*<Heading title='BIENVENUE SUR EPRIT’S JOB CENTER' />*/}
+            <p style={{color: 'white'}}>Explorez des opportunités uniques qui correspondent à votre vision et à vos aspirations.</p>
+            
           </div>
         </div>
+        
       </section>
-      </section>
+  
+      <div className='button1'>
+            <button className='primary-btn' onClick={scrollToOffers}>
+              DÉCOUVREZ NOS OFFRES <i className='fa fa-long-arrow-alt-right'></i>
+            </button>
+            </div>
+            
       <div className='margin'></div>
     </>
   )

@@ -33,3 +33,13 @@
     width: 100%;
   }
 }
+
+.button1 {
+  display: flex;
+  justify-content: flex-start; /* Aligner le bouton vers la gauche */
+  position: relative; /* Utiliser la position relative */
+  top: 370px; /* Déplacer le bouton vers le bas de 20px */
+  margin-left: 110px;
+}
+
+

@@ -131,7 +131,7 @@ const Offers = () => {
 
   return (
     <>
-      <section  className='homeAbout'>
+      <section id='offers-section' className='homeAbout'>
         <div className='container'>
           <Heading subtitle='our job offers' title='explore available job offers' />
           {/*
