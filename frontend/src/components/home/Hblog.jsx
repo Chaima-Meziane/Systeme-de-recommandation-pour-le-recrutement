@@ -21,15 +21,15 @@ const Hblog = () => {
                   <div className='admin flexSB'>
                     <span>
                       <i className='fa fa-user'></i>
-                      <label htmlFor=''>{val.type}</label>
+                      <label htmlFor=''></label>
                     </span>
                     <span>
                       <i className='fa fa-calendar-alt'></i>
-                      <label htmlFor=''>{val.date}</label>
+                      <label htmlFor=''></label>
                     </span>
                     <span>
                       <i className='fa fa-comments'></i>
-                      <label htmlFor=''>{val.com}</label>
+                      <label htmlFor=''></label>
                     </span>
                   </div>
                   <h1>{val.title}</h1>

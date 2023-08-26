@@ -24,5 +24,6 @@ class Entretien(models.Model):
     
     # ForeignKey to User model for the coordinator
     coordinateur = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True)
+    lien_reunion = models.URLField(blank=True, null=True)
 
     

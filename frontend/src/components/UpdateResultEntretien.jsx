@@ -54,7 +54,7 @@ export default function UpdateEntretien() {
       .then((response) => {
         console.log("Entretien was successfully updated!");
         console.log(response.data);
-        navigate('/calendar');
+        navigate(-1);
       })
       .catch((error) => {
         console.error("Update failed", error);
@@ -70,11 +70,11 @@ export default function UpdateEntretien() {
       <Back title="Rapport d'Entretien" />
       <section className='contacts padding'>
         <div className='container shadow'>
-          <div className='left row'>
+          <div className='left row'><br/><br/><br/><br/>
             <h1>Adjoindre le résultat de l'entretien</h1>
             <form onSubmit={handleAddSubmit}>
             <div className='form-field'>
-              <p> Résultat de l'entretien</p>
+              <p> Veuillez entrer le résultat de l'entretien</p>
               <select
                 name='resultat'
                 value={resultat}

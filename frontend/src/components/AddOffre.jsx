@@ -103,7 +103,7 @@ export default function AddOffre() {
 
   return (
     <>
-      <Back title='Add offer here' />
+      <Back title='Ajouter une offre' />
       <section className='contacts padding'>
         <div className='container shadow'>
           <div className='left row'>

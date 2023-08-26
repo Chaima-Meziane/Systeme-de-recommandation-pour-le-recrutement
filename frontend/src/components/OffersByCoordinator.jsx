@@ -42,7 +42,7 @@ const OffersByCoordinator = () => {
 
   return (
     <>
-    <Back title='Contact us' />
+    <Back title='Mes Offres' />
     <section className='homeAbout'>
     <div className='container'>
       <Heading subtitle='our job offers' title='explore available job offers' />
@@ -73,7 +73,7 @@ const OffersByCoordinator = () => {
                     <i className='fa fa-star'></i>
                     <i className='fa fa-star'></i>
                     <i className='fa fa-star'></i>
-                    <label htmlFor=''>(5.0)</label>
+                    {/*<label htmlFor=''>(5.0)</label>*/}
                   </div>
                   <div className='localisation'> 
                   <i className="fas fa-map-marker-alt"></i>

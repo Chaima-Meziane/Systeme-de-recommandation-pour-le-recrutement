@@ -169,7 +169,7 @@ const Offers = () => {
                         <i className='fa fa-star'></i>
                         <i className='fa fa-star'></i>
                         <i className='fa fa-star'></i>
-                        <label htmlFor=''>(5.0)</label>
+                        {/*<label htmlFor=''>(5.0)</label>*/}
                       </div>
                       <div className='localisation'> 
                       <i className="fas fa-map-marker-alt"></i>

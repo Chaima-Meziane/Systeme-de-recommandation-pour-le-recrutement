@@ -25,7 +25,7 @@ const RecommendedOffers = () => {
 
   return (
     <>
-    <Back title='Contact us' />
+    <Back title='Offres recommandées' />
     <section className='homeAbout'>
       <div className='container'>
         <Heading subtitle='our job offers' title='explore available job offers' />

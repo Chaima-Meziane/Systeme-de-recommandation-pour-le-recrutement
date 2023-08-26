@@ -13,6 +13,7 @@ export default function AddEntretien() {
   const [heureDebut, setHeureDebut] = useState('12:00');
   const [heureFin, setHeureFin] = useState('12:30');
   const [date, setDate] = useState('');
+  const[lien_reunion, setlien_reunion]=useState('');
   let navigate = useNavigate();
 
   // Access the user context
@@ -30,6 +31,7 @@ export default function AddEntretien() {
       date: formattedDate,
       candidature: id, // Set the candidature ID
       coordinateur: idUser, // Set the coordinator ID
+      lien_reunion: lien_reunion
     };
 
     try {
@@ -76,6 +78,18 @@ export default function AddEntretien() {
                     type='date'
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className='form-field'>
+                <div className='input-container'>
+                  <p>Lien de la réunion</p>
+                  <input
+                    type="text"
+                    id="lien"
+                    value={lien_reunion}
+                    onChange={(e) => setlien_reunion(e.target.value)}
                   />
                 </div>
               </div>

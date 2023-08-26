@@ -17,6 +17,7 @@ export default function UpdateEntretien() {
   const [resultat, setResultat] = useState('');
   const [candidature, setCandidaure] = useState('');
   const [coordinateur, setCoordinateur] = useState('');
+  const [lien_reunion, setlien_reunion] = useState('');
 
   useEffect(() => {
     axios.get(`http://127.0.0.1:8000/api/getEntretienByID/${id}/`)
@@ -29,6 +30,8 @@ export default function UpdateEntretien() {
         setResultat(entretienData.resultat);
         setCandidaure(entretienData.candidature);
         setCoordinateur(entretienData.coordinateur);
+        setlien_reunion(entretienData.lien_reunion);
+
         
         
         
@@ -48,6 +51,7 @@ export default function UpdateEntretien() {
         resultat,
         candidature,
         coordinateur,
+        lien_reunion,
     };
 
     axios.put(`http://127.0.0.1:8000/api/updateEntretien/${id}/`, formData)
