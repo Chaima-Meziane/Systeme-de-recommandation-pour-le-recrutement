@@ -35,7 +35,8 @@ console.log(user);
             <h3>Menu</h3>
             <ul>
               <a href='/'><li>Accueil</li></a>
-              <a href='/MesCandidatures'><li>Mes candidatures</li></a>
+              <a href='/monprofil'><li>Mon Profil</li></a>
+              <a href='/MesCandidatures'><li>Mes Candidatures</li></a>
               <a href='/recommendedoffers'><li>Meilleures offres pour vous</li></a>
               <a href={`/recommendedoffersbylikes/${user.id}`}><li>Meilleures offres pour vous</li></a>
 
@@ -47,9 +48,9 @@ console.log(user);
             <h3>Menu</h3>
             <ul>
               <a href='/'><li>Accueil</li></a>
-              <a href='/OffersByCoordinator'><li>Mes offres</li></a>
+              <a href='/OffersByCoordinator'><li>Mes Offres</li></a>
               <a href='/addoffre'><li>Ajouter une offre</li></a>
-              <a href='/calendar'><li>Mes entretiens</li></a>
+              <a href='/calendar'><li>Mes Entretiens</li></a>
               
             </ul>
           </div>

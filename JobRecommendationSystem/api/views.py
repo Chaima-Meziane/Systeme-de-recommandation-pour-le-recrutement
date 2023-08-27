@@ -23,6 +23,15 @@ class GetEntretienByID(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Entretien.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+        
+class GetUserByID(APIView):
+    def get(self, request, user_id):
+        try:
+            user = User.objects.get(id=user_id)
+            serializer = UserSerializer(user)  
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['POST'])
 def logout_view(request):

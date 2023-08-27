@@ -41,6 +41,9 @@ const Header = () => {
             </li>
             {isCandidat && (
               <>
+              <li>
+                  <Link to='/monprofil'>Mon Profil</Link>
+                </li>
                 <li>
                   <Link to='/MesCandidatures'>Mes Candidatures</Link>
                 </li>

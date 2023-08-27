@@ -31,6 +31,7 @@ import CalendarComponent from './components/Calendar';
 import UpdateEntretien from './components/UpdateEntretien';
 import UpdateOptions from './components/UpdateOptions';
 import UpdateResultEntretien from './components/UpdateResultEntretien';
+import Profil from './components/Profil';
 
 function shouldShowHeaderandFooter(location) {
   const { pathname } = location;
@@ -84,6 +85,7 @@ function App() {
             <Route path="/reporterentretien/:id" element={<UpdateEntretien/>}/>
             <Route path="/updateoptions/:id" element={<UpdateOptions/>}/>
             <Route path="/updateresultatentretien/:id" element={<UpdateResultEntretien/>}/>
+            <Route path="/monprofil" element={<Profil/>}/>
 
 
 

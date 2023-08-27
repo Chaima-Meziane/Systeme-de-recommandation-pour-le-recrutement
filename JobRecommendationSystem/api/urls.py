@@ -30,6 +30,7 @@ urlpatterns = [
     path('getEntretiensByCoordinateur/<int:coordinator_id>/', getEntretiensByCoordinateur),
     path('getEntretiensByCandidat/<int:candidat_id>/', getEntretiensByCandidat),
     path('getEntretienByID/<int:entretien_id>/', GetEntretienByID.as_view(), name='get-entretien-by-id'),
+    path('getUserByID/<int:user_id>/', GetUserByID.as_view(), name='get-user-by-id'),
     
 
 ]
