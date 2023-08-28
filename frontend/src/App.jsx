@@ -33,6 +33,7 @@ import UpdateOptions from './components/UpdateOptions';
 import UpdateResultEntretien from './components/UpdateResultEntretien';
 import Profil from './components/Profil';
 import UpdateUser from './components/UpdateUser';
+import RecommendedOffersForUser from './components/RecommendedOffersForUser';
 
 function shouldShowHeaderandFooter(location) {
   const { pathname } = location;
@@ -88,8 +89,8 @@ function App() {
             <Route path="/updateresultatentretien/:id" element={<UpdateResultEntretien/>}/>
             <Route path="/monprofil" element={<Profil/>}/>
             <Route path="/updateuser" element={<UpdateUser/>}/>
-
-
+            <Route path="/RecommendedOffersForUser/:id" element={<RecommendedOffersForUser/>}/>
+ 
 
           </>
         ) : (

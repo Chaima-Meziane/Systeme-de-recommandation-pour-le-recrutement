@@ -13,7 +13,7 @@ from offre.models import Offre
 from django.shortcuts import get_object_or_404
 from candidature.models import Candidature
 from django.core.exceptions import ObjectDoesNotExist
-
+from like.models import Like
 
 class GetEntretienByID(APIView):
     def get(self, request, entretien_id):
@@ -817,3 +817,67 @@ def changer_etat_candidature(request, candidature_id, nouvel_etat):
         return JsonResponse({'message': f'État de candidature mis à jour et e-mail envoyé à {candidature.candidat.email}.'})
     else:
         return JsonResponse({'message': 'Impossible de mettre à jour l\'état de la candidature ou d\'envoyer un e-mail.'})
+    
+
+
+
+
+
+from operator import itemgetter
+def like_similarity(text1, text2):
+    count_vectorizer = CountVectorizer()
+    count_matrix = count_vectorizer.fit_transform([text1, text2])
+    similarity = cosine_similarity(count_matrix[0], count_matrix[1])
+    return similarity[0][0]
+
+
+
+#Recommandation des offres 
+@csrf_exempt
+def combine_and_sort_scores(request, user_id):
+    # Get the IDs of offers that the user has liked
+    user = get_object_or_404(User, id=user_id)
+    user_cv = extract_text_from_pdf(user.resume.path)
+
+    liked_offers_ids = Like.objects.filter(user=user).values_list('offre_id', flat=True)
+
+    # Get all offers
+    all_offers = Offre.objects.all()
+    recommended_offers = []
+    for offre in all_offers:
+        offer_skills = offre.competences.lower()
+        filtered_user_cv = filter_matching_skills(user_cv.lower(), offer_skills)
+        if filtered_user_cv:
+            similarity = calculate_cosine_similarity__(offre.competences.lower(), filtered_user_cv)
+            if similarity != 0:
+                recommended_offers.append({'offer': OffreSerializer(offre).data, 'similarity': similarity})
+
+    # Filter liked offers and non-liked offers
+    liked_offers = [offer for offer in all_offers if offer.id in liked_offers_ids]
+    non_liked_offers = [offer for offer in all_offers if offer.id not in liked_offers_ids]
+
+    # Serialize the sorted offers and their similarity scores for JSON response
+    serialized_offers = []
+    for non_liked_offer in non_liked_offers:
+        similarity_scores = []
+        for liked_offer in liked_offers:
+            similarity_score = like_similarity(liked_offer.competences, non_liked_offer.competences)
+            similarity_scores.append(similarity_score)
+
+        average_similarity = sum(similarity_scores) / len(similarity_scores)
+        if average_similarity != 0:
+            # Serialize the non-liked offer using the OffreSerializer
+            serialized_offer = OffreSerializer(non_liked_offer).data
+            serialized_offer['similarity'] = average_similarity
+
+            serialized_offers.append(serialized_offer)
+    
+    # Combine recommended_offers and serialized_offers
+    combined_offers = recommended_offers + serialized_offers
+    # Combine and sort the offers based on similarity scores
+    sorted_offers = sorted(combined_offers, key=itemgetter('similarity'), reverse=True)
+
+    # Return a Response instance with the sorted offers
+    return JsonResponse({'recommended_offers': sorted_offers})
+
+

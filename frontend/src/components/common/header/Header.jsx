@@ -50,11 +50,14 @@ const Header = () => {
                 <li>
                   <Link to='/calendar'>Mes entretiens</Link>
                 </li>
-                <li>
+                {/*<li>
                   <Link to='/recommendedoffers'>Pour Vous</Link>
                 </li>
                 <li>
                   <Link to={`/recommendedoffersbylikes/${user.id}`}>Pour Vous</Link>
+            </li>*/}
+                <li>
+                  <Link to={`/RecommendedOffersForUser/${user.id}`}>Pour Vous</Link>
                 </li>
               </>
             )}

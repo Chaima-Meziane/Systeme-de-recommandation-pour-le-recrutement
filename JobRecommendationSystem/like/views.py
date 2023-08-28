@@ -41,7 +41,8 @@ from django.shortcuts import get_object_or_404
 from sklearn.feature_extraction.text import CountVectorizer
 
 
-def calculate_similarity(text1, text2):
+
+def like_similarity(text1, text2):
     count_vectorizer = CountVectorizer()
     count_matrix = count_vectorizer.fit_transform([text1, text2])
     similarity = cosine_similarity(count_matrix[0], count_matrix[1])
@@ -64,7 +65,7 @@ def get_best_offers(request, user_id):
     for non_liked_offer in non_liked_offers:
         similarity_scores = []
         for liked_offer in liked_offers:
-            similarity_score = calculate_similarity(liked_offer.competences, non_liked_offer.competences)
+            similarity_score = like_similarity(liked_offer.competences, non_liked_offer.competences)
             similarity_scores.append(similarity_score)
         
         average_similarity = sum(similarity_scores) / len(similarity_scores)
