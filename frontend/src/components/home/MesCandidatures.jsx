@@ -26,7 +26,7 @@ function MesCandidatures() {
     <Back title='Mes Candidatures' />
     <section className='homeAbout'>
       <div className='container'>
-        <Heading subtitle='our job offers' title='explore available job offers' />
+        <Heading subtitle='Mes Candidatures' title='Voici les offres auxquelles vous avez postulé' />
        
 
         <div className='coursesCard'>

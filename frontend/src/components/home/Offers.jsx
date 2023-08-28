@@ -91,12 +91,13 @@ const Offers = () => {
       .catch((error) => {
         console.error("Error fetching offers:", error);
       });
-      // Charger les candidatures de l'utilisateur depuis l'API
+    
+      
       getCandidaturesByUserId(user.id)
       .then((res) => {
         if (isMounted) {
           setUserCandidatures(res.candidatures);
-          setUserCandidaturesLoading(false); // Set loading state to false after fetching data
+          setUserCandidaturesLoading(false); 
         }
       })
       .catch((error) => {

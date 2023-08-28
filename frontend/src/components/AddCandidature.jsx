@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import { useNavigate, useParams} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from './UserContext';
 export default function AddCandidature() {
     
@@ -91,8 +91,12 @@ export default function AddCandidature() {
         });
     };
     if (loading) {
-        return <div>Loading...</div>;
-      }
+      return <><Back title='Ajouter une offre' /><div className="loading-container">
+      <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: '80px', color:'#1eb2a6' , marginLeft:'800px'}} />
+      <br/><br/>5
+      <div style={{ fontSize: '20px', color:'grey',   marginLeft:'720px' }}> Veuillez patienter un instant</div><br/><br/>
+    </div></>
+    }
     
       if (error) {
         return <div>Error: {error.message}</div>;
@@ -112,7 +116,7 @@ export default function AddCandidature() {
 
   return (
     <>
-      <Back title='Add offer here' />
+      <Back title='Ajouter une offre' />
       <section className='contacts padding'>
         <div className='container shadow'>
           <div className='left row'>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import './contact/contact.css';
 import Back from './common/back/Back';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from './UserContext';
 import axios from 'axios';
 
@@ -54,7 +54,11 @@ export default function UpdateOptions() {
 
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <><Back title='Mon Profil' /><div className="loading-container">
+    <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: '80px', color:'#1eb2a6' , marginLeft:'800px'}} />
+    <br/><br/>5
+    <div style={{ fontSize: '20px', color:'grey',   marginLeft:'720px' }}> Veuillez patienter un instant</div><br/><br/>
+  </div></>;
   }
 
   if (error) {

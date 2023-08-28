@@ -276,7 +276,7 @@ figure {
 
 .form-submit {
   display: inline-block;
-  background: #6dabe4;
+  background: #1eb2a6;
   color: #fff;
   border-bottom: none;
   width: auto;
@@ -289,7 +289,7 @@ figure {
   margin-top: 25px;
   cursor: pointer; }
   .form-submit:hover {
-    background: #4292dc; }
+    background: #1eb2a6; }
 
 #signin {
   margin-top: 16px; }

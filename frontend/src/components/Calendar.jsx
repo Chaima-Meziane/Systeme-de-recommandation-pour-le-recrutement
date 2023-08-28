@@ -17,7 +17,6 @@ const CalendarComponent = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch entretiens data from your Django API endpoint
     const fetchEntretiens = async () => {
       try {
         let response;
@@ -35,7 +34,7 @@ const CalendarComponent = () => {
     };
 
     fetchEntretiens();
-  }, [user]); // Run the effect whenever user.is_candidat changes
+  }, [user]); 
 
   const formatEvent = (event) => {
     const startDateTime = moment(event.date).add(moment.duration(event.heure_debut)).toDate();
@@ -50,8 +49,6 @@ const CalendarComponent = () => {
  
 
   const handleEventClick = (event) => {
-    // Redirect to a page when event is clicked
-    // Assuming you have a route like "/event/:eventId" where eventId is the ID of the clicked event
     navigate(`/updateoptions/${event.id}`);
   };
 
@@ -60,7 +57,7 @@ const CalendarComponent = () => {
       <Back title='Mes Entretiens' />
     <section className='homeAbout'>
     <div className='container'>
-      <Heading subtitle='Votre agenda' title="Explorez votre agenda d'entretiens" />
+      <Heading subtitle='Mes Entretiens' title="Explorez votre agenda d'entretiens" />
     <div style={{ height: '500px' }}>
       <Calendar
         localizer={localizer}
@@ -73,6 +70,7 @@ const CalendarComponent = () => {
         onSelectEvent={handleEventClick}
         
       />
+      
     </div>
     </div>
     </section>
