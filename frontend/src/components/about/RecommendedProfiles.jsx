@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Heading from "../common/heading/Heading";
-import "./about.css";
 import Back from "../common/back/Back";
+import './RecommendedProfiles.css';
 import Awrapper from "./Awrapper";
 import { useParams } from "react-router-dom";
-import on_recrute_image from "../../../public/images/on_recrute.png";
 import axios from "axios";
 
 const RecommendedProfiles = () => {
@@ -28,28 +27,26 @@ const RecommendedProfiles = () => {
 
   return (
     <>
-      <Back title="About Us" />
-      <section className="aboutHome">
-        <div className="container flexSB">
-          <div className="left row">
-            <img src={on_recrute_image} alt="" />
-          </div>
-          <div className="right row">
-            <Heading subtitle="Available Job Offer"/>
-            <div className="items">
-              <h2>Recommended Profiles for Offer {id}</h2>
-              {recommendedProfiles.map(({ id, name, url, similarity_score }) => (
-                <div className="item flexSB" key={id}>
-                  <div className="text">
+      <Back title={`Profils Recommandés`} />
+      <section className="testimonal padding">
+        <div className="container">
+          <Heading title={`Profils Recommandés`} />
+          <div className="content2 grid2">
+            {recommendedProfiles.map(({ id, name, url, skills, similarity_score, location }) => (
+              <div className="items2 shadow" key={id}>
+                <div className="box flex">
+                  <div className="name2">
                     <h2>{name}</h2>
-                    <p>Profile ID: {id}</p>
+                    <p>Localisation: {location}</p>
+                    <p>Score: {similarity_score}</p>
+                      <a  href={url}>
+                        <button className="linkedin-button">Voir le profil LinkedIn</button>
+                      </a>
                     
-                    <p>LinkedIn URL: <a href={url}>{url}</a></p>
-                    <p>Similarity Score: {similarity_score}</p>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

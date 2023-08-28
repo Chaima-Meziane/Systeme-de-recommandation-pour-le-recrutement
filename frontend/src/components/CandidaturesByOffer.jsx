@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import Heading from './common/heading/Heading'; 
 import '../components/home/testimonal/style.css';
+import Back from "./common/back/Back";
+
 const CandidaturesByOffers = () => {
   const { id } = useParams();
   const [candidatures, setCandidatures] = useState([]);
@@ -22,6 +24,8 @@ const CandidaturesByOffers = () => {
   }, [id]);
 
   return (
+    <>
+      <Back title={`Candidatures`} />
     <div>
   {loading ? (
     <div>Loading...</div>
@@ -78,6 +82,7 @@ const CandidaturesByOffers = () => {
     </section>
   )}
 </div>
+</>
   );};
 
 export default CandidaturesByOffers;

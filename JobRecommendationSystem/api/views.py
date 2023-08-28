@@ -581,7 +581,8 @@ def get_offer_recommendations(request, offer_id):
             "name": profile.name,
             "skills": profile.skills,
             "url": profile.url,  # Adjust this field to the actual URL field of the profile
-            "similarity_score": similarity
+            "similarity_score": similarity, 
+            "location": profile.location
         }
         for profile, similarity in recommendations
     ]

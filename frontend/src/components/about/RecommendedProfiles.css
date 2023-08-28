@@ -1,0 +1,106 @@
+/* Dans votre fichier RecommendedProfiles.css */
+
+/* Style pour les éléments .items2 */
+.items2 {
+    padding: 30px;
+    transition: 0.5s;
+  }
+  
+  /* Style pour le nom */
+  .name2 h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #000; /* Couleur verte par défaut */
+    cursor: pointer;
+  }
+  
+  /* Style pour le nom quand on survole la boîte */
+  .testimonal .items2:hover .name2 h2 {
+    color: #fff; /* Couleur noire quand on survole la boîte */
+  }
+  
+  
+  
+  /* Style pour les boîtes quand on survole */
+  .testimonal .items2:hover {
+    background-color: #1eb2a6; /* Couleur verte */
+    color: #fff; /* Texte blanc */
+    cursor: pointer;
+  }
+  
+  /* Style pour le texte dans les boîtes quand on survole */
+  .testimonal .items2:hover span,
+  .testimonal .items2:hover p {
+    color: #fff; /* Texte blanc */
+  }
+  
+  /* Style pour l'icône dans les boîtes quand on survole */
+  .testimonal .items2:hover i {
+    background-color: #fff; /* Fond blanc */
+    color: #1eb2a6; /* Icône verte */
+  }
+  
+  /* Style pour le conteneur grid2 */
+  .testimonal .content2.grid2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  /* Style pour les éléments items2 (boîtes) */
+  .testimonal .items2 {
+    padding: 30px;
+    transition: 0.5s;
+    width: calc(50% - 15px); /* 50% moins la marge intérieure */
+    margin-bottom: 30px;
+    box-sizing: border-box;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style pour le lien LinkedIn URL */
+  .linkedin-url {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  /* Style pour le paragraphe dans LinkedIn URL */
+  .linkedin-url p {
+    margin-right: 10px;
+    font-weight: normal; /* Enlever le gras */
+  }
+  
+  /* Style pour le lien dans LinkedIn URL */
+  .linkedin-url a {
+    display: block;
+    max-width: 75%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: bold;
+  }
+  
+
+  /* Style pour les paragraphes */
+  .name2 p {
+    margin-top: 20px;
+    color: grey;
+    transition: 0.5s;
+  }
+  
+
+  .linkedin-button {
+    margin: 0;
+    box-shadow: none;
+    border: 2px solid #1eb2a6;
+    width: 500px; 
+    display: block;
+    transition: 0.5s;
+    margin-left: 20px;
+    margin-top: 30px;
+  }
+  .linkedin-button:hover {
+    background-color: #1eb2a6;
+    color: #fff;
+  }
