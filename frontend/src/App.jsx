@@ -32,6 +32,7 @@ import UpdateEntretien from './components/UpdateEntretien';
 import UpdateOptions from './components/UpdateOptions';
 import UpdateResultEntretien from './components/UpdateResultEntretien';
 import Profil from './components/Profil';
+import UpdateUser from './components/UpdateUser';
 
 function shouldShowHeaderandFooter(location) {
   const { pathname } = location;
@@ -86,6 +87,7 @@ function App() {
             <Route path="/updateoptions/:id" element={<UpdateOptions/>}/>
             <Route path="/updateresultatentretien/:id" element={<UpdateResultEntretien/>}/>
             <Route path="/monprofil" element={<Profil/>}/>
+            <Route path="/updateuser" element={<UpdateUser/>}/>
 
 
 

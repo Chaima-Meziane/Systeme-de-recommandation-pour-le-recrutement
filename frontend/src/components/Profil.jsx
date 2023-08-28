@@ -96,7 +96,7 @@ export default function Profil() {
               <br />
               <br />
   
-              <Link to={``}>
+              <Link to={`/updateuser`}>
                 <button className='outline-btn'>Mettre à jour mes informations personnelles</button>
               </Link>
             </div>

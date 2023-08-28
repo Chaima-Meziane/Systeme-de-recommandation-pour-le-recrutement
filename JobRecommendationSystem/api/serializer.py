@@ -9,6 +9,7 @@ from profil.models import Profil
 class UserSerializer(serializers.ModelSerializer):
     resume = serializers.FileField(required=False)
     password = serializers.CharField(required=False)
+    username = serializers.CharField(required=False)
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'password', 'is_coordinateur', 'is_candidat', 'phone_number', 'address', 'resume', 'first_name', 'last_name')
