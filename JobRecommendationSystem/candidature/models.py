@@ -1,6 +1,7 @@
 from django.db import models
 from account.models import User
 from offre.models import Offre
+from django.utils import timezone
 
 
 class Candidature(models.Model):
@@ -14,6 +15,7 @@ class Candidature(models.Model):
 
     lettre_de_motivation = models.FileField(upload_to='pdfs/lettresDeMotivation/', null=True)
     etat = models.CharField(max_length=10, choices=EtatCandidature, default='En attente')
+    created_at = models.DateTimeField(default=timezone.now)
 
     candidat = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True)
     

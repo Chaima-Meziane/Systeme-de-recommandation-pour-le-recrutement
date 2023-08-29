@@ -954,3 +954,19 @@ def likes_histogram_view(request, offre_id):
     
     serialized_data = [{'date': entry['created_at'], 'count': entry['count']} for entry in likes_data]
     return JsonResponse(serialized_data, safe=False)
+
+
+@api_view(['GET'])
+def candidatures_by_day(request, offre_id):
+    candidatures = Candidature.objects.filter(offre_id=offre_id).values('created_at')
+    
+    # Manually group candidatures by day, month, and year
+    grouped_candidatures = {}
+    for candidature in candidatures:
+        day = candidature['created_at'].date().strftime('%Y-%m-%d')  # Format the date as "year-month-day"
+        if day not in grouped_candidatures:
+            grouped_candidatures[day] = 0
+        grouped_candidatures[day] += 1
+    
+    data = [{'date': day, 'candidature_count': count} for day, count in grouped_candidatures.items()]
+    return Response(data)

@@ -34,6 +34,7 @@ urlpatterns = [
     path('combine_and_sort_scores/<int:user_id>/', combine_and_sort_scores),
     path('candidature-summary/<int:offer_id>/', candidature_summary_view, name='candidature-summary'),
     path('likeshistogram/<int:offre_id>/', likes_histogram_view),
+    path('candidatures_by_day/<int:offre_id>/', candidatures_by_day, name='candidatures_by_day'),
 
 
 
