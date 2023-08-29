@@ -832,7 +832,7 @@ def like_similarity(text1, text2):
 
 
 
-#Recommandation des offres 
+"""#Recommandation des offres 
 @csrf_exempt
 def combine_and_sort_scores(request, user_id):
     # Get the IDs of offers that the user has liked
@@ -878,7 +878,61 @@ def combine_and_sort_scores(request, user_id):
     sorted_offers = sorted(combined_offers, key=itemgetter('similarity'), reverse=True)
 
     # Return a Response instance with the sorted offers
-    return JsonResponse({'recommended_offers': sorted_offers})
+    return JsonResponse({'recommended_offers': sorted_offers})"""
+#Recommandation des offres 
+@csrf_exempt
+def combine_and_sort_scores(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    user_cv = extract_text_from_pdf(user.resume.path)
+    liked_offers_ids = Like.objects.filter(user=user).values_list('offre_id', flat=True)
+    all_offers = Offre.objects.all()
+    
+    recommended_offers = []
+    for offre in all_offers:
+        offer_skills = offre.competences.lower()
+        filtered_user_cv = filter_matching_skills(user_cv.lower(), offer_skills)
+        if filtered_user_cv:
+            similarity = calculate_cosine_similarity__(offre.competences.lower(), filtered_user_cv)
+            if similarity != 0:
+                recommended_offers.append({'offer': {'id': offre.id, 'titreDuPoste': offre.titreDuPoste, 'localisation': offre.localisation, 'entreprise': offre.entreprise, 'competences': offre.competences}, 'similarity': similarity})
+
+    liked_offers = [offer for offer in all_offers if offer.id in liked_offers_ids]
+    non_liked_offers = [offer for offer in all_offers if offer.id not in liked_offers_ids]
+
+    serialized_offers = []
+    for non_liked_offer in non_liked_offers:
+        similarity_scores = []
+        for liked_offer in liked_offers:
+            similarity_score = like_similarity(liked_offer.competences, non_liked_offer.competences)
+            similarity_scores.append(similarity_score)
+
+        average_similarity = sum(similarity_scores) / len(similarity_scores)
+        if average_similarity != 0:
+            serialized_offer = {'offer': {'id': non_liked_offer.id, 'titreDuPoste': non_liked_offer.titreDuPoste, 'localisation': non_liked_offer.localisation, 'entreprise': non_liked_offer.entreprise, 'competences': non_liked_offer.competences}, 'similarity': average_similarity}
+            serialized_offers.append(serialized_offer)
+    
+    combined_offers = recommended_offers + serialized_offers
+    
+    max_similarity_offers = {}
+    for offer in combined_offers:
+        offer_data = offer['offer']
+        offer_id = offer_data['id']
+        similarity = offer['similarity']
+        
+        if offer_id in max_similarity_offers:
+            if similarity > max_similarity_offers[offer_id]['similarity']:
+                max_similarity_offers[offer_id] = {'offer': offer_data, 'similarity': similarity}
+        else:
+            max_similarity_offers[offer_id] = {'offer': offer_data, 'similarity': similarity}
+
+    unique_max_similarity_offers = list(max_similarity_offers.values())
+    
+    sorted_unique_max_similarity_offers = sorted(unique_max_similarity_offers, key=itemgetter('similarity'), reverse=True)
+    
+    return JsonResponse({'recommended_offers': sorted_unique_max_similarity_offers})
+
+
+
 
 
 from django.db.models import Count
