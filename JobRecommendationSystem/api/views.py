@@ -945,3 +945,12 @@ def candidature_summary_view(request, offer_id):
         'candidature_summary': list(summary)
     }
     return JsonResponse(response_data)
+
+def likes_histogram_view(request, offre_id):
+    likes_data = Like.objects.filter(offre_id=offre_id).values('created_at').annotate(count=Count('id'))
+    
+    if not likes_data:
+        return JsonResponse([], safe=False)  # Return an empty JSON response
+    
+    serialized_data = [{'date': entry['created_at'], 'count': entry['count']} for entry in likes_data]
+    return JsonResponse(serialized_data, safe=False)
