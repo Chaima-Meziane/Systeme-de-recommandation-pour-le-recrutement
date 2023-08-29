@@ -881,3 +881,13 @@ def combine_and_sort_scores(request, user_id):
     return JsonResponse({'recommended_offers': sorted_offers})
 
 
+from django.db.models import Count
+
+def candidature_summary_view(request, offer_id):
+    candidatures = Candidature.objects.filter(offre_id=offer_id)
+    summary = candidatures.values('etat').annotate(count=Count('id'))
+    
+    response_data = {
+        'candidature_summary': list(summary)
+    }
+    return JsonResponse(response_data)

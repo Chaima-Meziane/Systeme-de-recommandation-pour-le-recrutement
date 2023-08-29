@@ -34,6 +34,7 @@ import UpdateResultEntretien from './components/UpdateResultEntretien';
 import Profil from './components/Profil';
 import UpdateUser from './components/UpdateUser';
 import RecommendedOffersForUser from './components/RecommendedOffersForUser';
+import { Dashboard } from './components/dashboard/Dashboard';
 
 function shouldShowHeaderandFooter(location) {
   const { pathname } = location;
@@ -90,6 +91,7 @@ function App() {
             <Route path="/monprofil" element={<Profil/>}/>
             <Route path="/updateuser" element={<UpdateUser/>}/>
             <Route path="/RecommendedOffersForUser/:id" element={<RecommendedOffersForUser/>}/>
+            <Route path="/dashboard/:id" element={<Dashboard/>}/>
  
 
           </>

@@ -32,6 +32,7 @@ urlpatterns = [
     path('getEntretienByID/<int:entretien_id>/', GetEntretienByID.as_view(), name='get-entretien-by-id'),
     path('getUserByID/<int:user_id>/', GetUserByID.as_view(), name='get-user-by-id'),
     path('combine_and_sort_scores/<int:user_id>/', combine_and_sort_scores),
+    path('candidature-summary/<int:offer_id>/', candidature_summary_view, name='candidature-summary'),
 
 
 ]

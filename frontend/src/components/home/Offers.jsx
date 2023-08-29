@@ -212,6 +212,10 @@ const Offers = () => {
                   <button className='outline-btn'>VIEW JOB DETAILS</button>
                   </Link>
 
+                  <Link to={`/dashboard/${offre.id}`}>
+                  <button className='outline-btn'>Dashboard</button>
+                  </Link>
+
                   {/* Check if user candidatures are still loading */}
               {userCandidaturesLoading ? (
                 <button className='outline-btn' disabled>Loading...</button>
@@ -243,6 +247,7 @@ const Offers = () => {
                       </span>
                     )}
                   </button>
+                    
               
                 </div>
               ))}
