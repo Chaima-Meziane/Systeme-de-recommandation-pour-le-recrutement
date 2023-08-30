@@ -970,3 +970,18 @@ def candidatures_by_day(request, offre_id):
     
     data = [{'date': day, 'candidature_count': count} for day, count in grouped_candidatures.items()]
     return Response(data)
+
+
+def CandidatureCountView(request, offre_id):
+        candidature_count = Candidature.objects.filter(offre_id=offre_id).count()
+        return JsonResponse({'count': candidature_count})
+
+def LikeCountView(request, offre_id):
+        like_count = Like.objects.filter(offre_id=offre_id).count()
+        return JsonResponse({'count': like_count})
+
+def EntretienCountView(request, offre_id):
+        candidatures = Candidature.objects.filter(offre_id=offre_id)
+        candidature_ids = [candidature.id for candidature in candidatures]
+        entretien_count = Entretien.objects.filter(candidature__id__in=candidature_ids).count()
+        return JsonResponse({'count': entretien_count})
