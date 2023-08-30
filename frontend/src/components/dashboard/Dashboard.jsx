@@ -20,7 +20,7 @@ export function Dashboard() {
           <div className='content-box-dash'>
             <div className='content'><DoughnutChart offerId={id} /></div>
           </div>
-          <div className='content-box-dash'>
+          <div className='content-box-dash small-box'>
             <div className='content'><LikesHistogram offerId={id} /></div>
           </div>
           <div className='content-box-dash small-box'>

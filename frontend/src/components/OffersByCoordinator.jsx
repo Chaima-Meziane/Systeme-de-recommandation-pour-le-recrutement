@@ -106,6 +106,9 @@ const OffersByCoordinator = () => {
                   {offre.competences}
                 </h3>
               </div>
+              <Link to={`/dashboard/${offre.id}`}>
+                  <button className='outline-btn'>Dashboard</button>
+              </Link>
               <Link to={`/owner/details/${offre.id}`}><button className='outline-btn'>VIEW JOB DETAILS</button></Link>
               <Link to={`/candidaturesbyoffer/${offre.id}`}><button className='outline-btn'>voir les candidatures</button></Link>
               <Link to={`/recommendations/${offre.id}`}><button className='outline-btn'>Recommander</button></Link>

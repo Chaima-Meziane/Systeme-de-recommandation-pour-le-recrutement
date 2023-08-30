@@ -3,57 +3,59 @@ import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Brush, ReferenceLine } from 'recharts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-
+import './Dashboard.css'
 
 const LikesHistogram = ({ offerId }) => {
-    const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true); // Add loading state
-    const currentDate = new Date();
-    const [selectedMonth, setSelectedMonth] = useState(currentDate.getMonth() + 1); // Months are 0-indexed
-    const [selectedYear, setSelectedYear] = useState(currentDate.getFullYear());
-  
-    useEffect(() => {
-      async function fetchLikesData() {
-        setIsLoading(true); // Start loading
-  
-        try {
-          const response = await axios.get(`http://127.0.0.1:8000/api/likeshistogram/${offerId}/`);
-          console.log(response.data)
-  
-          // Filter data by the selected month and year
-          const filteredData = response.data.filter(entry => {
-            const entryDate = new Date(entry.date);
-            const entryMonth = entryDate.getMonth() + 1; // Months are 0-indexed
-            const entryYear = entryDate.getFullYear();
-            return entryMonth === selectedMonth && entryYear === selectedYear;
-          });
-  
-          // Group likes by date and sum up the counts
-          const groupedData = {};
-          filteredData.forEach(entry => {
-            const date = new Date(entry.date).getDate();
-            if (!groupedData[date]) {
-              groupedData[date] = 0;
-            }
-            groupedData[date] += entry.count;
-          });
-  
-          // Convert the grouped data into the format for BarChart
-          const formattedData = Object.keys(groupedData).map(date => ({
-            date: parseInt(date),
-            count: groupedData[date],
-          }));
-  
-          setData(formattedData);
-        } catch (error) {
-          console.error('Error fetching likes data:', error);
-        } finally {
-          setIsLoading(false); // End loading
-        }
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const currentDate = new Date();
+  const [selectedMonth, setSelectedMonth] = useState(currentDate.getMonth() + 1);
+  const [selectedYear, setSelectedYear] = useState(currentDate.getFullYear());
+
+  const getDaysInMonth = (year, month) => new Date(year, month, 0).getDate();
+
+  useEffect(() => {
+    async function fetchLikesData() {
+      setIsLoading(true);
+
+      try {
+        const response = await axios.get(`http://127.0.0.1:8000/api/likeshistogram/${offerId}/`);
+        console.log(response.data);
+
+        const filteredData = response.data.filter(entry => {
+          const entryDate = new Date(entry.date);
+          const entryMonth = entryDate.getMonth() + 1;
+          const entryYear = entryDate.getFullYear();
+          return entryMonth === selectedMonth && entryYear === selectedYear;
+        });
+
+        const groupedData = {};
+        filteredData.forEach(entry => {
+          const date = new Date(entry.date).getDate();
+          if (!groupedData[date]) {
+            groupedData[date] = 0;
+          }
+          groupedData[date] += entry.count;
+        });
+
+        const formattedData = Array.from({ length: getDaysInMonth(selectedYear, selectedMonth) }, (_, day) => {
+          const date = day + 1;
+          return {
+            date,
+            count: groupedData[date] || 0,
+          };
+        });
+
+        setData(formattedData);
+      } catch (error) {
+        console.error('Error fetching likes data:', error);
+      } finally {
+        setIsLoading(false);
       }
-  
-      fetchLikesData();
-    }, [offerId, selectedMonth, selectedYear]);
+    }
+
+    fetchLikesData();
+  }, [offerId, selectedMonth, selectedYear]);
 
   const handleMonthChange = (month) => {
     let newMonth = month;
@@ -75,45 +77,48 @@ const LikesHistogram = ({ offerId }) => {
     setSelectedYear(year);
   };
 
-  const monthNames = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ];
-
+  const monthNames =[
+    'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+    'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+    ];
 
   return (
     <div>
       {isLoading ? ( // Check if loading
         <div className="loading-container">
           <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: '80px', color: '#1eb2a6', marginLeft: '480px' }} />
-          <br /><br />5
+          <br /><br />
           <div style={{ fontSize: '20px', color: 'grey', marginLeft: '400px' }}> Veuillez patienter un instant</div><br /><br />
         </div>
       ) : (
         <div>
-          <h2>Likes Histogram for Offer ID: {offerId}</h2>
-          <div>
-            <button onClick={() => handleMonthChange(selectedMonth - 1)}>Previous Month</button>
-            {selectedMonth !== currentDate.getMonth() + 1 && (
-              <button onClick={() => handleMonthChange(selectedMonth + 1)}>Next Month</button>
-            )}
-            <span>Selected Month: {monthNames[selectedMonth - 1]}</span>
-          </div>
-          <div>
-            <button onClick={() => handleYearChange(currentDate.getFullYear())}>This Year</button>
-            <button onClick={() => handleYearChange(currentDate.getFullYear() - 1)}>Previous Year</button>
-            <span>Selected Year: {selectedYear}</span>
-          </div>
-          <BarChart width={800} height={400} data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="count" fill="#8884d8" />
-            <Brush dataKey="date" height={30} stroke="#8884d8" />
-            <ReferenceLine x={currentDate.getDate()} stroke="red" label="Today" />
-          </BarChart>
+          <div className="titre-dash"><h2>Fréquence Quotidienne Des "J'aime"</h2></div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginLeft: '80px', marginRight: '80px' }}>
+  <div>
+    <button onClick={() => handleMonthChange(selectedMonth - 1)}>◀</button>
+    <span> {monthNames[selectedMonth - 1]}</span>
+    {selectedMonth !== currentDate.getMonth() + 1 && (
+      <button onClick={() => handleMonthChange(selectedMonth + 1)}>▶</button>
+    )}
+  </div>
+  <div>
+    <button onClick={() => handleYearChange(currentDate.getFullYear() - 1)}> ◀</button>
+    <span> {selectedYear}</span>
+    {selectedYear !== currentDate.getFullYear() && (
+      <button onClick={() => handleYearChange(currentDate.getFullYear())}>Cette Année</button>
+    )}
+  </div>
+</div>
+
+<BarChart width={800} height={400} data={data}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" label={{ value: 'Jour', position: 'insideTopRight', offset: 20 }} tick={{ fontSize: 12 }} tickLabel={{ fontSize: 10 }} /> {/* Adjust label and tick font sizes */}
+          <YAxis tickCount={5} tickFormatter={tick => Number.isInteger(tick) ? tick.toFixed(0) : ''} /> {/* Format tick values */}
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="count" fill="#1eb2a6" name="Nombre de j'aime" />
+          <ReferenceLine x={currentDate.getDate()} stroke="red" label="Aujourd'hui" />
+        </BarChart>
         </div>
       )}
     </div>

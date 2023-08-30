@@ -24,12 +24,11 @@ export function DoughnutChart({ offerId }) {
     ...candidatureSummary.map((item) => [item.etat, item.count]),
   ];
   const options = {
-    title: "Répartition des Candidatures par État",
     pieHole: 0.4,
     is3D: false,
   };
   
-  return (
+  return (<><div className="titre-dash"><h2>Répartition des Candidatures par État</h2></div><br/>
     <Chart
       chartType="PieChart"
       width="100%"
@@ -41,6 +40,6 @@ export function DoughnutChart({ offerId }) {
       <br /><br />5
       <div style={{ fontSize: '20px', color: 'grey', marginLeft: '400px' }}> Veuillez patienter un instant</div><br /><br />
     </div>}
-    />
+    /></>
   );
 }
