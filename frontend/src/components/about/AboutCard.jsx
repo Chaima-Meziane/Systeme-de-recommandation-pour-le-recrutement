@@ -4,10 +4,12 @@ import "./about.css"
 import Awrapper from "./Awrapper"
 import { UserContext } from '../UserContext'
 import axios from 'axios';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useParams, Link } from "react-router-dom";
 import { getoffrebyid } from "../../services/ApiService";
 import on_recrute_image from '../../../public/images/on_recrute.png';
+import Back from "../common/back/Back";
 const AboutCard = () => {
   const { id } = useParams();
   const { user } = useContext(UserContext);
@@ -58,7 +60,11 @@ const AboutCard = () => {
   }, [id, user.id]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <><Back title="Détails de l'offre" /><div className="loading-container">
+    <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: '80px', color:'#1eb2a6' , marginLeft:'800px'}} />
+    <br/><br/>5
+    <div style={{ fontSize: '20px', color:'grey',   marginLeft:'720px' }}> Veuillez patienter un instant</div><br/><br/>
+  </div></>;
   }
 
   if (error) {
@@ -71,14 +77,14 @@ const AboutCard = () => {
     
 
   return (
-    <>
+    <><Back title="Détails de l'offre" />
       <section className='aboutHome'>
         <div className='container flexSB'>
           <div className='left row'>
             <img src={on_recrute_image} alt='' />
           </div>
           <div className='right row'>
-            <Heading subtitle='Available Job Offer' title='Job Offer Details'/>
+            <Heading subtitle='Consulter' title="Les détails de l'offre"/>
             <div className='items'>
               
                   <div className='item flexSB'>
@@ -161,7 +167,7 @@ const AboutCard = () => {
           </div>
         </div>
       </section>
-      <Awrapper />
+      {/*<Awrapper />*/}
     </>
   );
 };

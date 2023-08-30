@@ -45,7 +45,7 @@ export default function AddEntretien() {
 
   return (
     <>
-      <Back title='Add offer here' />
+      <Back title='Ajouter un entrtien' />
       <section className='contacts padding'>
         <div className='container shadow'>
           <div className='left row'>

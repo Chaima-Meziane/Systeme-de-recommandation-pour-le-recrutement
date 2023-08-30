@@ -32,7 +32,6 @@ const RecommendedOffers = () => {
        
 
         <div className='coursesCard'>
-          {/* copy code form  coursesCard */}
           <div className='grid2'>
             {recommendedOffers.map((offer) => (
               <div className='items'key={offer.id}>
@@ -72,8 +71,6 @@ const RecommendedOffers = () => {
                               <h4>{offer.entreprise}</h4>
                             </div></div>
                           </div></div>
-                          
-                          {/*<span>{offre.description}</span>*/}
                         </>
                       
                     </div>

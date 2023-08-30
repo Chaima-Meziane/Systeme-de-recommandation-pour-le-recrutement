@@ -145,7 +145,7 @@ const Offers = () => {
         */}
           <input
             type="text"
-            placeholder="Search job offers..."
+            placeholder="Rechercher des offres d'emploi..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -209,13 +209,13 @@ const Offers = () => {
 
                   
                   <Link to={`/details/${offre.id}`}>
-                  <button className='outline-btn'>VIEW JOB DETAILS</button>
+                  <button className='outline-btn'> CONSULTER LES DETAILS DE L'OFFRE</button>
                   </Link>
-
+                  
 
                   {/* Check if user candidatures are still loading */}
               {userCandidaturesLoading ? (
-                <button className='outline-btn' disabled>Loading...</button>
+                <button className='outline-btn' disabled>Chargement...</button>
               ) : (
                 <>
 

@@ -2,8 +2,6 @@ import React, { useContext, useState } from 'react';
 import { UserContext } from './UserContext';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-
 
 const CompleteYourProfile = () => {
 const { user } = useContext(UserContext); 
@@ -74,32 +72,34 @@ const { user } = useContext(UserContext);
         <div className="container1">
           <div className="signup-content">
             <div className="signup-form">
-              <h2 className="form-title1">Complete Your Profile</h2>
+              <h2 className="form-title1" style={{fontSize:'25px'}}>Complétez votre profil</h2>
               <form onSubmit={handleFormSubmit} className="register-form" id="register-form" encType="multipart/form-data">
                 <div className="form-group1">
                   <label htmlFor="phone_number"><i className="material-icons" style={iconStyle}>phone</i></label>
-                  <input type="text" name="phone_number" id="phone_number" onChange={handlePhoneNumberChange} placeholder="Your Phone Number" required/>
+                  <input type="text" name="phone_number" id="phone_number" onChange={handlePhoneNumberChange} placeholder="Numéro de téléphone" required/>
                 </div>
                 <div className="form-group1">
                   <label htmlFor="address"><i className="material-icons" style={iconStyle}>gps_fixed</i></label>
-                  <input type="text" name="address" id="address" value={address} onChange={handleAddressChange} placeholder="Your Address" required/>
+                  <input type="text" name="address" id="address" value={address} onChange={handleAddressChange} placeholder="Adresse" required/>
                 </div>
                 <div className="form-group1">
-                    <label htmlFor="resume"> Add Your Resume</label>
+                    <label htmlFor="resume" style={{fontSize: '14px', color:'grey'}}> 
+                    <i className="material-icons" style={{fontSize: '16px', marginRight:'10px', color:'black'}} >description</i>
+                    Importez votre CV 
+                    </label><br/>
                     <br/><br/><br/>
                     <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" onChange={handleFileChange} required/>
                 </div>
                 
                 <div className="form-group1 form-button1">
-                  <button type="submit" name="signup" id="signup" className="form-submit" value="Register">Register</button>
+                  <button type="submit" name="signup" id="signup" className="form-submit" value="Register">Valider</button>
                 </div>
               </form>
             </div>
 
             <div className="signup-image">
-                {/* Replace the source path with the correct path to your image */}
-                <figure><img src="./images/about.webp" alt='sign up image' /> </figure>
-                <Link to="/login" className="signup-image-link"><u>I am already a member</u></Link>
+                <figure><img src="./images/completeprofile.png" alt='sign up image'  width='600' height='300'/> </figure>
+                {/*<Link to="/login" className="signup-image-link"><u>I am already a member</u></Link>*/}
 
             </div>
 

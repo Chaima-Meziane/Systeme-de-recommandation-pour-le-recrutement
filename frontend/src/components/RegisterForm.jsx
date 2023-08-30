@@ -80,38 +80,38 @@ const RegisterForm = () => {
         <div className="container1">
           <div className="signup-content">
             <div className="signup-form">
-              <h2 className="form-title1">Sign up</h2>
+              <h2 className="form-title1">Inscription</h2>
               <form onSubmit={handleFormSubmit} className="register-form1" id="register-form">
               <div className="form-group1" style={formGroup1Style}>
                 <label htmlFor="firstName"><i className="zmdi zmdi-account material-icons-name"></i></label>
-                <input type="text" name="firstName" id="firstName" onChange={handleFirstNameChange} placeholder="First Name" required/>
-                <input type="text" name="lastName" id="lastName" onChange={handleLastNameChange} placeholder="Last Name" required/>
+                <input type="text" name="firstName" id="firstName" onChange={handleFirstNameChange} placeholder="Prénom" required/>
+                <input type="text" name="lastName" id="lastName" onChange={handleLastNameChange} placeholder="Nom" required/>
               </div>
               
                 
                 
                 <div className="form-group1">
                   <label htmlFor="name"><i className="zmdi zmdi-account material-icons-name"></i></label>
-                  <input type="text" name="name" id="name" onChange={handleNameChange} placeholder="Your Name" required/>
+                  <input type="text" name="name" id="name" onChange={handleNameChange} placeholder="Nom d'utilisatuer" required/>
                 </div>
                 <div className="form-group1">
                   <label htmlFor="email"><i className="zmdi zmdi-email"></i></label>
-                  <input type="email" name="email" id="email" value={email} onChange={handleEmailChange} placeholder="Your Email" required/>
+                  <input type="email" name="email" id="email" value={email} onChange={handleEmailChange} placeholder="Email" required/>
                 </div>
                 <div className="form-group1">
                   <label htmlFor="pass"><i className="zmdi zmdi-lock"></i></label>
-                  <input type="password" name="pass" id="pass" value={password} onChange={handlePasswordChange} placeholder="Password" required/>
+                  <input type="password" name="pass" id="pass" value={password} onChange={handlePasswordChange} placeholder="Mot de passe" required/>
                 </div>
 
                 <div className="form-group1 form-button1">
-                  <button type="submit" name="signup" id="signup" className="form-submit" value="Register">Register</button>
+                  <button type="submit" name="signup" id="signup" className="form-submit" value="Register">S'inscrire</button>
                 </div>
               </form>
             </div>
 
             <div className="signup-image">
-                <figure><img src='./images/about.webp' alt='sign up image' /> </figure>
-                <a href="/login" className="signup-image-link"><u>I am already a member</u></a>
+                <figure><img style={{marginRight:'50px'}} src='./images/registration.png' alt='sign up image' width='600' height='300'/> </figure>
+                <a href="/login" className="signup-image-link"><u>Vous avez déjà un compte ? Connectez-vous</u></a>
 
             </div>
 

@@ -19,11 +19,11 @@ export function Dashboard() {
 
   return (
     <>
-    <Back title={`Dashboard`} />
+    <Back title={`Tableau De Bord`} />
       <section className='testimonial padding'>
         <div className='container'>
           <Heading subtitle='Dashboard' title="Tableau de bord des détails de l'offre" />
-          <br/><br/>
+          <br/><br/><br/>
           <div className="grid-container">
           <div className='mini-box-rose' style={{ backgroundColor: 'rgba(255,107,159,255)' }}>
             <div className='content'><CandidatureWidget offerId={id} /></div>
@@ -39,16 +39,16 @@ export function Dashboard() {
         <div className='flex-container-dash'>
         
 
-          <div className='content-box-dash'>
+          <div className='content-box-dash-doughnut'>
             <div className='content'><DoughnutChart offerId={id} /></div>
           </div>
           <div className='nbre-candidatures'>
           <div className='mini-box-rose-cand' style={{ backgroundColor: 'white' }}>
             <div className='content'><CandidaturesAccepteesWidget offerId={id} /></div>
-          </div>
+          </div><br/>
           <div className='mini-box-jaune-cand' style={{ backgroundColor: 'white' }}>
             <div className='content'><CandidaturesEnAttenteWidget offerId={id} /></div>
-          </div>
+          </div><br/>
           <div className='mini-box-bleue-cand' style={{ backgroundColor: 'white' }}>
             <div className='content'><CandidaturesRejeteesWidget offerId={id} /></div>
           </div>

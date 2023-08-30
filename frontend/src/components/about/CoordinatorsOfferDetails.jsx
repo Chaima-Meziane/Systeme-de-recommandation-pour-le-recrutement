@@ -7,6 +7,8 @@ import { UserContext } from '../UserContext'
 import { useParams, Link } from "react-router-dom";
 import { getoffrebyid } from "../../services/ApiService";
 import on_recrute_image from '../../../public/images/on_recrute.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faSpinner } from '@fortawesome/free-solid-svg-icons';
 const CoordinatorsOfferDetails = () => {
   const { id } = useParams();
   const { setUser } = useContext(UserContext);
@@ -38,9 +40,12 @@ const CoordinatorsOfferDetails = () => {
   }, [id]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <><Back title="Détails de l'offre"/><div className="loading-container">
+    <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: '80px', color:'#1eb2a6' , marginLeft:'800px'}} />
+    <br/><br/>5
+    <div style={{ fontSize: '20px', color:'grey',   marginLeft:'720px' }}> Veuillez patienter un instant</div><br/><br/>
+  </div></>;
   }
-
   if (error) {
     return <div>Error: {error.message}</div>;
   }
@@ -51,14 +56,14 @@ const CoordinatorsOfferDetails = () => {
     
 
   return (
-    <><Back title='About Us' />
+    <><Back title="Détails de l'offre" />
       <section className='aboutHome'>
         <div className='container flexSB'>
           <div className='left row'>
             <img src={on_recrute_image} alt='' />
           </div>
           <div className='right row'>
-            <Heading subtitle='Available Job Offer' title='Job Offer Details'/>
+            <Heading subtitle='Consulter' title="Les détails de l'offre"/>
             <div className='items'>
               
                   <div className='item flexSB'>
@@ -143,7 +148,7 @@ const CoordinatorsOfferDetails = () => {
           </div>
         </div>
       </section>
-      <Awrapper />
+      {/*<Awrapper />*/}
     </>
   )
 }

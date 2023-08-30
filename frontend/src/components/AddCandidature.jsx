@@ -91,7 +91,7 @@ export default function AddCandidature() {
         });
     };
     if (loading) {
-      return <><Back title='Ajouter une offre' /><div className="loading-container">
+      return <><Back title='Ajouter une candidature' /><div className="loading-container">
       <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: '80px', color:'#1eb2a6' , marginLeft:'800px'}} />
       <br/><br/>5
       <div style={{ fontSize: '20px', color:'grey',   marginLeft:'720px' }}> Veuillez patienter un instant</div><br/><br/>
@@ -116,7 +116,7 @@ export default function AddCandidature() {
 
   return (
     <>
-      <Back title='Ajouter une offre' />
+      <Back title='Ajouter une candidature' />
       <section className='contacts padding'>
         <div className='container shadow'>
           <div className='left row'>

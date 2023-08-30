@@ -67,7 +67,7 @@ export default function UpdateEntretien() {
 
   return (
     <>
-      <Back title="Rapport d'Entretien" />
+      <Back title="Ajouter le résultat de l'entretien" />
       <section className='contacts padding'>
         <div className='container shadow'>
           <div className='left row'><br/><br/><br/><br/>

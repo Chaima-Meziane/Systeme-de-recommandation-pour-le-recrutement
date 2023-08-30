@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from './UserContext';
-import jwtDecode from "jwt-decode";
 import { Link } from "react-router-dom";
 
 const LoginForm = () => {
@@ -85,13 +84,16 @@ const LoginForm = () => {
       <div className="container1">
         <div className="signin-content">
           <div className="signin-image">
-           
-            <Link to="/register" className="signup-image-link"><u>Create an account</u></Link>
+          <figure>
+              <img src='./images/login.png' alt='sign up image' width='600' height='300' />
+          </figure>
+
+            <Link to="/register" className="signup-image-link"><u>Vous n'avez pas de compte ? Inscrivez-vous</u></Link>
 
           </div>
 
           <div className="signin-form">
-            <h2 className="form-title1">Login</h2>
+            <h2 className="form-title1">Connexion</h2>
             <form onSubmit={handleFormSubmit} className="register-form" id="login-form">
               <div className="form-group1">
                 <label htmlFor="your_name">
@@ -101,7 +103,7 @@ const LoginForm = () => {
                   type="text"
                   name="your_name"
                   id="your_name"
-                  placeholder="Your Name"
+                  placeholder="Nom d'utilisateur"
                   value={username}
                   onChange={handleUsernameChange}
                 required/>
@@ -114,7 +116,7 @@ const LoginForm = () => {
                   type="password"
                   name="your_pass"
                   id="your_pass"
-                  placeholder="Password"
+                  placeholder="Mot de passe"
                   value={password}
                   onChange={handlePasswordChange}
                   required/>
@@ -126,9 +128,9 @@ const LoginForm = () => {
                   id="remember-me"
                   className="agree-term"
                 />
-                <label htmlFor="remember-me" className="label-agree-term">
+                {/*<label htmlFor="remember-me" className="label-agree-term">
                   <span><span></span></span>Remember me
-                </label>
+                </label>*/}
               </div>
               <div className="form-group1 form-button1">
                 <input
@@ -136,7 +138,7 @@ const LoginForm = () => {
                   name="signin"
                   id="signin"
                   className="form-submit"
-                  value="Log in"
+                  value="Se connecter"
                 />
               
               
@@ -147,10 +149,10 @@ const LoginForm = () => {
               </div>
 
             </form>
-            <div className="social-login">
+             {/*<div className="social-login">
               
-              <button onClick={handleLinkedInLogin}>Login with LinkedIn</button>
-            </div>
+             <button onClick={handleLinkedInLogin}>Login with LinkedIn</button>
+            </div>*/}
           </div>
         </div>
       </div>

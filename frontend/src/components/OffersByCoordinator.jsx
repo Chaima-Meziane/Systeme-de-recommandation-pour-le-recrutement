@@ -49,7 +49,7 @@ const OffersByCoordinator = () => {
       {/*<Link to={`/addoffre`}><button className='outline-btn'>add offre</button></Link>*/}
       <input
             type="text"
-            placeholder="Search job offers..."
+            placeholder="Rechercher des offres d'emploi ..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />

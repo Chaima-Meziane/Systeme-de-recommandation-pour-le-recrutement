@@ -67,7 +67,7 @@ export default function UpdateOffre() {
 
   return (
     <>
-      <Back title='Add offer here' />
+      <Back title="Modifier l'offre"/>
       <section className='contacts padding'>
         <div className='container shadow'>
           <div className='left row'>
