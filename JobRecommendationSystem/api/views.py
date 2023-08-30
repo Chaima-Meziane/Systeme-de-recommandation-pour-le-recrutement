@@ -740,18 +740,21 @@ def mes_candidatures(request, candidat_id):
     
     candidatures_data = []
     for candidature in candidatures:
-        offre = candidature.offre
-        candidatures_data.append({
-            'offre_id': offre.id,
-            'titre_du_poste': offre.titreDuPoste,
-            'entreprise': offre.entreprise,
-            'localisation': offre.localisation,
-            'competences': offre.competences,
-            'etat': candidature.etat,
-        })
+        try:
+            offre = candidature.offre
+            candidatures_data.append({
+                'offre_id': offre.id,
+                'titre_du_poste': offre.titreDuPoste,
+                'entreprise': offre.entreprise,
+                'localisation': offre.localisation,
+                'competences': offre.competences,
+                'etat': candidature.etat,
+            })
+        except ObjectDoesNotExist:
+            # Gérer le cas où l'offre n'existe pas
+            pass
     
     return JsonResponse({'candidatures': candidatures_data})
-
 
 
 

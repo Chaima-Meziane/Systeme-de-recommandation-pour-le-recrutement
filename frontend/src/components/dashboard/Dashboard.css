@@ -1,64 +1,83 @@
 .content-box-dash {
-    background-color: #ffffff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-  }
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
 
-  .small-box {
-    flex: 1;
-    max-width: 900px; /* Ajustez la largeur selon vos besoins */
-    height: 620px; 
-  }
-  .mini-box {
-    flex: 1;
-    max-width: 450px; /* Ajustez la largeur selon vos besoins */
-    height: 130px; 
-    background-color: #ffffff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-    border-radius: 5px;
-    padding-bottom:25px;
-    padding-top:30px;
-    padding-left:80px;
-    font-size: 22px;
-  }
-  .grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Adjust as needed */
-    gap: 16px; /* Adjust as needed */
-  }
-  
-  
-  
-  .button-container-dash {
-    display: flex;
-    justify-content: flex-end; /* Décale les éléments vers la droite */
-    align-items: center; /* Centre les éléments verticalement */
-    margin-top: 10px; /* Ajoute un peu d'espace en haut */
-    margin-bottom: 20px; /* Ajoute un peu d'espace en bas */
-    margin-right: 50px; 
-  }
-  
-  .month {
-    margin-top: 0px; /* Ajoute un peu d'espace en haut */
-    margin-bottom: -27px; /* Ajoute un peu d'espace en bas */
+.small-box {
+  flex: 1;
+  max-width: 900px; /* Ajustez la largeur selon vos besoins */
+  height: 620px; 
+}
+.mini-box-rose {
+  flex: 1;
+  max-width: 450px;
+  height: 130px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  padding: 25px;
+  font-size: 22px;
+  background-image:linear-gradient(230deg, #fc5286, #fbaaa2);
+}
+.mini-box-bleue {
+  flex: 1;
+  max-width: 450px;
+  height: 130px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  padding: 25px;
+  font-size: 22px;
+  background-image:linear-gradient(230deg, #a7c0ff, #a370f5);
+}
 
-  }
-  .titre-dash{
-    font-family: 'Arial', sans-serif;
-  font-size: 20px;
-  color: #333;
-  letter-spacing: 1px;
-  padding: 10px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  margin-bottom: -18px;
-  }
+.mini-box-jaune {
+  flex: 1;
+  max-width: 450px;
+  height: 130px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  padding: 25px;
+  font-size: 22px;
+  background-image:linear-gradient(230deg, #ffc480, #ff763b);
+}
 
-  .recharts-legend-wrapper {
-    margin-top: 100px; /* Ajoute de l'espace entre le graphique et la légende */
-    margin-bottom: -10px; /* Ajoute de l'espace en bas de la légende */
-  }
-  
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Adjust as needed */
+  gap: 16px; /* Adjust as needed */
+}
+
+
+
+.button-container-dash {
+  display: flex;
+  justify-content: flex-end; /* Décale les éléments vers la droite */
+  align-items: center; /* Centre les éléments verticalement */
+  margin-top: 10px; /* Ajoute un peu d'espace en haut */
+  margin-bottom: 20px; /* Ajoute un peu d'espace en bas */
+  margin-right: 50px; 
+}
+
+.month {
+  margin-top: 0px; /* Ajoute un peu d'espace en haut */
+  margin-bottom: -27px; /* Ajoute un peu d'espace en bas */
+
+}
+.titre-dash{
+  font-family: 'Arial', sans-serif;
+font-size: 20px;
+color: #333;
+letter-spacing: 1px;
+padding: 10px;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+text-align: center;
+margin-bottom: -18px;
+}
+
+.recharts-legend-wrapper {
+  margin-top: 100px; /* Ajoute de l'espace entre le graphique et la légende */
+  margin-bottom: -10px; /* Ajoute de l'espace en bas de la légende */
+}
