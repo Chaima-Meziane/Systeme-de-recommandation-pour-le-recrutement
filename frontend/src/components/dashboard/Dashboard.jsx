@@ -10,6 +10,9 @@ import './Dashboard.css'
 import CandidatureWidget from"./CandidatureWidget";
 import LikesWidget from "./LikesWidget";
 import EntretienWidget from "./EntretienWidget";
+import CandidaturesAccepteesWidget from './CandidaturesAccepteesWidget';
+import CandidaturesRejeteesWidget from './CandidaturesRejeteesWidget';
+import CandidaturesEnAttenteWidget from './CandidaturesEnAttenteWidget';
 
 export function Dashboard() {
   const { id } = useParams();
@@ -33,9 +36,23 @@ export function Dashboard() {
             <div className='content'><EntretienWidget offerId={id} /></div>
           </div>
         </div>
+        <div className='flex-container-dash'>
+        
 
           <div className='content-box-dash'>
             <div className='content'><DoughnutChart offerId={id} /></div>
+          </div>
+          <div className='nbre-candidatures'>
+          <div className='mini-box-rose-cand' style={{ backgroundColor: 'white' }}>
+            <div className='content'><CandidaturesAccepteesWidget offerId={id} /></div>
+          </div>
+          <div className='mini-box-jaune-cand' style={{ backgroundColor: 'white' }}>
+            <div className='content'><CandidaturesEnAttenteWidget offerId={id} /></div>
+          </div>
+          <div className='mini-box-bleue-cand' style={{ backgroundColor: 'white' }}>
+            <div className='content'><CandidaturesRejeteesWidget offerId={id} /></div>
+          </div>
+          </div>
           </div>
           <div className='content-box-dash small-box'>
             <div className='content'><LikesHistogram offerId={id} /></div>

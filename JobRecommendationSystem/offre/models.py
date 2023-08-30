@@ -1,5 +1,7 @@
 from django.db import models
 from account.models import User
+
+
 # Create your models here.
 class Offre(models.Model):
     
@@ -24,4 +26,7 @@ class Offre(models.Model):
 
     def __str__(self):
         return self.titreDuPoste
+    
+   
+  
     

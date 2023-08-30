@@ -1,9 +1,11 @@
+
 .content-box-dash {
   background-color: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 5px;
+  width: 1000px;
 }
 
 .small-box {
@@ -81,3 +83,44 @@ margin-bottom: -18px;
   margin-top: 100px; /* Ajoute de l'espace entre le graphique et la légende */
   margin-bottom: -10px; /* Ajoute de l'espace en bas de la légende */
 }
+
+
+.nbre-candidatures {
+  justify-content: flex-end;
+  gap: 16px;
+ 
+  
+}
+.flex-container-dash {
+  display: flex;
+  gap: 20px;
+}
+
+.mini-box-rose-cand {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  max-width: 300px; 
+}
+
+.mini-box-bleue-cand {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  max-width: 300px;/* Modification ici */
+}
+
+.mini-box-jaune-cand {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  max-width: 300px;
+
+}
+

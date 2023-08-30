@@ -5,6 +5,7 @@ import Heading from './common/heading/Heading';
 import '../components/home/testimonal/style.css';
 import Back from "./common/back/Back";
 import {faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 const CandidaturesByOffers = () => {

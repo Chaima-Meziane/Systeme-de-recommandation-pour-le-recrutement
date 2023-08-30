@@ -2,6 +2,7 @@ from django.db import models
 from account.models import User
 from offre.models import Offre
 from django.utils import timezone
+from django.db.models import Count
 
 
 class Candidature(models.Model):
@@ -26,6 +27,7 @@ class Candidature(models.Model):
     def __str__(self):
         return f"Candidature {self.pk} - {self.get_etat_display()}"
 
-
+    def get_nombre_candidatures_acceptees(self):
+        return Candidature.objects.filter(offre=self, etat='Acceptée').count()
 
   

@@ -38,7 +38,9 @@ urlpatterns = [
     path('candidature_count/<int:offre_id>/', CandidatureCountView),
     path('like_count/<int:offre_id>/', LikeCountView),
     path('entretien_count/<int:offre_id>/', EntretienCountView),
-
+    path('candidatures_acceptees/<int:offre_id>/', nombre_candidatures_acceptees),
+    path('candidatures_rejetees/<int:offre_id>/', nombre_candidatures_rejetees),
+    path('candidatures_en_attente/<int:offre_id>/', nombre_candidatures_en_attente),
 
 
 ]

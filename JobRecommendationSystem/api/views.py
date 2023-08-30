@@ -988,3 +988,38 @@ def EntretienCountView(request, offre_id):
         candidature_ids = [candidature.id for candidature in candidatures]
         entretien_count = Entretien.objects.filter(candidature__id__in=candidature_ids).count()
         return JsonResponse({'count': entretien_count})
+
+
+
+
+def nombre_candidatures_acceptees(request, offre_id):
+    try:
+        candidatures_acceptees = Candidature.objects.filter(offre_id=offre_id, etat='Acceptée')
+        nombre_candidatures_acceptees = candidatures_acceptees.count()
+
+        data = {'nombre_candidatures_acceptees': nombre_candidatures_acceptees}
+        return JsonResponse(data)
+    except Candidature.DoesNotExist:
+        return JsonResponse({'error': 'Candidatures not found'}, status=404)
+
+
+def nombre_candidatures_rejetees(request, offre_id):
+    try:
+        candidatures_rejetees = Candidature.objects.filter(offre_id=offre_id, etat='Rejetée')
+        nombre_candidatures_rejetees = candidatures_rejetees.count()
+
+        data = {'nombre_candidatures_rejetees': nombre_candidatures_rejetees}
+        return JsonResponse(data)
+    except Candidature.DoesNotExist:
+        return JsonResponse({'error': 'Candidatures not found'}, status=404)
+    
+
+def nombre_candidatures_en_attente(request, offre_id):
+    try:
+        candidatures_en_attente = Candidature.objects.filter(offre_id=offre_id, etat='En attente')
+        nombre_candidatures_en_attente = candidatures_en_attente.count()
+
+        data = {'nombre_candidatures_en_attente': nombre_candidatures_en_attente}
+        return JsonResponse(data)
+    except Candidature.DoesNotExist:
+        return JsonResponse({'error': 'Candidatures not found'}, status=404)
