@@ -13,13 +13,14 @@
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 5px;
-  width: 1100px;
+  width: 850px;
+  height: 500px;
 }
 
 
 .small-box {
   flex: 1;
-  max-width: 900px; /* Ajustez la largeur selon vos besoins */
+  width: 1250px; /* Ajustez la largeur selon vos besoins */
   height: 620px; 
 }
 .mini-box-rose {
@@ -71,6 +72,22 @@
   margin-bottom: 20px; /* Ajoute un peu d'espace en bas */
   margin-right: 50px; 
 }
+.button-dash {
+  color: #fc5286;
+}
+.button-like-dash{
+  color: #a7c0ff;
+
+}
+.chart-container-dash {
+  display: flex;
+  justify-content: center; /* Centrer horizontalement le graphique */
+  align-items: center; /* Centrer verticalement le graphique */
+  width: 1000px;
+  height: 400px;
+}
+
+
 
 .month {
   margin-top: 0px; /* Ajoute un peu d'espace en haut */
@@ -111,7 +128,8 @@ margin-bottom: -18px;
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 5px;
-  max-width: 300px; 
+  width: 380px; 
+  height: 140px;
 }
 
 .mini-box-bleue-cand {
@@ -120,7 +138,8 @@ margin-bottom: -18px;
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 5px;
-  max-width: 300px;/* Modification ici */
+  width: 380px; 
+  height: 140px;
 }
 
 .mini-box-jaune-cand {
@@ -129,7 +148,8 @@ margin-bottom: -18px;
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 5px;
-  max-width: 300px;
+  width: 380px; 
+  height: 140px;
 
 }
 

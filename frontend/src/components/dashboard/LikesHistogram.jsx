@@ -95,28 +95,28 @@ const LikesHistogram = ({ offerId }) => {
           <div className="titre-dash"><h2>Fréquence Quotidienne Des "J'aime"</h2></div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginLeft: '80px', marginRight: '80px' }}>
   <div>
-    <button onClick={() => handleMonthChange(selectedMonth - 1)}>◀</button>
+    <button className="button-like-dash" onClick={() => handleMonthChange(selectedMonth - 1)}>◀</button>
     <span> {monthNames[selectedMonth - 1]}</span>
     {selectedMonth !== currentDate.getMonth() + 1 && (
-      <button onClick={() => handleMonthChange(selectedMonth + 1)}>▶</button>
+      <button className="button-like-dash" onClick={() => handleMonthChange(selectedMonth + 1)}>▶</button>
     )}
   </div>
   <div>
-    <button onClick={() => handleYearChange(currentDate.getFullYear() - 1)}> ◀</button>
+    <button className="button-like-dash" onClick={() => handleYearChange(currentDate.getFullYear() - 1)}> ◀</button>
     <span> {selectedYear}</span>
     {selectedYear !== currentDate.getFullYear() && (
-      <button onClick={() => handleYearChange(currentDate.getFullYear())}>Cette Année</button>
+      <button className="button-like-dash" onClick={() => handleYearChange(currentDate.getFullYear())}>Cette Année</button>
     )}
   </div>
 </div>
 
-<BarChart width={800} height={400} data={data}>
+<BarChart width={1150} height={400} data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" label={{ value: 'Jour', position: 'insideTopRight', offset: 20 }} tick={{ fontSize: 12 }} tickLabel={{ fontSize: 10 }} /> {/* Adjust label and tick font sizes */}
           <YAxis tickCount={5} tickFormatter={tick => Number.isInteger(tick) ? tick.toFixed(0) : ''} /> {/* Format tick values */}
           <Tooltip />
           <Legend />
-          <Bar dataKey="count" fill="#1eb2a6" name="Nombre de j'aime" />
+          <Bar dataKey="count" fill="#a7c0ff" name="Nombre de j'aime" />
           <ReferenceLine x={currentDate.getDate()} stroke="red" label="Aujourd'hui" />
         </BarChart>
         </div>

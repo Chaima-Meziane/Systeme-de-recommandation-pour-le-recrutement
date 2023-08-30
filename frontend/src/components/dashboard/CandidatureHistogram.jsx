@@ -52,20 +52,20 @@ export function CandidatureHistogram({ offerId }) {
 
   return (
     <div>
-      <div className="titre-dash"><h2>Nombre De Candidatures Par Jour</h2></div>
+      <div className="titre-dash"><h2>Fréquence Quotidienne Des Candidatures</h2></div>
       
       <div className="button-container-dash">
-        <button onClick={goToPreviousMonth}>◀</button>
+        <button className="button-dash" onClick={goToPreviousMonth}>◀</button>
         <span className="month">{months[currentMonth]}</span>
-        <button onClick={goToNextMonth}>▶</button>
+        <button className="button-dash" onClick={goToNextMonth}>▶</button>
       </div>
-      <BarChart width={800} height={400} data={dailyCandidatures.map((count, index) => ({ jour: index + 1, "Nombre de candidatures": count }))}>
+      <BarChart width={1150} height={400} data={dailyCandidatures.map((count, index) => ({ jour: index + 1, "Nombre de candidatures": count }))}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="jour" tickLine={false} tick={{ fontSize: 12 }} label={{ value: 'Jour', position: 'insideTopRight', offset: 20 }} />
         <YAxis />
         <Tooltip />
-        <Legend fill="#1eb2a6"/>
-        <Bar dataKey="Nombre de candidatures" fill="#1eb2a6" barSize={20} name="Nombre de candidatures" />
+        <Legend fill="#fc5286"/>
+        <Bar dataKey="Nombre de candidatures" fill="#fc5286" barSize={20} name="Nombre de candidatures" />
       </BarChart>
       
     </div>

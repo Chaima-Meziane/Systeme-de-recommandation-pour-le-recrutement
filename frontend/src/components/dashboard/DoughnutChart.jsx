@@ -26,13 +26,15 @@ export function DoughnutChart({ offerId }) {
   const options = {
     pieHole: 0.4,
     is3D: false,
+    colors: ['#fc5286', '#a7c0ff', '#ffc480'],
   };
   
   return (<><div style ={{fontSize:'18px'}} className="titre-dash"><h2>Répartition des Candidatures par État</h2></div><br/>
+
     <Chart
    
       chartType="PieChart"
-      width="100%"
+      width="800px"
       height="400px"
       data={chartData}
       options={options}
@@ -40,7 +42,10 @@ export function DoughnutChart({ offerId }) {
       <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: '80px', color: '#1eb2a6', marginLeft: '480px' }} />
       <br /><br />
       <div style={{ fontSize: '20px', color: 'grey', marginLeft: '400px' }}> Veuillez patienter un instant</div><br /><br />
+     
     </div>}
-    /></>
+    />
+    
+    </>
   );
 }

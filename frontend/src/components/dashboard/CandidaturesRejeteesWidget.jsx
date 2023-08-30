@@ -17,7 +17,13 @@ const CandidaturesRejeteesWidget = ({ offerId }) => {
 
   return (
     <div>
-      <h3>Nombre de candidatures rejetées</h3>
+      <h3 style={{ fontFamily: 'Arial', 
+  fontSize: '20px',
+  color: '#333',
+  letterSpacing: '1px',
+  padding: '10px',
+  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)',
+  marginBottom: '-10px'}}>Nombre de candidatures rejetées</h3>
       <p style={{ fontSize: '22px', marginTop: '6px'}}>
         {candidatureCount} {candidatureCount === 1 ? 'candidature rejetée' : 'candidatures rejetées'}</p>
     </div>
