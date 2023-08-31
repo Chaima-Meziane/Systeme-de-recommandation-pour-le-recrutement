@@ -83,7 +83,8 @@ const LikesHistogram = ({ offerId }) => {
     ];
 
   return (
-    <div>
+    <div><br/>
+    <div style={{ fontSize: '17px' }} className="titre-dash"><h2>Fréquence Quotidienne Des "J'aime"</h2></div>
       {isLoading ? ( // Check if loading
         <div className="loading-container">
           <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: '80px', color: '#1eb2a6', marginLeft: '550px' , marginTop:'200px'}} />
@@ -91,8 +92,7 @@ const LikesHistogram = ({ offerId }) => {
           <div style={{ fontSize: '20px', color: 'grey', marginLeft: '470px' }}> Veuillez patienter un instant</div><br /><br />
         </div>
       ) : (
-        <div><br/>
-          <div style={{ fontSize: '17px' }} className="titre-dash"><h2>Fréquence Quotidienne Des "J'aime"</h2></div>
+        <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginLeft: '80px', marginRight: '80px' }}>
   <div>
     <button className="button-like-dash" onClick={() => handleMonthChange(selectedMonth - 1)}>◀</button>

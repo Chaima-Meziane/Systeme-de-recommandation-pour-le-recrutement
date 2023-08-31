@@ -53,7 +53,7 @@ const LikesCandidaturesLineChart = ({ offerId }) => {
 
   return (
     <div><br/>
-      <div style={{ fontSize: '17px' }} className="titre-dash"><h2>Répartition des Candidatures par État</h2></div><br/><br/><br/><br/>
+      <div style={{ fontSize: '17px' }} className="titre-dash"><h2>Tendance des Interactions et des Candidatures par jour</h2></div><br/><br/><br/><br/><br/>
       {loading ? ( // Check if loading
         <div className="loading-container">
           <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: '80px', color: '#1eb2a6', marginLeft: '550px' , marginTop:'150px'}} />
@@ -61,7 +61,7 @@ const LikesCandidaturesLineChart = ({ offerId }) => {
           <div style={{ fontSize: '20px', color: 'grey', marginLeft: '470px' }}> Veuillez patienter un instant</div><br /><br />
         </div>
       ) : (
-        <LineChart style={{ marginLeft: '40px' }} width={1050} height={400} data={chartData}>
+        <LineChart style={{ marginLeft: '30px' }} width={1100} height={400} data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
           <YAxis tickFormatter={tick => Number.isInteger(tick) ? tick.toFixed(0) : ''} /> {/* Format tick values */}
