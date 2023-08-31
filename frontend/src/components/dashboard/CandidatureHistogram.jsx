@@ -51,8 +51,8 @@ export function CandidatureHistogram({ offerId }) {
   };
 
   return (
-    <div>
-      <div className="titre-dash"><h2>Fréquence Quotidienne Des Candidatures</h2></div>
+    <div><br/>
+      <div style={{ fontSize: '17px' }} className="titre-dash"><h2>Fréquence Quotidienne Des Candidatures</h2></div>
       
       <div className="button-container-dash">
         <button className="button-dash" onClick={goToPreviousMonth}>◀</button>

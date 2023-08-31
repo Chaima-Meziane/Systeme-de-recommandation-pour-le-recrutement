@@ -86,13 +86,13 @@ const LikesHistogram = ({ offerId }) => {
     <div>
       {isLoading ? ( // Check if loading
         <div className="loading-container">
-          <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: '80px', color: '#1eb2a6', marginLeft: '480px' }} />
+          <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: '80px', color: '#1eb2a6', marginLeft: '550px' , marginTop:'200px'}} />
           <br /><br />
-          <div style={{ fontSize: '20px', color: 'grey', marginLeft: '400px' }}> Veuillez patienter un instant</div><br /><br />
+          <div style={{ fontSize: '20px', color: 'grey', marginLeft: '470px' }}> Veuillez patienter un instant</div><br /><br />
         </div>
       ) : (
-        <div>
-          <div className="titre-dash"><h2>Fréquence Quotidienne Des "J'aime"</h2></div>
+        <div><br/>
+          <div style={{ fontSize: '17px' }} className="titre-dash"><h2>Fréquence Quotidienne Des "J'aime"</h2></div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginLeft: '80px', marginRight: '80px' }}>
   <div>
     <button className="button-like-dash" onClick={() => handleMonthChange(selectedMonth - 1)}>◀</button>
@@ -116,7 +116,7 @@ const LikesHistogram = ({ offerId }) => {
           <YAxis tickCount={5} tickFormatter={tick => Number.isInteger(tick) ? tick.toFixed(0) : ''} /> {/* Format tick values */}
           <Tooltip />
           <Legend />
-          <Bar dataKey="count" fill="#a7c0ff" name="Nombre de j'aime" />
+          <Bar dataKey="count" fill="#8baaf8" name="Nombre de j'aime" />
           <ReferenceLine x={currentDate.getDate()} stroke="red" label="Aujourd'hui" />
         </BarChart>
         </div>

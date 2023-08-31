@@ -29,7 +29,7 @@ export function DoughnutChart({ offerId }) {
     colors: ['#fc5286', '#a7c0ff', '#ffc480'],
   };
   
-  return (<><div style ={{fontSize:'18px'}} className="titre-dash"><h2>Répartition des Candidatures par État</h2></div><br/>
+  return (<><br/><div style ={{fontSize:'17px'}} className="titre-dash"><h2>Répartition des Candidatures par État</h2></div><br/>
 
     <Chart
    
