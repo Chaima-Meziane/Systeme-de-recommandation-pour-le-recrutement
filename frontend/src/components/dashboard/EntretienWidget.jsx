@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { faUserTie } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 const EntretienWidget = ({ offerId }) => {
   const [entretienCount, setEntretienCount] = useState(0);
@@ -19,13 +22,18 @@ const EntretienWidget = ({ offerId }) => {
   }, [offerId]);
 
   return (
-    <div>
-    <h3>Nombre d'entretiens</h3>
-    <p style={{ fontSize: '22px', marginTop: '6px'}}>
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ marginRight: '8px', marginLeft: '2px' }}>
+        <FontAwesomeIcon icon={faUserTie} style={{ color: 'rgba(0, 0, 0, 0.5)', fontSize: '39px' }} />
+      </div>
+      <div>
+        <h3 style={{ fontSize: '23px', marginLeft: '14px' }}>Nombre d'entretiens</h3>
+        <p style={{ fontSize: '21px', margin: '6px 14px' }}>
         {entretienCount} {entretienCount === 1 ? 'entretien' : 'entretiens'}
-    </p>
+        </p>
+      </div>
     </div>
-
+    
     
   );
 };
