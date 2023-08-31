@@ -24,7 +24,7 @@ const EntretienWidget = ({ offerId }) => {
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <div style={{ marginRight: '8px', marginLeft: '2px' }}>
-        <FontAwesomeIcon icon={faUserTie} style={{ color: 'rgba(0, 0, 0, 0.5)', fontSize: '39px' }} />
+        <FontAwesomeIcon icon={faUserTie} style={{ color: 'rgba(0, 0, 0, 0.4)', fontSize: '39px' }} />
       </div>
       <div>
         <h3 style={{ fontSize: '23px', marginLeft: '14px' }}>Nombre d'entretiens</h3>
