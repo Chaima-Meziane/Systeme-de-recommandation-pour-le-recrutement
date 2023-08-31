@@ -57,7 +57,8 @@ const OffersByCoordinator = () => {
         {/* copy code form  coursesCard */}
         <div className='grid2'>
         {filterOffers(offers).map((offre) => (
-            <div className='items'key={offre.id}>
+            <div className='items  offer-hoverable'key={offre.id}>
+               <div className='hidden'>
               <div className='content flex'>
                 <div className='left'>
                   <div className='img'>
@@ -106,13 +107,16 @@ const OffersByCoordinator = () => {
                   {offre.competences}
                 </h3>
               </div>
+              </div>
+              <div className='buttons-on-hover' style={{ marginTop: '10%' }}>
               <Link to={`/dashboard/${offre.id}`}>
-                  <button className='outline-btn'>Dashboard</button>
+                  <button className='outline-btn-btn'>Tableau de bord</button>
               </Link>
-              <Link to={`/owner/details/${offre.id}`}><button className='outline-btn'>VIEW JOB DETAILS</button></Link>
-              <Link to={`/candidaturesbyoffer/${offre.id}`}><button className='outline-btn'>voir les candidatures</button></Link>
-              <Link to={`/recommendations/${offre.id}`}><button className='outline-btn'>Recommander</button></Link>
+              <Link to={`/owner/details/${offre.id}`}><button className='outline-btn-btn'>Détails du poste</button></Link>
+              <Link to={`/candidaturesbyoffer/${offre.id}`}><button className='outline-btn-btn'>Candidatures reçues</button></Link>
+              <Link to={`/recommendations/${offre.id}`}><button className='outline-btn-btn'>Profils suggérés</button></Link>
 
+            </div>
             </div>
           ))}
         </div>

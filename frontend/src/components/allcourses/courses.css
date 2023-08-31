@@ -187,3 +187,48 @@
   background-color: #1eb2a6;
   color: #fff;
 }
+
+.outline-btn-btn{
+  margin-top: 4%;
+  box-shadow: none;
+  border: 2px solid #1eb2a6;
+  width: 80% ;
+  transition: 0.5s;
+
+}
+.outline-btn-btn:hover{
+  background-color: #1eb2a6;
+  color: #1eb2a6;
+
+}
+
+
+.agenda-btn{
+
+  box-shadow: none;
+  border: 2px solid #1eb2a6;
+  width: 200px ;
+  height: 80px;
+  transition: 0.5s;
+  margin-top: -100px;
+}
+.agenda-btn:hover{
+  background-color: #1eb2a6;
+  color: #1eb2a6;
+
+}
+.buttons-on-hover-candidature {
+  display: none; /* Masquer les boutons par défaut */
+margin-top: 140px;
+}
+
+.items.offer-hoverable:hover .buttons-on-hover-candidature {
+  display: block;
+}
+.buttons-on-hover-agenda {
+  display: none; /* Masquer les boutons par défaut */
+}
+.items.offer-hoverable:hover .buttons-on-hover-agenda {
+  display: block;
+  margin-top: -130px;
+}
