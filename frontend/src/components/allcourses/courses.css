@@ -152,3 +152,38 @@
 /*-------------online---------*/
 @media screen and (max-width: 768px) {
 }
+
+.items.offer-hoverable:hover {
+  background-color: #1eb2a6; /* Couleur verte ou toute autre couleur que vous souhaitez */
+}
+.buttons-on-hover {
+  display: none; /* Masquer les boutons par défaut */
+}
+
+.items.offer-hoverable:hover .hidden {
+  display: none;
+}
+
+.items.offer-hoverable:hover .buttons-on-hover {
+  display: block;
+  margin-top: 30%;
+}
+
+.items.offer-hoverable:hover .buttons-hidden{
+  display: none;
+}
+
+
+.offers-btn{
+  margin: 0;
+  box-shadow: none;
+  border: 2px solid #1eb2a6;
+  width: 70%;
+  height: 70%;
+  transition: 0.5s;
+
+}
+.offers-btn:hover {
+  background-color: #1eb2a6;
+  color: #fff;
+}

@@ -154,7 +154,8 @@ const Offers = () => {
             {/* copy code form  coursesCard */}
             <div className='grid2'>
             {filterOffers(offres).map((offre) => (
-                <div className='items'key={offre.id}>
+                <div className='items offer-hoverable'key={offre.id}>
+                  <div className='hidden'>
                   <div className='content flex'>
                     <div className='left'>
                       <div className='img'>
@@ -203,51 +204,56 @@ const Offers = () => {
                       {offre.competences}
                     </h3>
                   </div>
-                  
+                  </div>
                  
 
-
+                  <div className='buttons-on-hover'>
                   
                   <Link to={`/details/${offre.id}`}>
-                  <button className='outline-btn'> CONSULTER LES DETAILS DE L'OFFRE</button>
+                  <button className='offers-btn'> CONSULTER LES DETAILS DE L'OFFRE</button>
                   </Link>
-                  
+                  <br></br>
 
                   {/* Check if user candidatures are still loading */}
+                  
               {userCandidaturesLoading ? (
-                <button className='outline-btn' disabled>Chargement...</button>
+                <button className='offers-btn' disabled>Chargement...</button>
               ) : (
                 <>
-
+                  <br></br>
                    {/* Vérification si l'utilisateur a déjà postulé à cette offre */}
                 {userCandidatures.some(
                   (candidature) => candidature.offre_id === offre.id
                 ) ? (
-                  <button className="outline-btn" disabled>Vous avez déjà postulé</button>
+                  <button className="offers-btn"  disabled>VOUS AVEZ DÉJÀ POSTULÉ POUR CETTE OFFRE</button>
 
                 ) : (
+                  
                   <Link to={`/${offre.id}/addcandidature`}>
-                    <button className="outline-btn">POSTULER</button>
+                    <button className="offers-btn">POSTULER</button>
                   </Link>
                 )}
                 </>  
               )}
-
+              </div>
+              <div className='buttons-hidden'>
                   <button className={`like-button ${offre.liked ? "liked" : ""}`} onClick={() => handleLike(offre.id)}>
                   {offre.liked ? (
                       <span>
-                        <i className="fas fa-thumbs-up"></i> Liked
+                        <i className="fas fa-thumbs-up"></i> Aimée
                       </span>
                     ) : (
                       <span>
-                        <i className="far fa-thumbs-up"></i> Like
+                        <i className="far fa-thumbs-up"></i> J'aime
                       </span>
                     )}
                   </button>
                     
               
                 </div>
+                </div> 
               ))}
+              
             </div>
           </div>
         </div>

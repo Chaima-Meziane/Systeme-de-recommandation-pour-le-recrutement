@@ -53,7 +53,7 @@ const LoginForm = () => {
       .catch((error) => {
         // Handle login error
         console.error("Login failed:", error);
-        setLoginError("Invalid username or password."); 
+        setLoginError("Nom d'utilisateur ou mot de passe incorrect."); 
             });
       
 
