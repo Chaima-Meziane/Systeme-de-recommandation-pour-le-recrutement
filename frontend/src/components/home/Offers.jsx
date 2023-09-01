@@ -210,7 +210,7 @@ const Offers = () => {
                   <div className='buttons-on-hover'>
                   
                   <Link to={`/details/${offre.id}`}>
-                  <button className='offers-btn'> CONSULTER LES DETAILS DE L'OFFRE</button>
+                  <button className='offers-btn'> DETAILS DE L'OFFRE</button>
                   </Link>
                   <br></br>
 

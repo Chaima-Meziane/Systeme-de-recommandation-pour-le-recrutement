@@ -82,7 +82,7 @@ export default function UpdateOptions() {
     padding: '10px 10px', // Adjusting padding to 0 on the horizontal axis
     width: '350px',
     height:'60px',
-    marginLeft:'150px'
+    marginLeft:'50px'
    
   };
 

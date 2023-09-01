@@ -103,8 +103,8 @@ form .flexSB input:nth-child(1) {
   display: flex;
 justify-content: center;
 align-items: flex-start; /* Align the form to the top of the container */
-height: 130vh;
-width: 100%; /* Set the container width to take up the full viewport width */
+height: 160vh;
+width: 900px; /* Set the container width to take up the full viewport width */
 background-color: white; /* Set the background color of the container */
 border-radius: 10px; /* Add border radius to the container for a rounded appearance */
 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for a subtle effect */
@@ -144,6 +144,7 @@ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for a subtle effect *
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+ 
 }
 
 .form-field label {

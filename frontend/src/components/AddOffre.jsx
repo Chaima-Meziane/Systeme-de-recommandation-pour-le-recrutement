@@ -114,28 +114,29 @@ export default function AddOffre() {
               <div className='form-field'>
 
                 <div className='input-container'>
-                <input type='text' placeholder='Titre Du Poste' name='titreDuPoste' id='titreDuPoste' required/>
+                <p>Titre Du Poste</p>
+                <input type='text' name='titreDuPoste' id='titreDuPoste' required/>
                 </div>
               </div>
 
               
               <div className='form-field'>
-                
-                <input type='text' placeholder='Competences' name='competences' id='competences' required/>
+                <p>Compétences</p>
+                <input type='text' placeholder='Compétence1, compétence2,compétence3,...' name='competences' id='competences' required/>
               </div>
 
               <div className='form-field'>
-              
-                <input type='text' placeholder='Entreprise' name='entreprise' id='entreprise' required/>
+                <p>Entreprise</p>
+                <input type='text' name='entreprise' id='entreprise' required/>
               </div>
 
               <div className='form-field'>
-             
-                <input type='text' placeholder='Localisation' name='localisation' id='localisation' required/>
+              <p>Localisation</p>
+                <input type='text' name='localisation' id='localisation' required/>
               </div>
 
               <div className='form-field'>
-           
+            <p>Statut</p>
                 <select name='statut' value={statut} onChange={(e) => setStatut(e.target.value)} id='statut'>
                   <option value='Ouvert'>Ouvert</option>
                   <option value='Fermé'>Fermé</option>
@@ -143,14 +144,15 @@ export default function AddOffre() {
               </div>
 
               <div className='form-field'>
-          
+          <p>Type d'emploi</p>
                 <select name='typeEmploi' value={typeEmploi} onChange={(e) => setTypeEmploi(e.target.value)} id='typeEmploi'>
                   <option value='Temporaire'>Temporaire</option>
                   <option value='Permanent'>Permanent</option>
                 </select>
               </div>
               <div className='form-field'>
-                <textarea cols='30' rows='10' placeholder='Description' name='description' id='description'required>
+                <p>Description</p>
+                <textarea cols='30' rows='10' placeholder="Décrivez votre offre d'emploi ici." name='description' id='description'required>
                 
               </textarea>
               </div>
