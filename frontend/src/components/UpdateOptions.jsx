@@ -90,7 +90,7 @@ export default function UpdateOptions() {
     <>
       <Back title="Détails de l'entretien" />
       <section className='contacts padding'>
-        <div className='container shadow' style={{height:'950px'}}>
+        <div className='container shadow' style={{height:'920px'}}>
           <div className='left row'>
           <br/><br/>
           <h1>Détails de l'entretien</h1>

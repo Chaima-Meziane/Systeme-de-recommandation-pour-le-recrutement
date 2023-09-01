@@ -69,9 +69,9 @@ export default function UpdateOffre() {
     <>
       <Back title="Modifier l'offre"/>
       <section className='contacts padding'>
-        <div className='container shadow'>
+        <div className='container shadow' style={{height:'1230px'}}>
           <div className='left row'>
-            <h1>Modifier une offre</h1>
+            <br/><br/><h1>Modifier une offre</h1>
 
             <form onSubmit={handleAddSubmit}>
               <div className='form-field'>
@@ -159,11 +159,9 @@ export default function UpdateOffre() {
               <button className='primary-btn' type='submit'>
                 Confirmer les modifications
               </button>
-              <Link to='/offre'>
-                <button className='primary-btn'>
-                  <FontAwesomeIcon icon={faArrowLeft} /> Retour
-                </button>
-              </Link>
+              <button className='primary-btn' type='button' onClick={() => navigate(-1)}>
+                <FontAwesomeIcon icon={faArrowLeft} /> Retour
+              </button>  
             </form>
           </div>
         </div>
