@@ -166,7 +166,8 @@
 
 .items.offer-hoverable:hover .buttons-on-hover {
   display: block;
-  margin-top: 30%;
+ height:50%;
+ margin-top:8%;
 }
 
 .items.offer-hoverable:hover .buttons-hidden{

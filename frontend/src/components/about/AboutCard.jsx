@@ -150,7 +150,9 @@ const AboutCard = () => {
                       )}
                     </div>
                   </div>
+                  {user.is_candidat&&(<>
                   <div className='item flexSB'>
+                  
                   <div className='text'>
                     <p> Êtes-vous intéressé(e) par cette offre ? </p></div></div>
 
@@ -162,7 +164,7 @@ const AboutCard = () => {
                 ) : (
                   <button className='outline-btn'>Postuler</button>
                 )}
-              </Link>
+              </Link></>)}
             </div>
           </div>
         </div>

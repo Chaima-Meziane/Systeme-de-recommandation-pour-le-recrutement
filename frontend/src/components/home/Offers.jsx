@@ -134,7 +134,7 @@ const Offers = () => {
     <>
       <section id='offers-section' className='homeAbout'>
         <div className='container'>
-          <Heading subtitle='our job offers' title='explore available job offers' />
+          <Heading subtitle="Accueil" title='Explorez les opportunités professionnelles disponibles' />
           {/*
           <Link to={`/OffersByCoordinator`}><button className='outline-btn'>coordinator offers</button></Link>
           <Link to={`/addoffre`}><button className='outline-btn'>add offer</button></Link>
@@ -208,16 +208,22 @@ const Offers = () => {
                  
 
                   <div className='buttons-on-hover'>
-                  
+                  {user.is_candidat && (
                   <Link to={`/details/${offre.id}`}>
-                  <button className='offers-btn'> DETAILS DE L'OFFRE</button>
-                  </Link>
+                 <button className='offers-btn'> DETAILS DE L'OFFRE</button>
+                  
+                  </Link>)}
+                  {!user.is_candidat && (
+                  <Link to={`/details/${offre.id}`}>
+                 <button className='offers-btn' style={{ marginTop:'70px', height:'100px'}}> DETAILS DE L'OFFRE</button>
+                  
+                  </Link>)}
                   <br></br>
 
                   {/* Check if user candidatures are still loading */}
                   
               {userCandidaturesLoading ? (
-                <button className='offers-btn' disabled>Chargement...</button>
+               <> {user.is_candidat && (<><br/><button className='offers-btn' disabled>Chargement...</button></>)}</>
               ) : (
                 <>
                   <br></br>
@@ -225,29 +231,30 @@ const Offers = () => {
                 {userCandidatures.some(
                   (candidature) => candidature.offre_id === offre.id
                 ) ? (
-                  <button className="offers-btn"  disabled>VOUS AVEZ DÉJÀ POSTULÉ POUR CETTE OFFRE</button>
+                  <> {user.is_candidat && (<button className="offers-btn" disabled>VOUS AVEZ DÉJÀ POSTULÉ POUR CETTE OFFRE</button>)}</>
 
                 ) : (
                   
                   <Link to={`/${offre.id}/addcandidature`}>
-                    <button className="offers-btn">POSTULER</button>
+                    {user.is_candidat && (<button className="offers-btn">POSTULER</button>)}
                   </Link>
                 )}
                 </>  
               )}
-              </div>
-              <div className='buttons-hidden'>
-                  <button className={`like-button ${offre.liked ? "liked" : ""}`} onClick={() => handleLike(offre.id)}>
-                  {offre.liked ? (
-                      <span>
-                        <i className="fas fa-thumbs-up"></i> Aimée
-                      </span>
-                    ) : (
-                      <span>
-                        <i className="far fa-thumbs-up"></i> J'aime
-                      </span>
-                    )}
-                  </button>
+              
+              {user.is_candidat && (
+                            <button className={`like-button ${offre.liked ? "liked" : ""}`} onClick={() => handleLike(offre.id)}>
+                              {offre.liked ? (
+                                <span>
+                                  <i className="fas fa-thumbs-up"></i> Aimée
+                                </span>
+                              ) : (
+                                <span>
+                                  <i className="far fa-thumbs-up"></i> J'aime
+                                </span>
+                              )}
+                            </button>
+                          )}
                     
               
                 </div>
@@ -257,7 +264,7 @@ const Offers = () => {
             </div>
           </div>
         </div>
-        <OnlineCourses />
+        {/*<OnlineCourses />*/}
       </section>
     </>
   )
