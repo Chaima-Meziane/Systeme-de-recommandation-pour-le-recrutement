@@ -210,12 +210,12 @@ const Offers = () => {
                   <div className='buttons-on-hover'>
                   {user.is_candidat && (
                   <Link to={`/details/${offre.id}`}>
-                 <button className='offers-btn'> DETAILS DE L'OFFRE</button>
+                 <button className='offers-btn'> DÉTAILS DE L'OFFRE</button>
                   
                   </Link>)}
                   {!user.is_candidat && (
                   <Link to={`/details/${offre.id}`}>
-                 <button className='offers-btn' style={{ marginTop:'70px', height:'100px'}}> DETAILS DE L'OFFRE</button>
+                 <button className='offers-btn' style={{ marginTop:'70px', height:'100px'}}> DÉTAILS DE L'OFFRE</button>
                   
                   </Link>)}
                   <br></br>

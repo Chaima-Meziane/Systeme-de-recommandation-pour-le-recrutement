@@ -123,7 +123,7 @@ function MesCandidatures() {
                         </div>
                     </div>
                 </div>
-                <OnlineCourses />
+                {/*<OnlineCourses />*/}
             </section>
         </>
     );

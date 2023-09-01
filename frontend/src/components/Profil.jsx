@@ -58,7 +58,7 @@ export default function Profil() {
     <>
     <Back title='Mon Profil' />
     <section className='testimonal padding'>
-      <div className='container'>
+      <div className='container' style={{marginTop:'-40px'}}>
         <div className='content'>
           <div className='items shadow' style={{ padding: '100px', margin: '0 200px', display: 'flex' }}>
             <div className='profile-icon' style={{ flex: '1', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

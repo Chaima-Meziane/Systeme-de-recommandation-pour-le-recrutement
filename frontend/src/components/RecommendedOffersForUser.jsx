@@ -60,7 +60,7 @@ function RecommendedOffersForUser(props) {
 
       <section className='homeAbout'>
         <div className='container'>
-          <Heading subtitle='our job offers' title='explore available job offers' />
+          <Heading subtitle='Offres sur Mesure' title="les plus adaptées à vous en premier" />
 
           <div className='coursesCard'>
             <div className='grid2'>
@@ -82,7 +82,7 @@ function RecommendedOffersForUser(props) {
                           <i className='fa fa-star'></i>
                           <i className='fa fa-star'></i>
                           <i className='fa fa-star'></i>
-                          <label htmlFor=''>(5.0)</label>
+                          
                         </div>
                         <div className='localisation'>
                           <i className="fas fa-map-marker-alt"></i>
@@ -114,9 +114,9 @@ function RecommendedOffersForUser(props) {
                     </div>
                   </div>
 
-                  <div className='buttons-on-hover'>
+                  <div style={{marginTop:'60px', height:'70%'}} className='buttons-on-hover'>
                     <Link to={`/details/${offre.offer ? offre.offer.id : offre.id}`}>
-                      <button className='offers-btn'> CONSULTER LES DÉTAILS DE L'OFFRE</button>
+                      <button className='offers-btn'>DÉTAILS DE L'OFFRE</button>
                     </Link>
                     <br />
                     {userCandidaturesLoading ? (

@@ -37,8 +37,7 @@ console.log(user);
               <a href='/'><li>Accueil</li></a>
               <a href='/monprofil'><li>Mon Profil</li></a>
               <a href='/MesCandidatures'><li>Mes Candidatures</li></a>
-              <a href='/recommendedoffers'><li>Meilleures offres pour vous</li></a>
-              <a href={`/recommendedoffersbylikes/${user.id}`}><li>Meilleures offres pour vous</li></a>
+              <a href={`/RecommendedOffersForUser/${user.id}`}><li>Offres Sur Mesure</li></a>
 
               <a href='/calendar'><li>Mes entretiens</li></a>
             </ul>
