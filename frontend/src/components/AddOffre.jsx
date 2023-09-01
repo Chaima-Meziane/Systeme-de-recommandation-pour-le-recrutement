@@ -1,7 +1,7 @@
 import React, { useContext,  useState } from 'react';
 import './contact/contact.css';
 import Back from './common/back/Back';
-import { Link} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from './UserContext';
@@ -12,7 +12,7 @@ export default function AddOffre() {
   const [offres, setOffres] = useState([]);
   const [profiles, setProfiles] = useState([]); // Ajoutez cette ligne pour déclarer l'état des profils
   const [addedOffreId, setAddedOffreId] = useState(null);
-
+  const navigate = useNavigate();
   const [statut, setStatut] = useState('Ouvert');
   const [typeEmploi, setTypeEmploi] = useState('Permanent');
   const { user } = useContext(UserContext);
@@ -107,7 +107,7 @@ export default function AddOffre() {
       <section className='contacts padding'>
         <div className='container shadow'>
           <div className='left row'>
-            <h1>Ajouter une offre</h1>
+          <br/><br/><br/><h1>Ajouter une offre</h1>
 
             <form onSubmit={handleAddSubmit}>
             
@@ -159,11 +159,9 @@ export default function AddOffre() {
              
               <button className='primary-btn' type='submit'>Ajouter</button>
               
-              <Link to="/offre">
-              <button className='primary-btn' type='submit'>
+              <button className='primary-btn' type='button' onClick={() => navigate(-1)}>
                 <FontAwesomeIcon icon={faArrowLeft} /> Retour
-              </button>
-              </Link>
+              </button>     
               
             </form>
           </div>

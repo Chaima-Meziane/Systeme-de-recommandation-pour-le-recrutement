@@ -69,7 +69,7 @@ export default function UpdateEntretien() {
     <>
       <Back title="Ajouter le résultat de l'entretien" />
       <section className='contacts padding'>
-        <div className='container shadow'>
+        <div className='container shadow' style={{height:'500px'}}>
           <div className='left row'><br/><br/><br/><br/>
             <h1>Adjoindre le résultat de l'entretien</h1>
             <form onSubmit={handleAddSubmit}>

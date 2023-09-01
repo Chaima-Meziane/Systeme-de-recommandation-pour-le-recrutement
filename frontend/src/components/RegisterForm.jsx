@@ -77,7 +77,7 @@ const RegisterForm = () => {
   return (
     <div className="main1">
       <section className="signup1">
-        <div className="container1">
+        <div className="container1" style={{marginTop:'45px'}}>
           <div className="signup-content">
             <div className="signup-form">
               <h2 className="form-title1">Inscription</h2>
@@ -92,7 +92,7 @@ const RegisterForm = () => {
                 
                 <div className="form-group1">
                   <label htmlFor="name"><i className="zmdi zmdi-account material-icons-name"></i></label>
-                  <input type="text" name="name" id="name" onChange={handleNameChange} placeholder="Nom d'utilisatuer" required/>
+                  <input type="text" name="name" id="name" onChange={handleNameChange} placeholder="Nom d'utilisateur" required/>
                 </div>
                 <div className="form-group1">
                   <label htmlFor="email"><i className="zmdi zmdi-email"></i></label>

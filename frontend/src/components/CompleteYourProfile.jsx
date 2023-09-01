@@ -69,7 +69,7 @@ const { user } = useContext(UserContext);
   return (
     <div className="main1">
       <section className="signup">
-        <div className="container1">
+        <div className="container1" style={{marginTop:'45px'}}>
           <div className="signup-content">
             <div className="signup-form">
               <h2 className="form-title1" style={{fontSize:'25px'}}>Complétez votre profil</h2>

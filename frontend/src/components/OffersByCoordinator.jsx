@@ -45,7 +45,7 @@ const OffersByCoordinator = () => {
     <Back title='Mes Offres' />
     <section className='homeAbout'>
     <div className='container'>
-      <Heading subtitle='our job offers' title='explore available job offers' />
+      <Heading subtitle='Parcourir ' title="Mon Catalogue d'Offres" /><br/>
       {/*<Link to={`/addoffre`}><button className='outline-btn'>add offre</button></Link>*/}
       <input
             type="text"
@@ -122,7 +122,7 @@ const OffersByCoordinator = () => {
         </div>
       </div>
     </div>
-    <OnlineCourses />
+    {/*<OnlineCourses />*/}
   </section>
   </>
   );

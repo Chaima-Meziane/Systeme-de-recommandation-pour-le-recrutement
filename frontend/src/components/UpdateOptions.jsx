@@ -54,7 +54,7 @@ export default function UpdateOptions() {
 
 
   if (loading) {
-    return <><Back title='Mon Profil' /><div className="loading-container">
+    return <><Back title="Détails de l'entretien" /><div className="loading-container">
     <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: '80px', color:'#1eb2a6' , marginLeft:'800px'}} />
     <br/><br/>5
     <div style={{ fontSize: '20px', color:'grey',   marginLeft:'720px' }}> Veuillez patienter un instant</div><br/><br/>
@@ -78,8 +78,8 @@ export default function UpdateOptions() {
   };
 
   const buttonStyles = {
-    fontSize: '19px',
-    padding: '10px 10px', // Adjusting padding to 0 on the horizontal axis
+    fontSize: '17px',
+    padding: '10px 10px', 
     width: '350px',
     height:'60px',
     marginLeft:'50px'
@@ -90,7 +90,7 @@ export default function UpdateOptions() {
     <>
       <Back title="Détails de l'entretien" />
       <section className='contacts padding'>
-        <div className='container shadow'>
+        <div className='container shadow' style={{height:'950px'}}>
           <div className='left row'>
           <br/><br/>
           <h1>Détails de l'entretien</h1>

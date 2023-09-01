@@ -81,7 +81,7 @@ const LoginForm = () => {
   return (
     <div className="main1">
     <section className="sign-in">
-      <div className="container1">
+      <div className="container1" style={{marginTop:'70px'}}>
         <div className="signin-content">
           <div className="signin-image">
           <figure>

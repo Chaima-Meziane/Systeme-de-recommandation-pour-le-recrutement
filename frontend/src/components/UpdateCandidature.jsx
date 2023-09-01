@@ -63,9 +63,9 @@ export default function UpdateCandidature() {
     <>
       <Back title="Modifier l'état de la candidature" />
       <section className='contacts padding'>
-        <div className='container shadow'>
+        <div className='container shadow' style={{height:'500px'}}>
           <div className='left row'>
-            <h1>Modifier l'état de la candidature</h1>
+            <br/><br/><h1 style={{ fontSize:'28px'}}>Modifier l'état de la candidature</h1>
             <form onSubmit={handleAddSubmit}>
             <div className='form-field'>
                 <p> Identifiant de l'offre: {offre} </p>

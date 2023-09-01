@@ -71,11 +71,11 @@ export default function UpdateEntretien() {
 
   return (
     <>
-      <Back title="Rapport d'Entretien" />
+      <Back title="Reporter l'entretien" />
       <section className='contacts padding'>
-        <div className='container shadow'>
+        <div className='container shadow' style={{height:'680px'}}>
           <div className='left row'>
-            <h1>Reporter l'entretien</h1>
+            <br/><br/><h1>Reporter l'entretien</h1>
             <form onSubmit={handleAddSubmit}>
             <div className='form-field'>
                 <div className='input-container'>

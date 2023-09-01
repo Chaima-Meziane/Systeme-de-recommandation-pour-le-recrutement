@@ -39,7 +39,7 @@ console.log(user);
               <a href='/MesCandidatures'><li>Mes Candidatures</li></a>
               <a href={`/RecommendedOffersForUser/${user.id}`}><li>Offres Sur Mesure</li></a>
 
-              <a href='/calendar'><li>Mes entretiens</li></a>
+              <a href='/calendar'><li>Mes Entretiens</li></a>
             </ul>
           </div>
         ) : (
@@ -48,7 +48,7 @@ console.log(user);
             <ul>
               <a href='/'><li>Accueil</li></a>
               <a href='/OffersByCoordinator'><li>Mes Offres</li></a>
-              <a href='/addoffre'><li>Ajouter une offre</li></a>
+              <a href='/addoffre'><li>Ajouter Une Offre</li></a>
               <a href='/calendar'><li>Mes Entretiens</li></a>
               
             </ul>

@@ -83,9 +83,9 @@ export default function UpdateUser() {
 
   return (
     <>
-      <Back title="Mon Profil" />
-      <section className='contacts padding'>
-        <div className='container shadow'>
+      <Back title="Mise à jour de mes données" />
+      <section className='contacts padding' >
+        <div className='container shadow' style={{height:'1050px'}}>
           <div className='left row'><br/><br/>
             <h1>Mettre à jour mes informations personnelles</h1>
             <form onSubmit={handleAddSubmit}  encType="multipart/form-data">
@@ -147,7 +147,7 @@ export default function UpdateUser() {
 
               <div className='form-field'>
                 <div className='input-container'>
-                  <p> Téléchargez une version plus récente de votre CV </p>
+                  <p> Importez une version plus récente de votre CV </p>
                   <input
                     type='file'
                     accept=".pdf,.doc,.docx"

@@ -30,7 +30,10 @@ const RecommendedProfiles = () => {
       <Back title={`Profils Recommandés`} />
       <section className="testimonal padding">
         <div className="container">
-          <Heading title={`Profils Recommandés`} />
+        <Heading  title={`Profils Recommandés`} />
+          <p style={{marginLeft:'150px', fontSize:'23px', fontWeight:'bold', color:'black'}}>
+          Voici les profils LinkedIn les plus recommandés pour cette offre. Contactez-les si vous êtes intéressé(e).</p><br/><br/><br/><br/>
+
           <div className="content2 grid2">
             {recommendedProfiles.map(({ id, name, url, skills, similarity_score, location, job_title }) => (
               <div className="items2 shadow" key={id}>
@@ -65,7 +68,7 @@ const RecommendedProfiles = () => {
           </div>
         </div>
       </section>
-      <Awrapper />
+      {/*<Awrapper />*/}
     </>
   );
 };

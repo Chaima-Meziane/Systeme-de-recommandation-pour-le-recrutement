@@ -3,7 +3,6 @@ import './contact/contact.css';
 import Back from './common/back/Back';
 import { getoffrebyid} from '../services/ApiService';
 import axios from 'axios';
-
 import { useNavigate, useParams} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -118,9 +117,9 @@ export default function AddCandidature() {
     <>
       <Back title='Ajouter une candidature' />
       <section className='contacts padding'>
-        <div className='container shadow'>
+        <div className='container shadow' style={{height:'430px'}}>
           <div className='left row'>
-            <h1>Ajouter votre candidature</h1>
+            <br/><br/><h1>Ajouter votre candidature</h1>
 
             <form onSubmit={handleAddSubmit}>
             
@@ -147,11 +146,12 @@ export default function AddCandidature() {
   </div>*/}
               
              
-              <button className='primary-btn' type='submit'>Ajouter</button>
+              <button className='primary-btn' type='submit'>Valider</button>
               
               
-              <button className='primary-btn' type='button'><FontAwesomeIcon icon={faArrowLeft} /> Retour</button>
-              
+              <button className='primary-btn' type='button' onClick={() => navigate(-1)}>
+                <FontAwesomeIcon icon={faArrowLeft} /> Retour
+              </button>              
                 
               
              

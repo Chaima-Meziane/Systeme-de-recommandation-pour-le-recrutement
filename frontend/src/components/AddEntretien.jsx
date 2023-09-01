@@ -47,9 +47,9 @@ export default function AddEntretien() {
     <>
       <Back title='Ajouter un entrtien' />
       <section className='contacts padding'>
-        <div className='container shadow'>
+        <div className='container shadow' style={{height:'790px'}}>
           <div className='left row'>
-            <h1>Fixer un entretien</h1>
+            <br/><br/><h1>Fixer un entretien</h1>
             <form onSubmit={handleAddSubmit}>
               <div className='form-field'>
                 <div className='input-container'>
@@ -94,8 +94,8 @@ export default function AddEntretien() {
                 </div>
               </div>
               
-              <button className='primary-btn' type='submit'>Ajouter</button>
-              <button className='primary-btn' type='button' onClick={() => navigate(-1)}>
+              <button  className='primary-btn' type='submit'>Ajouter</button>
+              <button  className='primary-btn' type='button' onClick={() => navigate(-1)}>
         <FontAwesomeIcon icon={faArrowLeft} /> Retour
       </button>
             </form>
