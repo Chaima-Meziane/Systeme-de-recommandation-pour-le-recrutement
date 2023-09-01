@@ -32,15 +32,30 @@ const RecommendedProfiles = () => {
         <div className="container">
           <Heading title={`Profils Recommandés`} />
           <div className="content2 grid2">
-            {recommendedProfiles.map(({ id, name, url, skills, similarity_score, location }) => (
+            {recommendedProfiles.map(({ id, name, url, skills, similarity_score, location, job_title }) => (
               <div className="items2 shadow" key={id}>
                 <div className="box flex">
                   <div className="name2">
+                
                     <h2>{name}</h2>
-                    <p>Localisation: {location}</p>
-                    <p>Score: {similarity_score}</p>
+                <br/>
+                            
+                <div style={{ marginBottom: '10px', position: 'relative' }}>
+                <span  className="hover-l" >Poste:</span>
+                <span style={{ color: '#333' }}>{job_title}</span>
+              </div>
+              <div style={{ marginBottom: '10px', position: 'relative' }}>
+                <span  className="hover-l">Localisation:</span>
+                <span style={{ color: '#333' }}>{location}</span>
+              </div>
+              <div style={{ marginBottom: '10px', position: 'relative' }}>
+                <span  className="hover-l">Score:</span>
+                <span style={{ color: '#333' }}>{similarity_score}</span>
+              
+              </div>
+                    
                       <a  href={url}>
-                        <button className="linkedin-button">Voir le profil LinkedIn</button>
+                        <button className="linkedin-button">Consulter le profil LinkedIn</button>
                       </a>
                     
                   </div>
