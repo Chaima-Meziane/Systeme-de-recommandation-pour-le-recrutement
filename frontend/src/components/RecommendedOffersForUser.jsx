@@ -100,7 +100,7 @@ function RecommendedOffersForUser(props) {
                                   <h4>{offre.offer ? offre.offer.entreprise : offre.entreprise}</h4>
                                 </div>
                               </div>
-                              <p>Similarity score : {offre.similarity}</p>
+                              {/*<p>Similarity score : {offre.similarity}</p>*/}
                             </div>
                           </div>
                         </div>

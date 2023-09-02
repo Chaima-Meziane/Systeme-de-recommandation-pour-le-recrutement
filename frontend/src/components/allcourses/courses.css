@@ -179,8 +179,8 @@
   margin: 0;
   box-shadow: none;
   border: 2px solid #1eb2a6;
-  width: 70%;
-  height: 70%;
+  width: 60%;
+  height: 60%;
   transition: 0.5s;
 
 }
@@ -233,3 +233,4 @@ margin-top: 140px;
   display: block;
   margin-top: -130px;
 }
+
