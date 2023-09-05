@@ -128,16 +128,22 @@ const Offers = () => {
         <div className='container'>
           <Heading subtitle="Accueil" title='Explorez les opportunités professionnelles disponibles' />
 
+          <div className="search-container-offers">
           <input
             type="text"
             placeholder="Rechercher des offres d'emploi..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input-offers"
           />
+          <i className="fas fa-search search-icon"></i>
+        </div>
+
 
           <div className='coursesCard'>
             <div className='grid2'>
-              {offres.map((offre) => (
+              {/*--------------*/}
+              {filterOffers(offres).map((offre) => (
                 <div  className='items offer-hoverable' key={offre.id}>
                    <div className='hidden'>
                   <div className={`content flex ${hoveredOffer === offre.id ? 'offer-hoverable' : ''}`}

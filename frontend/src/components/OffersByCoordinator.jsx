@@ -47,12 +47,16 @@ const OffersByCoordinator = () => {
     <div className='container'>
       <Heading subtitle='Parcourir ' title="Mon Catalogue d'Offres" /><br/>
       {/*<Link to={`/addoffre`}><button className='outline-btn'>add offre</button></Link>*/}
-      <input
+      <div className="search-container-offers">
+          <input
             type="text"
-            placeholder="Rechercher des offres d'emploi ..."
+            placeholder="Rechercher des offres d'emploi..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input-offers"
           />
+          <i className="fas fa-search search-icon"></i>
+        </div>
       <div className='coursesCard'>
         {/* copy code form  coursesCard */}
         <div className='grid2'>
