@@ -16,15 +16,18 @@ export default function UpdateOptions() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [candidatDetails, setCandidatDetails] = useState({});
+  const [offreDetails, setOffreDetails] = useState({});
+
+
   useEffect(() => {
-    let isMounted = true; // Add a flag to check if the component is still mounted
-  
+    let isMounted = true;
+
     axios.get(`http://127.0.0.1:8000/api/getEntretienByID/${id}`)
       .then((res) => {
         if (isMounted) {
           setEntretien(res.data);
           setLoading(false);
-          console.log(res.data);
         }
       })
       .catch((err) => {
@@ -33,7 +36,7 @@ export default function UpdateOptions() {
           setLoading(false);
         }
       });
-  
+
     if (entretien?.candidature) {
       axios.get(`http://127.0.0.1:8000/api/getCandidatureByID/${entretien.candidature}`)
         .then((response) => {
@@ -44,12 +47,33 @@ export default function UpdateOptions() {
           console.error("Error fetching candidature data:", error);
         });
     }
-  
+
+    if (candidature?.candidat) {
+      axios.get(`http://127.0.0.1:8000/api/getUserByID/${candidature.candidat}`)
+        .then((response) => {
+          const candidatData = response.data;
+          setCandidatDetails(candidatData);
+        })
+        .catch((error) => {
+          console.error("Error fetching candidat data:", error);
+        });
+    }
+    if (candidature?.offre) {
+      axios.get(`http://127.0.0.1:8000/api/getOffreByID/${candidature.offre}`)
+        .then((response) => {
+          const offreData = response.data;
+          setOffreDetails(offreData);
+        })
+        .catch((error) => {
+          console.error("Error fetching offre data:", error);
+        });
+    }
+
+
     return () => {
       isMounted = false; 
     };
-  }, [id, entretien?.candidature]); 
-  
+  }, [id, entretien, candidature]);
 
 
 
@@ -95,7 +119,7 @@ export default function UpdateOptions() {
           <br/><br/>
           <h1>Détails de l'entretien</h1>
             
-            <div style={{ display: 'inline-block' }}>
+            {/*<div style={{ display: 'inline-block' }}>
             <p style={{ display: 'inline', fontSize: '20px' , color:'black'}}>Identifiant : </p>
             <p style={{ display: 'inline' }}>
               {entretien.id}
@@ -108,21 +132,28 @@ export default function UpdateOptions() {
               {candidature.id}
             </p>
             </div><br/><br/>
-            
+  */}
             <div style={{ display: 'inline-block' }}>
-            <p style={{ display: 'inline', fontSize: '20px' , color:'black'}}>Identifiant du candidat : </p>
+            <p style={{ display: 'inline', fontSize: '20px' , color:'black'}}>Candidat: </p>
             <p style={{ display: 'inline' }}>
-              {candidature.candidat}
-            </p>
+              {candidatDetails.first_name} {candidatDetails.last_name}
+                 </p>
             </div><br/><br/>
 
+            <div style={{ display: 'inline-block' }}>
+            <p style={{ display: 'inline', fontSize: '20px' , color:'black'}}>Offre: </p>
+            <p style={{ display: 'inline' }}>
+            {offreDetails.titreDuPoste}
+                 </p>
+            </div><br/><br/>
+{/*
             <div style={{ display: 'inline-block' }}>
             <p style={{ display: 'inline', fontSize: '20px' , color:'black'}}>Identifiant du coordinateur pédagogique : </p>
             <p style={{ display: 'inline' }}>
               {entretien.coordinateur}
             </p>
             </div><br/><br/>
-
+*/}
             <div style={{ display: 'inline-block' }}>
               <p style={{ display: 'inline', fontSize: '20px', color: 'black' }}>Date et heure : </p>
               <p style={{ display: 'inline' }}>
@@ -131,6 +162,7 @@ export default function UpdateOptions() {
               </p>
             </div>
             <br /><br/>
+
 
             <div style={{ display: 'inline-block' }}>
               <p style={{ display: 'inline', fontSize: '20px', color: 'black' }}>Lien de réunion : </p>
@@ -141,8 +173,8 @@ export default function UpdateOptions() {
               </p>
             </div>
 
+            
             <br /><br/>
-
 
             <div style={{ display: 'inline-block' }}>
             <p style={{ display: 'inline', fontSize: '20px' , color:'black'}}>Résultat de l'entretien :</p>
@@ -153,7 +185,17 @@ export default function UpdateOptions() {
               entretien.resultat}
             </p>
           </div>
-          <br/><br/><br/><br/>
+
+          <br /><br/>
+            <div style={{ display: 'inline-block' }}>
+            
+            <p style={{ display: 'inline' }} >
+              <a href={`/candidaturesbyoffer/${candidature.offre}`} style={{ textDecoration: 'underline' }}>Cliquez ici pour voir la candidature</a>
+            </p>
+          </div>
+
+          <br/><br/>
+          <br/><br/>
 
           
           {!user.is_candidat && (

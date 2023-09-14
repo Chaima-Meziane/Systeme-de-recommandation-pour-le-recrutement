@@ -57,93 +57,105 @@ function RecommendedOffersForUser(props) {
   return (
     <>
       <Back title='Offres recommandées' />
-
+  
       <section className='homeAbout'>
         <div className='container'>
           <Heading subtitle='Offres sur Mesure' title="les plus adaptées à vous en premier" />
-
-          <div className='coursesCard'>
-            <div className='grid2'>
-              {recommendedOffers.map(offre => (
-                <div className='items offer-hoverable' key={offre.id}>
-                  <div className='hidden'>
-                    <div className='content flex'>
-                      <div className='left'>
-                        <div className='img'>
-                          <img src={job_offer} alt='' />
+          {recommendedOffers.length === 0 ? (
+            <div className="no-offers-message">
+            <p >Nous n'avons actuellement aucune offre qui correspond à vos critères.</p>
+            <p >Nous vous invitons à consulter régulièrement nos mises à jour.</p>
+            <br></br>
+            <br></br>
+            <br></br>
+          </div>
+         
+          
+          ) : (
+            <div className='coursesCard'>
+              <div className='grid2'>
+                {recommendedOffers.map(offre => (
+                  <div className='items offer-hoverable' key={offre.id}>
+                    <div className='hidden'>
+                      <div className='content flex'>
+                        <div className='left'>
+                          <div className='img'>
+                            <img src={job_offer} alt='' />
+                          </div>
                         </div>
-                      </div>
-                      <div className='text'>
-                        <h1>{offre.offer ? offre.offer.titreDuPoste : offre.titreDuPoste}</h1>
-
-                        <div className='rate'>
-                          <i className='fa fa-star'></i>
-                          <i className='fa fa-star'></i>
-                          <i className='fa fa-star'></i>
-                          <i className='fa fa-star'></i>
-                          <i className='fa fa-star'></i>
-                          
-                        </div>
-                        <div className='localisation'>
-                          <i className="fas fa-map-marker-alt"></i>
-                          <h4>{offre.offer ? offre.offer.localisation : offre.localisation}</h4>
-                        </div>
-
-                        <div className='details'>
-                          <div className='container'>
-                            <div className='left2'>
-                              <div className='dimg'>
-                                <img src={logo_esprit} alt='' />
-                              </div>
-                              <div className='text2'>
-                                <div className='para'>
-                                  <h4>{offre.offer ? offre.offer.entreprise : offre.entreprise}</h4>
+                        <div className='text'>
+                          <h1>{offre.offer ? offre.offer.titreDuPoste : offre.titreDuPoste}</h1>
+  
+                          <div className='rate'>
+                            <i className='fa fa-star'></i>
+                            <i className='fa fa-star'></i>
+                            <i className='fa fa-star'></i>
+                            <i className='fa fa-star'></i>
+                            <i className='fa fa-star'></i>
+                          </div>
+                          <div className='localisation'>
+                            <i className="fas fa-map-marker-alt"></i>
+                            <h4>{offre.offer ? offre.offer.localisation : offre.localisation}</h4>
+                          </div>
+  
+                          <div className='details'>
+                            <div className='container'>
+                              <div className='left2'>
+                                <div className='dimg'>
+                                  <img src={logo_esprit} alt='' />
                                 </div>
+                                <div className='text2'>
+                                  <div className='para'>
+                                    <h4>{offre.offer ? offre.offer.entreprise : offre.entreprise}</h4>
+                                  </div>
+                                </div>
+                                {/*<p>Similarity score : {offre.similarity}</p>*/}
                               </div>
-                              {/*<p>Similarity score : {offre.similarity}</p>*/}
                             </div>
                           </div>
                         </div>
                       </div>
+  
+                      <div className='price'>
+                        <h3>
+                          {offre.offer ? offre.offer.competences : offre.competences}
+                        </h3>
+                      </div>
                     </div>
-
-                    <div className='price'>
-                      <h3>
-                        {offre.offer ? offre.offer.competences : offre.competences}
-                      </h3>
+  
+                    <div style={{ marginTop: '60px', height: '70%' }} className='buttons-on-hover'>
+                      <Link to={`/details/${offre.offer ? offre.offer.id : offre.id}`}>
+                        <button className='offers-btn'>DÉTAILS DE L'OFFRE</button>
+                      </Link>
+                      <br />
+                      {userCandidaturesLoading ? (
+                        <button className='offers-btn' disabled>Chargement...</button>
+                      ) : (
+                        <>
+                          <br />
+                          {userCandidatures.some(
+                            (candidature) => candidature.offre_id === (offre.offer ? offre.offer.id : offre.id)
+                          ) ? (
+                            <button className="offers-btn" disabled>VOUS AVEZ DÉJÀ POSTULÉ POUR CETTE OFFRE</button>
+                          ) : (
+                            <Link to={`/${offre.offer ? offre.offer.id : offre.id}/addcandidature`}>
+                              <button className="offers-btn">POSTULER</button>
+                            </Link>
+                          )}
+                        </>
+                      )}
                     </div>
                   </div>
-
-                  <div style={{marginTop:'60px', height:'70%'}} className='buttons-on-hover'>
-                    <Link to={`/details/${offre.offer ? offre.offer.id : offre.id}`}>
-                      <button className='offers-btn'>DÉTAILS DE L'OFFRE</button>
-                    </Link>
-                    <br />
-                    {userCandidaturesLoading ? (
-                      <button className='offers-btn' disabled>Chargement...</button>
-                    ) : (
-                      <>
-                        <br />
-                        {userCandidatures.some(
-                          (candidature) => candidature.offre_id === (offre.offer ? offre.offer.id : offre.id)
-                        ) ? (
-                          <button className="offers-btn" disabled>VOUS AVEZ DÉJÀ POSTULÉ POUR CETTE OFFRE</button>
-                        ) : (
-                          <Link to={`/${offre.offer ? offre.offer.id : offre.id}/addcandidature`}>
-                            <button className="offers-btn">POSTULER</button>
-                          </Link>
-                        )}
-                      </>
-                    )}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
     </>
   );
+  
+
 }
 
 export default RecommendedOffersForUser;

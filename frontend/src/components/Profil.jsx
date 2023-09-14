@@ -67,11 +67,11 @@ export default function Profil() {
             <div className='info-column' style={{ flex: '2', padding: '0 50px' }}>
               <div className='box flex'>
                 <div className='name'>
-                  <h2> Informations personnelles </h2>
+                <h2 style={{ color: "#1eb2a6" }}> Informations personnelles </h2>
                   <br />
-                  <span>Identifiant : {user.id}</span>
-                  <br />
-                  <br />
+                  {/*<span>Identifiant : {user.id}</span>*/}
+                 
+                
                 </div>
               </div>
   

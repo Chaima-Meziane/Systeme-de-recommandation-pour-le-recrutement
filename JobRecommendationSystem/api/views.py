@@ -909,9 +909,8 @@ def combine_and_sort_scores(request, user_id):
         for liked_offer in liked_offers:
             similarity_score = like_similarity(liked_offer.competences, non_liked_offer.competences)
             similarity_scores.append(similarity_score)
-
-        average_similarity = sum(similarity_scores) / len(similarity_scores)
-        if average_similarity != 0:
+        if len(similarity_scores) > 0:
+            average_similarity = sum(similarity_scores) / len(similarity_scores)
             serialized_offer = {'offer': {'id': non_liked_offer.id, 'titreDuPoste': non_liked_offer.titreDuPoste, 'localisation': non_liked_offer.localisation, 'entreprise': non_liked_offer.entreprise, 'competences': non_liked_offer.competences}, 'similarity': average_similarity}
             serialized_offers.append(serialized_offer)
     

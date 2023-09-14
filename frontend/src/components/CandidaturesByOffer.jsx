@@ -81,10 +81,11 @@ const CandidaturesByOffers = () => {
                   <button className='outline-btn'>Modifier l'état de la candidature</button>
                 </Link>
                 <br /><br />
-                <Link to={`/addentretien/${candidature.id}`}>
-                  <button className='outline-btn'>Fixer un entretien</button>
-                </Link>
-
+                {candidature.etat === 'Acceptée' && (
+                  <Link to={`/addentretien/${candidature.id}`}>
+                    <button className='outline-btn'>Fixer un entretien</button>
+                  </Link>
+                )}
               </div>
             ))}
           </div>

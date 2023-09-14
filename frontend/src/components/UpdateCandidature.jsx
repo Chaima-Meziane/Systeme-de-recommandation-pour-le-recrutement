@@ -15,6 +15,8 @@ export default function UpdateCandidature() {
   const [candidat, setCandidat] = useState('');
   const [offre, setOffre] = useState('');
   const [lettre, setLettre] = useState('');
+  const [candidatDetails, setCandidatDetails] = useState({});
+  const [offreDetails, setOffreDetails] = useState({});
 
   useEffect(() => {
     axios.get(`http://127.0.0.1:8000/api/getCandidatureByID/${id}/`)
@@ -26,12 +28,30 @@ export default function UpdateCandidature() {
         setCandidat(candidatureData.candidat);
         setOffre(candidatureData.offre)
         
-        
-      })
-      .catch((error) => {
-        console.error("Error fetching candidature data:", error);
-      });
-  }, [id]);
+    // Récupérer les détails du candidat
+    axios.get(`http://127.0.0.1:8000/api/getUserByID/${candidatureData.candidat}/`)
+    .then((response) => {
+      const candidatData = response.data;
+      setCandidatDetails(candidatData);
+    })
+    .catch((error) => {
+      console.error("Error fetching candidat data:", error);
+    });
+
+  // Récupérer les détails de l'offre
+  axios.get(`http://127.0.0.1:8000/api/getOffreByID/${candidatureData.offre}/`)
+    .then((response) => {
+      const offreData = response.data;
+      setOffreDetails(offreData);
+    })
+    .catch((error) => {
+      console.error("Error fetching offre data:", error);
+    });
+})
+.catch((error) => {
+  console.error("Error fetching candidature data:", error);
+});
+}, [id]);
 
   const handleAddSubmit = (event) => {
     event.preventDefault();
@@ -68,12 +88,11 @@ export default function UpdateCandidature() {
             <br/><br/><h1 style={{ fontSize:'28px'}}>Modifier l'état de la candidature</h1>
             <form onSubmit={handleAddSubmit}>
             <div className='form-field'>
-                <p> Identifiant de l'offre: {offre} </p>
-            </div>
-            
-            <div className='form-field'>
-                <p> Identifiant du candidat: {candidat} </p>
-            </div>
+              <p> Candidat: {candidatDetails.first_name} {candidatDetails.last_name} </p>
+              </div>
+              <div className='form-field'>
+                <p> Offre: {offreDetails.titreDuPoste} </p>
+              </div>
 
               <div className='form-field'>
                 <p>État de la candidature</p>
