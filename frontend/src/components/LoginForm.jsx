@@ -37,13 +37,23 @@ const LoginForm = () => {
 
     // Make an API call to authenticate the user
     axios
-      .post("http://127.0.0.1:8000/api/login/", credentials)
-      .then((response) => {
-        // Handle successful login
-        console.log("Login successful!");
-        setUser(response.data.user);
-        console.log(response.data.user)
-        navigate("/")
+  .post("http://127.0.0.1:8000/api/login/", credentials)
+  .then((response) => {
+    // Handle successful login
+    console.log("Login successful!");
+    setUser(response.data.user);
+    console.log(response.data.user);
+
+    // Check if user.resume is empty or undefined
+    if (response.data.user.resume_url === null) {
+      // Redirect to /completeprofile
+      navigate("/delayedcompleteyourprofile");
+    } else {
+      // Redirect to the home page or any other desired route
+      navigate("/");
+    }
+  
+  
         
         
         // You can store the authentication token or user information in local storage or session storage

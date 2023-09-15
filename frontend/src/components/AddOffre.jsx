@@ -64,8 +64,8 @@ export default function AddOffre() {
         // Effectuer la recherche LinkedIn en utilisant les données de formulaire
       const linkedInFormData = {
         profile_to_search: titreDuPoste,
-        username: 'gharbimonia08@gmail.com',
-        password: '21285728',
+        username: 'flenbenfoulen36@gmail.com',
+        password: 'citronnade123',
         offre: addedOffreId,
       };
 

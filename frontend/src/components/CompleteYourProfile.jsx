@@ -45,7 +45,7 @@ const { user } = useContext(UserContext);
         // Handle successful profile update
         console.log("Profile update successful!");
         console.log(response.data)
-        navigate('/')
+        navigate('/login')
       })
       .catch((error) => {
         // Handle registration error

@@ -60,7 +60,7 @@ const RegisterForm = () => {
         // Set the user information in the context
         setUser(response.data); // Assuming the response contains user data
         console.log(response.data)
-        // Redirect to the complete your profile page
+        
         navigate('/completeprofile');
       })
       .catch((error) => {

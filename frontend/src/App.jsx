@@ -35,7 +35,7 @@ import Profil from './components/Profil';
 import UpdateUser from './components/UpdateUser';
 import RecommendedOffersForUser from './components/RecommendedOffersForUser';
 import { Dashboard } from './components/dashboard/Dashboard';
-
+import DelayedCompleteYourProfile from './components/DelayedCompleteYourProfile';
 function shouldShowHeaderandFooter(location) {
   const { pathname } = location;
   return !['/login', '/register', '/offre', '/completeprofile'].includes(pathname);
@@ -92,6 +92,7 @@ function App() {
             <Route path="/updateuser" element={<UpdateUser/>}/>
             <Route path="/RecommendedOffersForUser/:id" element={<RecommendedOffersForUser/>}/>
             <Route path="/dashboard/:id" element={<Dashboard/>}/>
+            <Route path="/delayedcompleteyourprofile" element={<DelayedCompleteYourProfile/>}/>
  
 
           </>

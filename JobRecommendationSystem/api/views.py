@@ -156,24 +156,41 @@ def register_api(request):
     
 from django.contrib.auth import get_user_model
 
+from django.conf import settings
+from django.contrib.auth import authenticate, login
+from django.core.files.storage import default_storage
+from django.urls import reverse
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 class LoginAPIView(APIView):
     def post(self, request):
         username = request.data.get('username')
         password = request.data.get('password')
         user = authenticate(username=username, password=password)
+        
         if user is not None:
             login(request, user)
+            
+            # Generate a URL to download the user's resume
+            if user.resume:
+                resume_url = default_storage.url(user.resume.name)
+            else:
+                resume_url = None
+            
             user_data = {
                 'id': user.id,
                 'username': user.username,
                 'email': user.email,
-                'is_candidat':user.is_candidat,
-                'is_coordinateur':user.is_coordinateur,
-                # Add other user fields you want to include
+                'is_candidat': user.is_candidat,
+                'is_coordinateur': user.is_coordinateur,
+                'resume_url': resume_url,  # Include the resume URL
             }
             return Response({"message": "Login successful", "user": user_data}, status=status.HTTP_200_OK)
         
         return Response({"message": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
+
 
     
 
@@ -359,7 +376,7 @@ def login_to_linkedin(request):
             people_button.click()
             sleep(2)
             URLs_all_page = []
-            for page in range(1):
+            for page in range(2):
                 URLs_one_page = GetURL(driver)
                 sleep(2)
                 driver.execute_script('window.scrollTo(0, document.body.scrollHeight);') #scroll to the end of the page
@@ -379,10 +396,12 @@ def login_to_linkedin(request):
             for linkedin_URL in urls_filtered:
                 driver.get(linkedin_URL)
                 print('- Accessing profile: ', linkedin_URL)
-
+                sleep(2)
                 page_source = BeautifulSoup(driver.page_source, "html.parser")
-
+                sleep(2)
                 info_div = page_source.find('div',{'class':'mt2 relative'})
+                sleep(2)
+
                 location = info_div.find('span',{'class':'text-body-small inline t-black--light break-words'}).get_text().strip()
                 sleep(1)
                 print('--- Profile location is: ', location)
